@@ -9,7 +9,7 @@
 
 */
 const userService = require('../services/user.service');
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
 // Signup
 exports.signup = async (req, res) => {
@@ -18,7 +18,7 @@ exports.signup = async (req, res) => {
 
         // Validation for signup
         if (!email || !password || !first_name || !last_name) {
-            return res.status(400).json({ message: "All fields required" });
+            return res.status(400).json({ message: 'All fields required' });
         }
 
         const user = await userService.createUser(
