@@ -1,2 +1,2 @@
-# tiny_thinkers
+# Tint Thinkers
 Hope hacks project
