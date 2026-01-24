@@ -46,9 +46,15 @@ app.use("/api/users", userRoutes);
 
 // DB connection test route
 app.get("/db-test", async (req, res) => {
-    const [rows] = await db.query("SELECT 1");
-    res.json({ db: "connected" });
+  const [rows] = await db.query("SELECT 1");
+  res.json({ db: "connected" });
 });
 
-
 module.exports = app;
+
+// 404 handler
+app.use((req, res) => {
+  res.status(404).render("404", {
+    pageTitle: "tiny thinkers | not found",
+  });
+});

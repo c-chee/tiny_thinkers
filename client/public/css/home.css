@@ -707,3 +707,49 @@ body {
     transition: none !important;
   }
 }
+
+/* 404 page */
+.tiny-404 {
+  width: min(300px, 75vw);
+  height: auto;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 10px 18px rgba(0, 0, 0, 0.15));
+}
+
+.not-found {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+.not-found .body {
+  text-align: center;
+  max-width: 42ch;
+}
+
+.not-found .btn-pill {
+  border-color: var(--purple);
+  color: var(--purple);
+}
+
+.not-found .btn-pill::before {
+  background: repeating-linear-gradient(
+    -12deg,
+    var(--orange) 0px,
+    var(--orange) 6px,
+    var(--pink) 6px,
+    var(--pink) 12px
+  );
+}
+
+.not-found .btn-pill:hover {
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .tiny-404 {
+    animation: rockSide 3.5s ease-in-out infinite;
+  }
+}
