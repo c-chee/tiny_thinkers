@@ -4,16 +4,44 @@
  * - CORS
  * - Routes
  */
-const express = require('express');
-const db = require("./db");
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
+const { engine } = require("express-handlebars");
 
 const app = express();
 
-// Allows server to read JSON
-app.use(express.json());
-
-// User route connection
+const db = require("./db");
 const userRoutes = require("./routes/user.routes");
+
+app.use(cors());
+app.use(express.json()); // Allows server to read JSON
+
+// === HANDLBARS ===
+app.use(express.static(path.join(__dirname, "../../client/public")));
+
+app.engine(
+  "hbs",
+  engine({
+    extname: "hbs",
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "../../client/views/layouts"),
+    partialsDir: path.join(__dirname, "../../client/views/partials"),
+  }),
+);
+app.set("view engine", "hbs");
+app.set("views", path.join(__dirname, "../../client/views"));
+
+app.get("/", (req, res) => {
+  res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+});
+
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
+});
+
+// === DATABASE ===
+// User route connection
 app.use("/api/users", userRoutes);
 
 // DB connection test route
