@@ -101,9 +101,9 @@ app.use('/api/learning', learningRoutes);
 
 app.use('/api/users', userRoutes);
 
-// app.use((req, res) => {
-//     res.status(404).json({ error: 'Route not found'});
-// });
+app.use((req, res) => {
+    res.status(404).json({ error: 'Route not found'});
+});
 
 module.exports = app;
 >>>>>>> 1b749ed (updated routes, learning service and APIs)
