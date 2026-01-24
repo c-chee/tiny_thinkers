@@ -21,7 +21,12 @@ exports.signup = async (req, res) => {
             return res.status(400).json({ message: "All fields required" });
         }
 
-        const user = await userService.createUser(email, password);
+        const user = await userService.createUser(
+            email,
+            password,
+            first_name,
+            last_name
+        );
         
 
         res.status(201).json({

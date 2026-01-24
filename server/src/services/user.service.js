@@ -7,7 +7,7 @@ const bcrypt = require('bcrypt');
 const userQueries = require('../db/queries/user.queries');
 
 // Signup
-exports.createUser = async (email, password) => {
+exports.createUser = async (email, password, first_name, last_name) => {
   // Check if user already exists
   // Search by the unique email
     const existingUser = await userQueries.findByEmail(email);
@@ -19,7 +19,12 @@ exports.createUser = async (email, password) => {
     const passwordHash = await bcrypt.hash(password, 10);
 
     // Save user
-    const userId = await userQueries.createUser(email, passwordHash, first_name, last_name);
+    const userId = await userQueries.createUser(
+        email,
+        passwordHash,
+        first_name,
+        last_name
+    );
 
     return { 
         id: userId 
