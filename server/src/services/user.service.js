@@ -6,6 +6,7 @@
 const bcrypt = require('bcrypt');
 const userQueries = require('../db/queries/user.queries');
 
+// Signup
 exports.createUser = async (email, password) => {
   // Check if user already exists
   // Search by the unique email
@@ -23,4 +24,21 @@ exports.createUser = async (email, password) => {
     return { 
         id: userId 
     };
+};
+
+// Login
+exports.authenticateUser = async (email, password) => {
+    const user = await userQueries.findByEmail(email);
+
+    if (!user) {
+        throw new Error('Invalid email or password');
+    }
+
+    const valid = await bcrypt.compare(password, user.password_hash);
+
+    if (!valid) {
+        throw new Error('Invalid email or password');
+    }
+
+    return user; // return full user object for controller to generate token
 };
