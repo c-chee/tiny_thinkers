@@ -15,10 +15,12 @@ exports.findByEmail = async (email) => {
 };
 
 // Create new user
-exports.createUser = async (email, passwordHash) => {
+exports.createUser = async (email, passwordHash, first_name, last_name) => {
     const [result] = await db.query(
-        'INSERT INTO users (email, password_hash) VALUES (?, ?)',
-        [email, passwordHash]
+        `INSERT INTO users (email, password_hash, first_name, last_name)
+        VALUES (?, ?, ?, ?)`,
+        [email, passwordHash, first_name, last_name]
     );
     return result.insertId;
 };
+
