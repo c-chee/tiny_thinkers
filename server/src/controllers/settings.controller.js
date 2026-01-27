@@ -1,10 +1,12 @@
-const prefService = require("../services/settings.service");
+const settingsService = require("../services/settings.service"); // Imports the service that talks to the DB
 
-exports.savePreferences = async (req, res) => {
-    const userId = req.user.id;
-    const { grade_level, content_type } = req.body;
+// POST /api/settings
+exports.saveSettings = async (req, res) => {
+    const userId = req.user.id; // USer is from the JWT middleware
 
-    await prefService.savePreferences(userId, grade_level, content_type);
+    const { grade_level, content_type } = req.body; // Reads the frontend settings form data
 
-    res.json({ message: "Preferences saved" });
+    await settingsService.saveSettings(userId, grade_level, content_type); // Saves settings to DB
+
+    res.json({ message: "Settings saved" }); // Confirmation res
 };
