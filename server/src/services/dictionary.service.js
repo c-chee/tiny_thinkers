@@ -1,7 +1,7 @@
 const axios = require('axios');
 
-//learner api
-const LEARNER_API_KEY = process.env.MW_API_KEY;
+// Learner api
+const LEARNER_API_KEY = process.env.LEARN_MW_API_KEY;
 const LEARNER_API_URL = 'https://www.dictionaryapi.com/api/v3/references/learners/json';
 
 const learnerDictionaryWord = async (word) => {
@@ -11,7 +11,7 @@ const learnerDictionaryWord = async (word) => {
     return response.data;
 };
 
-//elementary api
+// Elementary api
 const ELEM_API_KEY = process.env.ELEM_MW_API_KEY;
 const ELEM_API_URL = 'https://www.dictionaryapi.com/api/v3/references/sd2/json';
 
