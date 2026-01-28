@@ -356,6 +356,18 @@ body {
   animation: appleFloat 3.5s ease-in-out infinite;
 }
 
+.stats-container {
+  grid-column: 1 / -1; /* Spans full width of the grid */
+  margin-top: 3rem;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
 @keyframes appleFloat {
   0%,
   100% {
