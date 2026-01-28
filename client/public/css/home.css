@@ -752,9 +752,21 @@ body {
 }
 
 .book-item img{
-  width: 170px;
-  height: 200px;
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
 }
+
+.books{
+  list-style-type:none;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit, minmax(180px, 1fr)
+  );
+}
+
+
 
 .tips-list{
   list-style: none;
