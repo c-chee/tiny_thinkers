@@ -94,13 +94,3 @@ document.addEventListener("DOMContentLoaded", () => {
   // start observing the start scene element
   obs2.observe(startScene);
 });
-
-
-//navigation menu 
-const toggle = document.querySelector('.menu-toggle');
-
-const nav = document.querySelector('.navigation');
-
-toggle.addEventListener('click', () => {
-  nav.classList.toggle('active');
-});
