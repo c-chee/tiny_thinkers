@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 
 /**
  * Notes:
@@ -30,6 +30,11 @@ app.engine(
         defaultLayout: "main",
         layoutsDir: path.join(__dirname, "../../client/views/layouts"),
         partialsDir: path.join(__dirname, "../../client/views/partials"),
+        helpers: {
+          isSelected: (current, value) => {
+            return current === value ? 'selected' : '';
+          }
+        }
     }),
 );
 app.set("view engine", "hbs");
@@ -54,11 +59,20 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
+ 
 module.exports = app;
 //login 
 app.get("/Login", (req, res) => {
   res.render("Login", { pageTitle : "Login"});
 });
+
+// reading comprehension 
+const readingRoutes = require('./routes/reading.routes');
+app.use('/', readingRoutes);
+
+// const pageRoutes = require('./routes/pages.routes');
+// app.use('/', pageRoutes);
+
 
 // === RESOURCE ===
 // app.get('/resources', (req, res) => {
@@ -81,11 +95,10 @@ app.get('/volunteer', (req, res) => {
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
-    pageTitle: "tiny thinkers | not found",
+    pageTitle: "tiny thinkers | not found"
   });
 });
 
-=======
 const express = require('express');
 
 const userRoutes = require('./routes/user_routes');
@@ -106,4 +119,8 @@ app.use((req, res) => {
 });
 
 module.exports = app;
->>>>>>> 1b749ed (updated routes, learning service and APIs)
+
+
+
+module.exports = app;
+

@@ -746,6 +746,16 @@ body {
   }
 }
 
+/* reading comprehension*/
+.comp-header{
+    font-family: "Finger Paint", cursive;
+}
+
+.book-item img{
+  width: 170px;
+  height: 200px;
+}
+
 /* - - - - - mobile first breakouts - - - - - */
 /* tablet */
 @media (min-width: 700px) {
