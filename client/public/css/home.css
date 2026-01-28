@@ -756,6 +756,18 @@ body {
   height: 200px;
 }
 
+.tips-list{
+  list-style: none;
+}
+
+.tips-list li::before{
+  content: "⭐️";
+}
+
+.comp-container{
+  padding: 2rem 1rem;
+}
+
 /* - - - - - mobile first breakouts - - - - - */
 /* tablet */
 @media (min-width: 700px) {
