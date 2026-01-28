@@ -27,6 +27,11 @@ app.engine(
         defaultLayout: "main",
         layoutsDir: path.join(__dirname, "../../client/views/layouts"),
         partialsDir: path.join(__dirname, "../../client/views/partials"),
+        helpers: {
+          isSelected: (current, value) => {
+            return current === value ? 'selected' : '';
+          }
+        }
     }),
 );
 app.set("view engine", "hbs");
@@ -50,11 +55,20 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-module.exports = app;
+// reading comprehension 
+const readingRoutes = require('./routes/reading.routes');
+app.use('/', readingRoutes);
+
+// const pageRoutes = require('./routes/pages.routes');
+// app.use('/', pageRoutes);
 
 // 404 handler
 app.use((req, res) => {
   res.status(404).render("404", {
-    pageTitle: "tiny thinkers | not found",
+    pageTitle: "tiny thinkers | not found"
   });
 });
+
+
+
+module.exports = app;
