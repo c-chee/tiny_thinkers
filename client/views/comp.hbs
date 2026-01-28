@@ -1,0 +1,75 @@
+<!-- radio buttons with level of the child -->
+
+{{!-- <body>
+    <main>
+        <h1 class="comp-header">Reading Comprehension</h1>
+        <div>
+            <label for="grade">Choose a grade:</label>
+            <select id="grade">
+                <option value=""> Select your child's grade</option>
+                <option value="kindergarten">Kindergarten</option>
+                <option value="first">First Grade</option>
+                <option value="second">Second Grade</option>
+                <option value="third">Third Grade</option>
+                <option value="fourth">Fourth Grade</option>
+                <option value="fifth">Fifth Grade</option>
+            </select>
+        </div>
+        <h2>Reading tips for your child</h2>
+        <ul id="reading-tips"></ul>
+
+        <h2>Recommendations for books</h2>
+        <ul id="books"></ul>
+    </main>
+
+    <script src="/js/comp.js"></script>
+</body> --}}
+
+<body>
+    <h1>Reading Comprehension</h1>
+
+    <div>
+        <form method="GET" action="/reading">
+            <label for="grade">Select your child's grade</label>
+            <select name="grade" id="grade" onchange="this.form.submit()">
+                <option value="kindergarten" {{isSelected grade "kindergarten"}}>Kindergarten</option>
+
+                <option value="first"  {{isSelected grade "first"}}>First</option>
+
+                <option value="second"  {{isSelected grade "second"}}>Second</option>
+
+                <option value="third" {{isSelected grade "third"}}>Third</option>
+
+                <option value="fourth" {{isSelected grade "fourth"}}>Fourth</option>
+
+                <option value="fifth" {{isSelected grade "fifth"}}  >Fifth</option>
+            </select>
+        </form>
+    </div>
+
+    <div>
+        <h2>Reading tips</h2>
+        <ul>
+            {{#each data.tips}}
+            <li>{{this}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div>
+        <h2>Recommended Books</h2>
+        <ul class="books">
+            {{#each data.books}}
+            <li class="book-item">
+                <img src="{{image}}" alt="{{title}}"/>
+                <h3>{{title}}</h3>
+                <p>By {{author}}</p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+
+
+    <script src="/js/comp.js"></script>
+</body>
