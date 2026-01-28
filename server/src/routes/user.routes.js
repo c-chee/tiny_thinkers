@@ -1,3 +1,6 @@
+/**
+ * This file connects routes to controllers
+ */
 const express = require('express');
 const router = express.Router();
 

@@ -14,12 +14,13 @@ const app = express();
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
 
-app.use(cors());
-app.use(express.json()); // Allows server to read JSON
+app.use(cors()); // Enables cross-origin requests
+app.use(express.json()); // Allows server to read JSON req
 
 // === HANDLEBARS ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
+// Handlebars templaing setup
 app.engine(
     "hbs",
     engine({
@@ -53,7 +54,7 @@ app.get("/db-test", async (req, res) => {
 
 module.exports = app;
 
-//resource page 
+// === RESOURCE ===
 // app.get('/resources', (req, res) => {
 //   res.render('resources', {
 //     layout: 'resourcelayout',
@@ -61,14 +62,17 @@ module.exports = app;
 //     categories: resourcesData.categories,
 //   });
 // });
-//volunteer page 
+
+// === VOLUNTEER ===
 app.get('/volunteer', (req, res) => {
     res.render('volunteer', {
       layout: 'volunteerlayout',
       title: 'Volunteer'
     });
 });
-// 404 handler
+
+// === 404 HANDLER === 
+// *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
     pageTitle: "tiny thinkers | not found",
