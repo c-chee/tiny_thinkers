@@ -53,6 +53,10 @@ app.get("/db-test", async (req, res) => {
 });
 
 module.exports = app;
+//login 
+app.get("/Login", (req, res) => {
+  res.render("Login", { pageTitle : "Login"});
+});
 
 // === RESOURCE ===
 // app.get('/resources', (req, res) => {
