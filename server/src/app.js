@@ -55,17 +55,10 @@ app.get("/db-test", async (req, res) => {
 module.exports = app;
 //login 
 app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle : "Login"});
+  res.render("Login", { pageTitle : "Login",
+    layout: "loginlayout"
+  });
 });
-
-// === RESOURCE ===
-// app.get('/resources', (req, res) => {
-//   res.render('resources', {
-//     layout: 'resourcelayout',
-//     title: 'Resources',
-//     categories: resourcesData.categories,
-//   });
-// });
 
 // === VOLUNTEER ===
 app.get('/volunteer', (req, res) => {
