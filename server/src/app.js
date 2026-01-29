@@ -37,6 +37,7 @@ app.get("/", (req, res) => {
     res.render("home", { pageTitle: "Tiny Thinkers | Home" });
 });
 
+
 app.get("/api/status", (req, res) => {
     res.json({ status: "Tiny Thinkers API running" });
 });
@@ -52,11 +53,26 @@ app.get("/db-test", async (req, res) => {
 });
 
 module.exports = app;
+//login 
+app.get("/Login", (req, res) => {
+  res.render("Login", { pageTitle : "Login",
+    layout: "loginlayout"
+  });
+});
 
-// === 404 handler === 
+// === VOLUNTEER ===
+app.get('/volunteer', (req, res) => {
+    res.render('volunteer', {
+      layout: 'volunteerlayout',
+      title: 'Volunteer'
+    });
+});
+
+// === 404 HANDLER === 
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
     pageTitle: "tiny thinkers | not found",
   });
 });
+
