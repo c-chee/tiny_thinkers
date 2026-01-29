@@ -24,6 +24,7 @@ app.use(express.static(path.join(__dirname, "../../client/public")));
 
 // Handlebars templaing setup
 app.engine(
+
     "hbs",
     engine({
         extname: "hbs",
@@ -36,17 +37,33 @@ app.engine(
           }
         }
     }),
+
+  "hbs",
+  engine({
+    extname: "hbs",
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "../../client/views/layouts"),
+    partialsDir: path.join(__dirname, "../../client/views/partials"),
+  }),
+
 );
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
 app.get("/", (req, res) => {
-    res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+  res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+});
+
+app.get("/cards", (req, res) => {
+  res.render("cards", {
+    pageTitle: "Tiny Thinkers | Cards",
+    pageCss: "/css/cards.css",
+  });
 });
 
 
 app.get("/api/status", (req, res) => {
-    res.json({ status: "Tiny Thinkers API running" });
+  res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === DATABASE ===
@@ -59,12 +76,19 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
+
  
 module.exports = app;
 //login 
+
+// === LOGIN === 
+
 app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle : "Login"});
+  res.render("Login", { pageTitle : "Login",
+    layout: "loginlayout"
+  });
 });
+
 
 // reading comprehension 
 const readingRoutes = require('./routes/reading.routes');
@@ -82,6 +106,7 @@ app.use('/', readingRoutes);
 //     categories: resourcesData.categories,
 //   });
 // });
+
 
 // === VOLUNTEER ===
 app.get('/volunteer', (req, res) => {
@@ -101,24 +126,5 @@ app.use((req, res) => {
 
 
 
+module.exports = app;
 
-// const express = require('express');
-
-// const userRoutes = require('./routes/user_routes');
-// const learningRoutes = require('./routes/learning _routes');
-
-// const app = express();
-
-// app.use(express.json());
-
-
-
-// app.use('/api/learning', learningRoutes);
-
-// app.use('/api/users', userRoutes);
-
-// app.use((req, res) => {
-//     res.status(404).json({ error: 'Route not found'});
-// });
-
-// module.exports = app;
