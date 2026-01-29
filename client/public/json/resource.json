@@ -1,0 +1,133 @@
+{
+    "categories": [
+        {
+        "id": "local-charlotte",
+        "title": "Charlotte Local Resources",
+        "resources": [
+            {
+                "name": "ourBridge for Kids",
+                "imageURL": "https://joinourbridge.org/wp-content/uploads/2023/09/%C2%A92018-Piper-Warlick-Photography-Sil-006-Reproduction-Rights-Granted-800x533-1.jpg",
+                "description": "Community support and advocacy for children and families in Charlotte",
+                "url": "https://joinourbridge.org/?gad_source=1&gad_campaignid=20921777721&gbraid=0AAAAAqtQrRHNOhLJQWV9EVU6tjOWN-_xQ&gclid=Cj0KCQiA-NHLBhDSARIsAIhe9X3IBJT_4KEyJwijozpsuzzJ-sVcdmZ1ayNYZUzr6yqOpu1YAgIZWykaAhGJEALw_wcB",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "Charlotte Mecklenburg Library",
+                "imageURL": "https://www.mcmillanpazdansmith.com/wp-content/uploads/slider173/charlotte-mecklenbug-north-regional-library_003a.jpg",
+                "description": "Free homework help, tutoring programs, and family learning resources for children.",
+                "url": "https://cmlibrary.org/",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "Classroom Central",
+                "imageURL":"https://impactclub.com/wp-content/uploads/2018/10/Classroom-Central-Inc..jpg",
+                "description": "Non-profit providing free essential school supplies to teachers and students in need through its Free Stores and Mobile Free Store in the Charlotte Area",
+                "url": "http://www.classroomcentral.org/",
+                "languages": ["English"],
+                "cost": "No cost!"
+            }
+        ]
+        },
+        {
+        "id": "needs",
+        "title": "Food and Basic Needs",
+        "resources": [
+            {
+                "name": "Second Harvest Food Bank of Metrolina",
+                "imageURL":"https://www.secondharvestmidtn.org/wp-content/uploads/2023/12/Mobile-Market-Distribution-10.20.23-1-2-scaled-2.jpg",
+                "description": "Food bank providing groceries and meal support for families in Charlotte.",
+                "url": "https://www.secondharvestmetrolina.org",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "Mecklenburg County Community Resource Center",
+                "imageURL":"https://blog.mecknc.gov/wp-content/uploads/2022/07/meck-pre-k-1.jpeg",
+                "description": "Walk-in centers offering help with housing, utilities, food, family services, job resources, and healthcare access.",
+                "url": "https://dcr.mecknc.gov/community-resource-centers",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "City of Charlotte Emergency Housing Assistance",
+                "imageURL": "https://www.charlottenc.gov/files/sharedassets/city/v/1/streets-and-neighborhoods/housing/images/housing.jpeg?w=1058&h=353",
+                "description": "Programs and contacts for rent help, utility assistance, aand homelessness prevention.",
+                "url": "https://www.charlottenc.gov/Streets-and-Neighborhoods/Housing/Emergency-Housing-Assistance",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            }
+        ]
+        },
+        {
+        "id": "learning",
+        "title": "Learning At Home",
+        "resources": [
+            {
+                "name": "Khan Academy",
+                "imageURL":"https://khankids.zendesk.com/hc/article_attachments/360007563852/KhanKids_LogoBanner_Landscape_EmailV3.jpg",
+                "description": "Non-profit educational organization that provides a free, world-class education for anyone, anywhere, offering personalized learning through videos, exercises, and AI-powered support.",
+                "url": "https://www.khanacademy.org/",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "PBS Kids",
+                "imageURL":"https://i.ytimg.com/vi/28duvD5z-PI/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLBHLgyj4UQz6D9Q5w-yUnd4msdHtg",
+                "description": "Media brand offering research-based content designed to spaark curiosity and learning through TV, digital, and community programs.",
+                "url": "https://pbskids.org/",
+                "languages": ["English"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "Starfall",
+                "imageURL":"https://kimberlygreen11.wordpress.com/wp-content/uploads/2015/04/10934614_1117295231620571_1437384123_n.jpg",
+                "description": "Non-profit educational website and app designed to teach children to read through phonics-based, interactive games, movies, and books.",
+                "url": "https://www.starfall.com/h/",
+                "languages": ["English"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "ReadWorks",
+                "imageURL":"https://about.readworks.org/uploads/7/9/6/7/79679564/230525-readworks-ps31-7019_orig.jpg",
+                "description": "Non-profit organization providing free, research-based reading comprehension curriculum, tools, and, in particular, thousands of K-12 fiction/non-fiction passages to enhance literacy.",
+                "url": "https://www.readworks.org/",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            }
+        ]
+        },
+        {
+        "id": "school-help",
+        "title": "School and Academic Help",
+        "resources": [
+            {
+                "name": "Understood",
+                "imageURL":"https://cdn-images.understood.org/ifcoor6xo6lf/6gyb0yGaUDh38lWkaTZROW/096965cc3279f668b5fc3ce4f0038c42/ArtboardUnderstood_article_51_image.jpg",
+                "description": "Non-profit organization created to help parents understand learning and attention challenges at school. ",
+                "url": "https://www.understood.org/",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "Colorin Colorado",
+                "imageURL":"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsS4CTMbXxoTr0WoZn9TJAJNQCaccaYjyxuyOUMBaRXBmTzAnuwCqzj7rjbamQM_WWk252pVWVyUyfTvM4wXXzJoJ3XBNzpi6M0OqSRMQQCSX9aPuI5QeiqOQ-yxG9ZoZ19uJg-A6Z7lw/s1600/colorincolorado.png",
+                "description": "Resource for families of English learners to support reading and school success.",
+                "url": "https://www.colorincolorado.org/",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            },
+            {
+                "name": "GreatSchools Parent Guides",
+                "imageURL":"https://www.greatschools.org/gk/wp-content/uploads/2010/02/Assistive-technology-tools-guide-for-parents.jpg",
+                "description": "Clear guide that explaains grades, testing, and what children learn at each grade level.",
+                "url": "https://www.greatschools.org/gk/parents/",
+                "languages": ["English", "Spanish"],
+                "cost": "No cost!"
+            }
+        ]
+        }
+    ]
+    
+}

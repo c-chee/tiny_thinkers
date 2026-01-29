@@ -73,6 +73,13 @@ app.get('/volunteer', (req, res) => {
       title: 'Volunteer'
     });
 });
+// === Resources ===
+app.get('/resources', (req, res) => {
+    res.render('resources', {
+      layout: 'resourceslayout',
+      title: 'Resources'
+    });
+})
 
 // === 404 HANDLER === 
 // *** Must be last ***
