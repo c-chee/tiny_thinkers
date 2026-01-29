@@ -1,0 +1,115 @@
+<main class="cards-page">
+
+  <!-- hero -->
+  <section class="cards-hero">
+    <div class="container">
+      <h1 class="h2">letter cards</h1>
+      <p class="body">tap a key to open its card.</p>
+    </div>
+
+    <div class="wave wave-hero"></div>
+  </section>
+
+  <!-- keyboard section -->
+  <section class="cards-area band-purple">
+    <div class="container">
+
+      <!-- dino helper -->
+      <div class="dino-helper">
+        <img
+          src="/images/tiny9.PNG"
+          alt="Dino cheering you on"
+          class="dino-img"
+        />
+        <p class="dino-text">Press a letter to learn its sound!</p>
+      </div>
+
+      <!-- keyboard -->
+      <div class="keyboard" id="puzzleGrid" aria-label="alphabet keyboard">
+
+        <div class="key-row">
+          <button class="key" data-letter="q" type="button">Q</button>
+          <button class="key" data-letter="w" type="button">W</button>
+          <button class="key" data-letter="e" type="button">E</button>
+          <button class="key" data-letter="r" type="button">R</button>
+          <button class="key" data-letter="t" type="button">T</button>
+          <button class="key" data-letter="y" type="button">Y</button>
+          <button class="key" data-letter="u" type="button">U</button>
+          <button class="key" data-letter="i" type="button">I</button>
+          <button class="key" data-letter="o" type="button">O</button>
+          <button class="key" data-letter="p" type="button">P</button>
+        </div>
+
+        <div class="key-row">
+          <button class="key" data-letter="a" type="button">A</button>
+          <button class="key" data-letter="s" type="button">S</button>
+          <button class="key" data-letter="d" type="button">D</button>
+          <button class="key" data-letter="f" type="button">F</button>
+          <button class="key" data-letter="g" type="button">G</button>
+          <button class="key" data-letter="h" type="button">H</button>
+          <button class="key" data-letter="j" type="button">J</button>
+          <button class="key" data-letter="k" type="button">K</button>
+          <button class="key" data-letter="l" type="button">L</button>
+        </div>
+
+        <div class="key-row">
+          <button class="key key-wide" data-letter="z" type="button">Z</button>
+          <button class="key" data-letter="x" type="button">X</button>
+          <button class="key" data-letter="c" type="button">C</button>
+          <button class="key" data-letter="v" type="button">V</button>
+          <button class="key" data-letter="b" type="button">B</button>
+          <button class="key" data-letter="n" type="button">N</button>
+          <button class="key key-wide" data-letter="m" type="button">M</button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- wave -->
+    <div class="wave wave-purple-bottom"></div>
+  </section>
+
+  <!-- back to dashboard -->
+  <section class="cards-back">
+    <div class="container">
+      <div class="back-row">
+        <a href="/dashboard" class="back-btn">Back to Dashboard</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- modal -->
+  <div class="modal-overlay" id="letterModal" aria-hidden="true">
+    <div
+      class="modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="modalTitle"
+    >
+      <button
+        class="modal-close"
+        type="button"
+        id="modalClose"
+        aria-label="close"
+      >
+        ×
+      </button>
+
+      <h2 class="h2" id="modalTitle">letter</h2>
+      <p class="body" id="modalSubtitle">loading…</p>
+
+      <div class="modal-content" id="modalContent">
+        <!-- content injected here from js -->
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn-pill btn-solid" type="button" id="playAudioBtn">
+          play sound
+        </button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<script src="/js/cards.js"></script>

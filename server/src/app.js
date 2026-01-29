@@ -22,24 +22,31 @@ app.use(express.static(path.join(__dirname, "../../client/public")));
 
 // Handlebars templaing setup
 app.engine(
-    "hbs",
-    engine({
-        extname: "hbs",
-        defaultLayout: "main",
-        layoutsDir: path.join(__dirname, "../../client/views/layouts"),
-        partialsDir: path.join(__dirname, "../../client/views/partials"),
-    }),
+  "hbs",
+  engine({
+    extname: "hbs",
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "../../client/views/layouts"),
+    partialsDir: path.join(__dirname, "../../client/views/partials"),
+  }),
 );
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
 app.get("/", (req, res) => {
-    res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+  res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+});
+
+app.get("/cards", (req, res) => {
+  res.render("cards", {
+    pageTitle: "Tiny Thinkers | Cards",
+    pageCss: "/css/cards.css",
+  });
 });
 
 
 app.get("/api/status", (req, res) => {
-    res.json({ status: "Tiny Thinkers API running" });
+  res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === DATABASE ===
@@ -52,8 +59,7 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-module.exports = app;
-//login 
+// === LOGIN === 
 app.get("/Login", (req, res) => {
   res.render("Login", { pageTitle : "Login",
     layout: "loginlayout"
@@ -76,3 +82,4 @@ app.use((req, res) => {
   });
 });
 
+module.exports = app;
