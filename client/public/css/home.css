@@ -747,8 +747,17 @@ body {
 }
 
 /* reading comprehension*/
+.comp-container{
+  padding: 2rem 1rem; 
+}
+
 .comp-header{
     font-family: "Finger Paint", cursive;
+    text-align: center;
+}
+
+.grade-selector label{
+  font-weight: bold;
 }
 
 .book-item img{
@@ -758,6 +767,7 @@ body {
   border-radius: 6px;
 }
 
+
 .books{
   list-style-type:none;
   display: grid;
@@ -766,7 +776,13 @@ body {
   );
 }
 
+.books h3, .books p{
+  text-align: center;
+}
 
+.parent-note{
+  text-align: center;
+}
 
 .tips-list{
   list-style: none;
@@ -775,10 +791,29 @@ body {
 .tips-list li::before{
   content: "⭐️";
 }
-
-.comp-container{
-  padding: 2rem 1rem;
+.question-list li::before{
+  content: "⭐️";
 }
+
+.question-list{
+  list-style: none;
+}
+
+.day{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+}
+
+.day input{
+  width: 180px;
+}
+
+.selector{
+  text-align: center;
+}
+
 
 /* - - - - - mobile first breakouts - - - - - */
 /* tablet */

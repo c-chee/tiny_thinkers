@@ -1,9 +1,12 @@
 <body>
-    <div class="comp-container">
-    <h1>Reading Comprehension</h1>
+    <section class="comp-container">
+    <header class="comp-header">
+        <h1>Reading Comprehension</h1>
+    </header>
+    
 
-    <div>
-        <form method="GET" action="/reading">
+    <div class="grade-selector">
+        <form method="GET" action="/reading" class="selector">
             <label for="grade">Select your child's grade</label>
             <select name="grade" id="grade" onchange="this.form.submit()">
                 <option value="kindergarten" {{isSelected grade "kindergarten"}}>Kindergarten</option>
@@ -19,9 +22,10 @@
                 <option value="fifth" {{isSelected grade "fifth"}}  >Fifth</option>
             </select>
         </form>
+        <p class="parent-note">Choose a grade to see age appropriate books and activities.</p>
     </div>
 
-    <div>
+    <div class="tips-section">
         <h2>Reading tips</h2>
         <ul class="tips-list">
             {{#each data.tips}}
@@ -30,7 +34,7 @@
         </ul>
     </div>
 
-    <div>
+    <div class="books-section">
         <h2>Recommended Books</h2>
         <ul class="books">
             {{#each data.books}}
@@ -42,7 +46,62 @@
             {{/each}}
         </ul>
     </div>
-</div>
+
+    
+
+    <div class="questions-section">
+        <h2>Great Questions to Ask for {{grade}} grade</h2>
+        <ul class="question-list">
+            {{#each data.questions}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="reading-tracker">
+        <h2>Daily Reading Tracker</h2>
+        <p>Keep track of your childs daily reading</p>
+
+        <div class="day-tracker">
+            <div class="day">
+                <span>Monday</span>
+                <input type="number" min="0" placeholder="Monday minutes"/>
+            </div>
+
+            <div class="day">
+                <span>Tuesday</span>
+                <input type="number" min="0" placeholder="Tuesday minutes"/>
+            </div>
+
+            <div class="day">
+                <span>Wednesday</span>
+                <input type="number" min="0" placeholder="Wednesday minutes"/>
+            </div>
+
+            <div class="day">
+                <span>Thursday</span>
+                <input type="number" min="0" placeholder="Thursday minutes"/>
+            </div>
+
+            <div class="day">
+                <span>Friday</span>
+                <input type="number" min="0" placeholder="Friday minutes"/>
+            </div>
+
+            <div class="day">
+                <span>Saturday</span>
+                <input type="number" min="0" placeholder="Saturday minutes"/>
+            </div>
+
+            <div class="day">
+                <span>Sunday</span>
+                <input type="number" min="0" placeholder="Sunday minutes"/>
+            </div>
+        </div>
+
+        <p class="total-minutes"> Total minutes this week : <span id="totalMinutes"> 0</span> minutes</p>
+    </div>
+</section>
 
 
     <script src="/js/comp.js"></script>
