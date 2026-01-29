@@ -53,7 +53,9 @@ app.get("/db-test", async (req, res) => {
 module.exports = app;
 //login 
 app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle : "Login"});
+  res.render("Login", { pageTitle : "Login",
+    layout: "loginlayout"
+  });
 });
 
 // 404 handler
