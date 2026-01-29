@@ -21,23 +21,30 @@ app.use(express.json()); // Allows server to read JSON
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
 app.engine(
-    "hbs",
-    engine({
-        extname: "hbs",
-        defaultLayout: "main",
-        layoutsDir: path.join(__dirname, "../../client/views/layouts"),
-        partialsDir: path.join(__dirname, "../../client/views/partials"),
-    }),
+  "hbs",
+  engine({
+    extname: "hbs",
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "../../client/views/layouts"),
+    partialsDir: path.join(__dirname, "../../client/views/partials"),
+  }),
 );
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
 app.get("/", (req, res) => {
-    res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+  res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+});
+
+app.get("/cards", (req, res) => {
+  res.render("cards", {
+    pageTitle: "Tiny Thinkers | Cards",
+    pageCss: "/css/cards.css",
+  });
 });
 
 app.get("/api/status", (req, res) => {
-    res.json({ status: "Tiny Thinkers API running" });
+  res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === DATABASE ===
@@ -50,11 +57,11 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-module.exports = app;
-
 // 404 handler
 app.use((req, res) => {
   res.status(404).render("404", {
     pageTitle: "tiny thinkers | not found",
   });
 });
+
+module.exports = app;

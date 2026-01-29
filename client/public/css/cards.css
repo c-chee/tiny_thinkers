@@ -1,0 +1,432 @@
+/* - - - - - card styles - - - - - */
+.cards-page {
+  min-height: 100vh;
+  background: #bbf9db;
+}
+
+.cards-hero .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.wave {
+  height: 110px;
+  width: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 100%;
+}
+
+.wave-hero {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23fffdda'/%3E%3C/svg%3E");
+}
+
+.wave-purple-bottom {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23bbf9db'/%3E%3C/svg%3E");
+}
+
+.cards-hero {
+  position: relative;
+  padding: 22px 0 110px;
+  background: #bbf9db;
+  overflow: hidden;
+}
+
+.cards-hero .container {
+  position: relative;
+  z-index: 2;
+}
+
+.cards-hero .wave-hero {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 1;
+}
+
+.cards-hero h1,
+.cards-hero p {
+  text-align: center;
+}
+
+.band-purple {
+  background: #fffdda;
+}
+
+.cards-area {
+  position: relative;
+  padding: 12px 0 110px;
+  overflow: hidden;
+}
+
+.cards-area .container {
+  position: relative;
+  z-index: 2;
+}
+
+.cards-area .wave-purple-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 1;
+}
+
+.dino-helper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin: 0 0 -150px;
+  position: relative;
+  z-index: 3;
+  bottom: 80px;
+  pointer-events: none;
+}
+
+.dino-img {
+  width: 260px;
+  height: auto;
+  filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.14));
+}
+
+.dino-text {
+  margin: 0;
+  font-weight: 900;
+  background: rgba(255, 255, 255, 0.65);
+  padding: 10px 12px;
+  border-radius: 16px;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
+}
+
+/* - - - - - keyboard section - - - - - */
+.keyboard {
+  display: grid;
+  gap: 14px;
+  margin-top: -40px;
+  position: relative;
+  z-index: 2;
+  bottom: 40px;
+}
+
+.key-row {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.key {
+  appearance: none;
+  border: none;
+  cursor: pointer;
+  min-width: 52px;
+  height: 56px;
+  padding: 0 14px;
+  border-radius: 16px;
+  font-family: "Finger Paint", cursive;
+  font-size: 1.85rem;
+  color: rgba(0, 0, 0, 0.78);
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow:
+    0 10px 0 rgba(0, 0, 0, 0.14),
+    0 16px 24px rgba(0, 0, 0, 0.14);
+  transform: translateY(0);
+  transition:
+    transform 0.08s ease,
+    filter 0.14s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.key::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.55),
+    transparent 45%
+  );
+  opacity: 0.55;
+  pointer-events: none;
+}
+
+.key:hover {
+  filter: brightness(0.98);
+}
+
+.key:active,
+.key.is-pressed {
+  transform: translateY(6px);
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.14),
+    0 10px 18px rgba(0, 0, 0, 0.12);
+}
+
+.key-wide {
+  min-width: 68px;
+}
+
+/* pastel key colors */
+.key:nth-child(6n + 1) {
+  background: rgba(154, 208, 236, 0.95);
+}
+.key:nth-child(6n + 2) {
+  background: rgba(247, 214, 224, 0.95);
+}
+.key:nth-child(6n + 3) {
+  background: rgba(255, 230, 71, 0.82);
+}
+.key:nth-child(6n + 4) {
+  background: rgba(231, 122, 122, 0.9);
+}
+.key:nth-child(6n + 5) {
+  background: rgba(178, 247, 239, 0.9);
+}
+.key:nth-child(6n + 6) {
+  background: rgba(223, 235, 255, 0.95);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  place-items: center;
+  padding: 18px;
+  background: rgba(0, 0, 0, 0.28);
+  z-index: 9999;
+}
+
+.modal-overlay.is-open {
+  display: grid;
+}
+
+.modal-card {
+  width: min(560px, 94vw);
+  background: #fffdf8;
+  border-radius: 24px;
+  padding: 22px 20px;
+  box-shadow: 0 18px 30px rgba(0, 0, 0, 0.18);
+}
+
+.modal-card #modalTitle,
+.modal-card #modalSubtitle {
+  text-align: center;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 14px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 40px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  background: transparent;
+  border: none;
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 30px;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    color 0.15s ease,
+    transform 0.1s ease;
+}
+
+.modal-close:hover {
+  color: rgba(0, 0, 0, 0.9);
+  transform: scale(1.08);
+}
+
+.modal-close:active {
+  transform: scale(0.95);
+}
+
+.modal-close:focus-visible {
+  outline: 3px solid rgba(155, 93, 229, 0.35);
+  outline-offset: 2px;
+}
+
+#playAudioBtn {
+  background: transparent;
+  color: #1c1c1c;
+  border: 3px solid #1c1c1c;
+  border-radius: 999px;
+  padding: 10px 18px;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 700;
+  cursor: pointer;
+  transition:
+    color 0.18s ease,
+    border-color 0.18s ease;
+}
+
+#playAudioBtn:hover {
+  color: #ffffff;
+  border-color: #ffffff;
+}
+
+/* - - - - - back to dash - - - - - */
+.back-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-family:
+    "Urbanist",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  font-weight: 1000;
+  text-decoration: none;
+  overflow: hidden;
+  background: transparent;
+  border: 2px solid black;
+  color: black;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease;
+}
+
+.back-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -12deg,
+    #ff9f1c 0px,
+    #ff9f1c 6px,
+    #ffb347 6px,
+    #ffb347 12px
+  );
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
+  z-index: -1;
+}
+
+.back-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 6px,
+    rgba(255, 255, 255, 0.25) 6px,
+    rgba(255, 255, 255, 0.25) 9px
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.back-btn:hover::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  color: white;
+  border-color: white;
+}
+
+/* - - - - - prefers reduced motion preset - - - - - */
+@media (prefers-reduced-motion: reduce) {
+  .back-btn:hover {
+    transform: none !important;
+  }
+  .back-btn::before {
+    transition: none !important;
+  }
+}
+
+/* - - - - - mobile first breakouts - - - - - */
+/* mobile */
+@media (max-width: 699px) {
+  .dino-helper {
+    flex-direction: column;
+    align-items: center;
+    bottom: 20px;
+    margin: 0 0 -110px;
+  }
+
+  .dino-text {
+    order: -1;
+    margin: 0 0 10px;
+    text-align: center;
+    max-width: 26ch;
+  }
+}
+
+/* tablet */
+@media (min-width: 700px) {
+  .cards-hero {
+    padding: 22px 0 110px;
+  }
+
+  .dino-helper {
+    flex-direction: row;
+    gap: 12px;
+    bottom: 70px;
+    margin: 0 0 -150px;
+  }
+
+  .dino-img {
+    width: 240px;
+    margin-top: 0;
+  }
+
+  .dino-text {
+    text-align: left;
+    max-width: none;
+    margin-bottom: 4px;
+  }
+
+  .key {
+    min-width: 62px;
+    height: 62px;
+    font-size: 2rem;
+    border-radius: 16px;
+  }
+
+  .key-wide {
+    min-width: 82px;
+  }
+}
+
+/* desktop */
+@media (min-width: 900px) {
+  .keyboard {
+    gap: 16px;
+  }
+
+  .key-row {
+    gap: 12px;
+  }
+
+  .dino-img {
+    width: 260px;
+  }
+}
