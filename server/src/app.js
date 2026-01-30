@@ -46,14 +46,29 @@ app.get("/spelling", (req, res) => {
   });
 });
 
-//login
-app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle: "Login" });
-});
-
 // === API ROUTES ===
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
+});
+
+
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
+});
+
+// === LOGIN === 
+app.get("/login", (req, res) => {
+  res.render("Login", { pageTitle : "Tiny Thinkers | Login",
+    layout: "loginlayout"
+  });
+});
+
+// === VOLUNTEER ===
+app.get("/volunteer", (req, res) => {
+  res.render("volunteer", {
+    layout: "volunteerlayout",
+    title: "Volunteer",
+  });
 });
 
 // === DATABASE ===
@@ -66,15 +81,7 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-// === VOLUNTEER ===
-app.get("/volunteer", (req, res) => {
-  res.render("volunteer", {
-    layout: "volunteerlayout",
-    title: "Volunteer",
-  });
-});
-
-// === 404 HANDLER ===
+// === 404 HANDLER === 
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
