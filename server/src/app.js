@@ -20,9 +20,10 @@ app.use(cors()); // Enables cross-origin requests
 app.use(express.json()); // Allows server to read JSON req
 
 // === HANDLEBARS ===
+// Static files: client/public -> /css, /js, /images, etc.
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
-// Handlebars templaing setup
+// Handlebars templating setup
 app.engine(
 
     "hbs",
@@ -50,20 +51,41 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
+// === PAGE ROUTES ===
 app.get("/", (req, res) => {
   res.render("home", { pageTitle: "Tiny Thinkers | Home" });
 });
 
-app.get("/cards", (req, res) => {
-  res.render("cards", {
-    pageTitle: "Tiny Thinkers | Cards",
-    pageCss: "/css/cards.css",
+app.get("/spelling", (req, res) => {
+  res.render("spelling", {
+    pageTitle: "Tiny Thinkers | Spelling",
+    pageCss: "/css/spelling.css",
   });
+});
+
+// === API ROUTES ===
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
 });
 
 
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
+});
+
+// === LOGIN === 
+app.get("/login", (req, res) => {
+  res.render("Login", { pageTitle : "Tiny Thinkers | Login",
+    layout: "loginlayout"
+  });
+});
+
+// === VOLUNTEER ===
+app.get("/volunteer", (req, res) => {
+  res.render("volunteer", {
+    layout: "volunteerlayout",
+    title: "Volunteer",
+  });
 });
 
 // === DATABASE ===
@@ -75,8 +97,6 @@ app.get("/db-test", async (req, res) => {
   const [rows] = await db.query("SELECT 1");
   res.json({ db: "connected" });
 });
-
-
  
 module.exports = app;
 //login 

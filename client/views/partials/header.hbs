@@ -1,24 +1,27 @@
-<header class="site-header">
-  <div class="header-content">
-    
-    <!-- logo -->
-    <div class="mascot-logo">
-      <img src="/images/tiny1.PNG" alt="tiny head"/ class="mascot">
-      <h1 class="header-title">Tiny Thinkers</h1>
+<header class = "site-header">
+  <nav class = "top-nav">
+    {{!-- ----------------------
+            Logo Container 
+      ----------------------- --}}
+    <a href = "/" class = "home-link">
+      <img src = "/images/tiny1.PNG" alt = "Home" class = "nav-logo" />
+      <h1 class = "page-title">Tiny Thinkers</h1>
+    </a>
+
+    {{!-- ----------------------
+          Navigation Links 
+      ----------------------- --}}
+    {{!-- [ Mobile ] --}}
+    <div class = 'nav-mobile-container'>
+      <a href = "/login" class = "login-btn">Login</a>
     </div>
-   
 
- 
-
-    <!-- links -->
-    <nav class="navigation">
-      <a href="" class="nav-link">About</a>
-      <a href="" class="nav-link btn-pill nav-login">Login</a>
-    </nav>
-
-  </div>
-  <div class="wave wave-header"></div>
+    {{!-- [ Desktop ] --}}
+    <div class = 'nav-desktop-container'>
+      <a href = "/signup" class = 'signup-btn'>Sign Up</a>
+      <a href = "/login" class = "login-btn">Login</a>
+    </div>
+  </nav>
+  {{!-- <div class="wave wave-nav"></div> --}}
 
 </header>
-
-
