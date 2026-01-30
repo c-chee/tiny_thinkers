@@ -1,15 +1,20 @@
 # Node.js
 node_modules/
+.pnp/
+.pnp.js
+.pnp.cjs
+.pnpm-store/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
-.pnpm-store/
 
 # Environment files
 .env
 .env.*.local
 .local
+.env.local
+.env.production.local
 
 # Build / output
 dist/
@@ -17,8 +22,14 @@ build/
 out/
 coverage/
 .cache/
+.parcel-cache/
 .next/
+.nuxt/
+.svelte-kit/
 .public/
+.turbo/
+.webpack/
+.vite/
 
 # Logs
 logs/
@@ -30,10 +41,27 @@ yarn-error.log*
 # OS / Editor
 .DS_Store
 Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Editors / IDEs
 .vscode/
 .idea/
+*.iml
 *.sublime-workspace
 *.sublime-project
+*.swp
+*~
+
+# Mobile / native
+android/
+ios/
+.expo/
+.expo-shared/
+
+# Docker / CI
+docker-compose.override.yml
+.env.docker
 
 # Misc
 *.pid
@@ -43,3 +71,4 @@ Thumbs.db
 *.db
 .eslintcache
 .snyk
+.history

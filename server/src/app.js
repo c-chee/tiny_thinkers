@@ -14,12 +14,13 @@ const app = express();
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
 
-app.use(cors());
-app.use(express.json()); // Allows server to read JSON
+app.use(cors()); // Enables cross-origin requests
+app.use(express.json()); // Allows server to read JSON req
 
-// === HANDLBARS ===
+// === HANDLEBARS ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
+// Handlebars templaing setup
 app.engine(
   "hbs",
   engine({
@@ -36,6 +37,13 @@ app.get("/", (req, res) => {
   res.render("home", { pageTitle: "Tiny Thinkers | Home" });
 });
 
+app.get("/cards", (req, res) => {
+  res.render("cards", {
+    pageTitle: "Tiny Thinkers | Cards",
+    pageCss: "/css/cards.css",
+  });
+});
+
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
@@ -50,11 +58,25 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-module.exports = app;
+// === LOGIN ===
+app.get("/Login", (req, res) => {
+  res.render("Login", { pageTitle: "Login", layout: "loginlayout" });
+});
 
-// 404 handler
+// === VOLUNTEER ===
+app.get("/volunteer", (req, res) => {
+  res.render("volunteer", {
+    layout: "volunteerlayout",
+    title: "Volunteer",
+  });
+});
+
+// === 404 HANDLER ===
+// *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
     pageTitle: "tiny thinkers | not found",
   });
 });
+
+module.exports = app;
