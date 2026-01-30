@@ -37,7 +37,6 @@ app.set("views", path.join(__dirname, "../../client/views"));
 // === PAGE ROUTES ===
 app.get("/", (req, res) => {
   res.render("home", { pageTitle: "Tiny Thinkers | Home" });
-<<<<<<< HEAD
 });
 
 app.get("/cards", (req, res) => {
@@ -45,8 +44,6 @@ app.get("/cards", (req, res) => {
     pageTitle: "Tiny Thinkers | Cards",
     pageCss: "/css/cards.css",
   });
-=======
->>>>>>> origin/main
 });
 
 app.get("/spelling", (req, res) => {
@@ -56,22 +53,11 @@ app.get("/spelling", (req, res) => {
   });
 });
 
-// === API ROUTES ===
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Tiny Thinkers API running" });
-<<<<<<< HEAD
-=======
-});
-
-
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Tiny Thinkers API running" });
-});
-
-// === LOGIN === 
+// === LOGIN ===
 app.get("/login", (req, res) => {
-  res.render("Login", { pageTitle : "Tiny Thinkers | Login",
-    layout: "loginlayout"
+  res.render("Login", {
+    pageTitle: "Tiny Thinkers | Login",
+    layout: "loginlayout",
   });
 });
 
@@ -81,7 +67,11 @@ app.get("/volunteer", (req, res) => {
     layout: "volunteerlayout",
     title: "Volunteer",
   });
->>>>>>> origin/main
+});
+
+// === API ROUTES ===
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === DATABASE ===
@@ -94,12 +84,8 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-<<<<<<< HEAD
-// 404 handler
-=======
-// === 404 HANDLER === 
+// === 404 HANDLER ===
 // *** Must be last ***
->>>>>>> origin/main
 app.use((req, res) => {
   res.status(404).render("404", {
     pageTitle: "tiny thinkers | not found",
