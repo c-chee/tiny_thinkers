@@ -19,10 +19,14 @@
       rel="stylesheet"
     />
 
-    <!-- css link -->
+    <!-- base css link -->
     <link rel="stylesheet" href="/css/home.css" />
     {{#if pageCss}}
         <link rel="stylesheet" href="{{pageCss}}" />
+
+    <!-- spelling page css -->
+    {{#if pageCss}}
+      <link rel="stylesheet" href="{{pageCss}}" />
     {{/if}}
   </head>
 
@@ -35,6 +39,7 @@
 
     <!-- script link -->
     <script src="/js/home.js"></script>
+    <script src="/js/navbar.js"></script>
   </body>
 </html>
 

@@ -1,0 +1,111 @@
+<body>
+    <section class="comp-container">
+    <header class="comp-header">
+        <h1>Reading Comprehension</h1>
+    </header>
+    
+
+    <div class="grade-selector">
+        <form method="GET" action="/reading" class="selector">
+            <label for="grade">Select your child's grade</label>
+            <select name="grade" id="grade" onchange="this.form.submit()">
+                <option value="kindergarten" {{isSelected grade "kindergarten"}}>Kindergarten</option>
+
+                <option value="first"  {{isSelected grade "first"}}>First</option>
+
+                <option value="second"  {{isSelected grade "second"}}>Second</option>
+
+                <option value="third" {{isSelected grade "third"}}>Third</option>
+
+                <option value="fourth" {{isSelected grade "fourth"}}>Fourth</option>
+
+                <option value="fifth" {{isSelected grade "fifth"}}  >Fifth</option>
+            </select>
+        </form>
+        <p class="parent-note">Choose a grade to see age appropriate books and activities.</p>
+    </div>
+
+    <div class="tips-section">
+        <h2 class="comp-subheader">Reading tips</h2>
+        <ul class="tips-list">
+            {{#each data.tips}}
+            <li>{{this}}</li>
+        {{/each}}
+        </ul>
+    </div>
+
+    <div class="books-section">
+        <h2 class="comp-subheader">Recommended Books</h2>
+        <p class="parent-note">When book images are clicked you'll be taken to a free copy of each book.</p>
+        <ul class="books">
+            {{#each data.books}}
+            <li class="book-item">
+                <a href="{{link}}" target="_blank" rel="noopener noreferrer">
+                <img src="{{image}}" alt="{{title}}"/>
+                <h3>{{title}}</h3>
+                </a>
+                <p>By {{author}}</p>
+            </li>
+            {{/each}}
+        </ul>
+    </div>
+
+    
+
+    <div class="questions-section">
+        <h2 class="comp-subheader">Great Questions to Ask for {{grade}} grade</h2>
+        <ul class="question-list">
+            {{#each data.questions}}
+            <li>{{this}}</li>
+            {{/each}}
+        </ul>
+    </div>
+
+    <div class="reading-tracker">
+        <h2 class="comp-subheader">Daily Reading Tracker</h2>
+        <p class="parent-note">Keep track of your childs daily reading by typing in a number below</p>
+
+        <div class="day-tracker">
+            <div class="day">
+                <span>Monday</span>
+                <input type="number" min="0" placeholder="Monday minutes :"/>
+            </div>
+
+            <div class="day">
+                <span>Tuesday</span>
+                <input type="number" min="0" placeholder="Tuesday minutes :"/>
+            </div>
+
+            <div class="day">
+                <span>Wednesday</span>
+                <input type="number" min="0" placeholder="Wednesday minutes :"/>
+            </div>
+
+            <div class="day">
+                <span>Thursday</span>
+                <input type="number" min="0" placeholder="Thursday minutes :"/>
+            </div>
+
+            <div class="day">
+                <span>Friday</span>
+                <input type="number" min="0" placeholder="Friday minutes :"/>
+            </div>
+
+            <div class="day">
+                <span>Saturday</span>
+                <input type="number" min="0" placeholder="Saturday minutes :"/>
+            </div>
+
+            <div class="day">
+                <span>Sunday</span>
+                <input type="number" min="0" placeholder="Sunday minutes :"/>
+            </div>
+        </div>
+
+        <p class="total-minutes"> Total minutes this week : <span id="totalMinutes"> 0</span> minutes</p>
+    </div>
+</section>
+
+
+    <script src="/js/comp.js"></script>
+</body>
