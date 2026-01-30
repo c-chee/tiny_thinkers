@@ -844,12 +844,4 @@ body {
   .btn-pill::before {
     transition: none !important;
   }
-
-  .stats-track {
-    transition: none !important;
-  }
-
-  .dot {
-    transition: none !important;
-  }
 }

@@ -20,7 +20,6 @@ app.use(express.json()); // Allows server to read JSON req
 // === HANDLEBARS ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
-// Handlebars templaing setup
 app.engine(
   "hbs",
   engine({
@@ -35,13 +34,6 @@ app.set("views", path.join(__dirname, "../../client/views"));
 
 app.get("/", (req, res) => {
   res.render("home", { pageTitle: "Tiny Thinkers | Home" });
-});
-
-app.get("/cards", (req, res) => {
-  res.render("cards", {
-    pageTitle: "Tiny Thinkers | Cards",
-    pageCss: "/css/cards.css",
-  });
 });
 
 app.get("/api/status", (req, res) => {
