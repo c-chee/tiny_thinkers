@@ -1028,6 +1028,149 @@ footer {
   }
 }
 
+/* reading comprehension*/
+.comp-container{
+  padding: 2rem 1rem; 
+  max-width: 1000px;
+  margin: 0 auto;
+
+}
+
+.comp-header{
+    font-family: "Finger Paint", cursive;
+    text-align: center;
+}
+
+.comp-subheader{
+  color: #3a4f7a;
+}
+
+.grade-selector label{
+  font-weight: bold;
+}
+
+.books-section{
+  margin-top: 70px;
+  background-color: #f5f6f4;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+.book-item img{
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  transition: transfoorm 0.25s ease, box-shadow 0.25s ease;
+}
+
+.book-item a{
+  text-decoration: none;
+  display: block;
+  color:#3a4f7a;
+}
+
+.book-item:hover img{
+  cursor: pointer;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(58, 79, 122, 0.35);
+}
+
+
+.books{
+  list-style-type:none;
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fit, minmax(180px, 1fr)
+  );
+}
+
+.books h3, .books p{
+  text-align: center;
+}
+
+.parent-note{
+  text-align: center;
+  font-size: 17px;
+}
+
+.tips-section{
+  margin-top: 70px;
+  background-color: #f5f6f4;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+.tips-list{
+  list-style: none;
+}
+
+.tips-list li::before{
+  content: "⭐️";
+}
+
+.questions-section{
+  margin-top: 70px;
+  background-color: #f5f6f4;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+.question-list li::before{
+  content: "⭐️";
+}
+
+.question-list{
+  list-style: none;
+}
+
+.day{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+}
+
+.day input{
+  border: 2px solid #3a4f7a;
+  height: 35px;
+  width: 200px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+
+
+.selector{
+  text-align: center;
+}
+
+.selector label{
+  color:#3a4f7a ;
+}
+
+.grade-selector select{
+  border: 2px solid #3a4f7a;
+  height: 35px;
+  width: 200px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.reading-tracker{
+  margin-top: 70px;
+  background-color: #f5f6f4;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+.total-minutes{
+   font-size: 17px;
+   text-align: center;
+}
+
+
+
 .band-lavender .btn-solid {
   color: var(--ink); /* black text */
   border-color: var(--ink); /* black border */
