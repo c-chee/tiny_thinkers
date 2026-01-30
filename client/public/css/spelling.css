@@ -1,0 +1,380 @@
+/* - - - - - global spelling styles - - - - - */
+:root {
+  --spell-blue: #c8efff;
+  --spell-orange: #ffd9b3;
+  --spell-cream: #fff7e6;
+}
+
+.spelling-page {
+  background: var(--spell-orange);
+  min-height: 100vh;
+}
+
+.spelling-hero {
+  background: var(--spell-orange);
+}
+
+.spelling-area {
+  background: var(--spell-blue);
+  padding: 3rem 0 4rem;
+}
+
+.spelling-page .container.center-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.spelling-badges {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.helper-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.tiny-helper {
+  display: block;
+  margin: 1rem auto 0.5rem;
+  max-width: 260px;
+  width: 100%;
+  height: auto;
+}
+
+.game-card {
+  width: min(720px, 92vw);
+  margin: 1.5rem auto 0;
+}
+
+.input-row {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.spell-input {
+  min-width: 240px;
+  max-width: 360px;
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  font-size: 1rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 255, 255, 0.9);
+  background: rgba(255, 255, 255, 0.85);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.spell-input:focus {
+  border-color: #ffb84d;
+  box-shadow: 0 0 0 3px rgba(255, 184, 77, 0.35);
+  background: #fff;
+}
+
+.spell-input::placeholder {
+  color: #777;
+  font-size: 0.9rem;
+}
+
+.input-row {
+  margin-bottom: 0.75rem;
+}
+
+.feedback {
+  margin-top: 0.75rem;
+}
+
+.wave {
+  width: 100%;
+  height: 100px;
+  display: block;
+  background-repeat: repeat-x;
+  background-size: cover;
+}
+
+.wave-orange-to-blue {
+  background-color: var(--spell-orange);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23c8efff'/%3E%3C/svg%3E");
+}
+
+.wave-blue-to-orange {
+  background-color: var(--spell-blue);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23ffd9b3'/%3E%3C/svg%3E");
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+  background: rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.modal-overlay.is-open {
+  display: flex;
+}
+
+.modal-card {
+  background: var(--spell-cream);
+  border-radius: 22px;
+  padding: 2rem 1.75rem 1.75rem;
+  text-align: center;
+  position: relative;
+
+  box-shadow:
+    0 20px 50px rgba(0, 0, 0, 0.18),
+    0 6px 16px rgba(0, 0, 0, 0.12);
+  animation: modalPop 0.25s ease-out;
+}
+
+@keyframes modalPop {
+  from {
+    transform: scale(0.96) translateY(8px);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+  }
+}
+
+.tiny-modal-img {
+  display: block;
+  margin: 0 auto 0.75rem;
+  max-width: 180px;
+  height: auto;
+}
+
+.modal-card p {
+  margin: 0.5rem auto 1.25rem;
+  max-width: 360px;
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  border: none;
+  background: #ffe2b8;
+  color: #6b4b1f;
+  font-size: 1.2rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.18);
+  transition: all 0.18s ease;
+}
+
+.modal-close:hover {
+  transform: scale(1.08);
+  background: #ffd28a;
+}
+
+.modal-close:active {
+  transform: scale(0.95);
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: center;
+  margin-top: 0.75rem;
+}
+
+.modal-actions .btn-pill {
+  color: #000;
+  border-color: #000;
+}
+
+.modal-actions .btn-pill:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+.back-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-family:
+    "Urbanist",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  font-weight: 1000;
+  text-decoration: none;
+  overflow: hidden;
+  background: transparent;
+  border: 2px solid black;
+  color: black;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease;
+}
+
+.back-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -12deg,
+    #7b61ff 0px,
+    #7b61ff 6px,
+    #9a86ff 6px,
+    #9a86ff 12px
+  );
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
+  z-index: -1;
+}
+
+.back-btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent 0px,
+    transparent 6px,
+    rgba(255, 255, 255, 0.25) 6px,
+    rgba(255, 255, 255, 0.25) 9px
+  );
+  opacity: 0.35;
+  pointer-events: none;
+}
+
+.back-btn:hover::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  color: white;
+  border-color: white;
+}
+
+/* - - - - - prefers reduced motion preset - - - - - */
+@media (prefers-reduced-motion: reduce) {
+  .modal-card {
+    animation: none !important;
+  }
+  .modal-close:hover {
+    transform: none !important;
+  }
+  .back-btn:hover {
+    transform: none !important;
+  }
+  .back-btn::before {
+    transition: none !important;
+  }
+}
+
+/* - - - - - mobile first breakouts - - - - - */
+/* tablet */
+@media (min-width: 700px) {
+  .spelling-hero {
+    padding: 22px 0 34px;
+  }
+
+  .spelling-hero .title {
+    font-size: 2.45rem;
+  }
+
+  .spelling-hero .subtitle {
+    max-width: 52ch;
+  }
+
+  .tiny-helper {
+    max-width: 230px;
+  }
+
+  .game-card {
+    max-width: 640px;
+    padding: 22px 22px;
+  }
+
+  .input-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+  }
+  .spell-input {
+    max-width: 380px;
+  }
+
+  #checkBtn {
+    width: auto;
+  }
+
+  .progress-row {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+  #nextBtn {
+    width: auto;
+  }
+
+  .wave {
+    height: 95px;
+  }
+
+  .back-btn {
+    width: auto;
+    max-width: none;
+  }
+}
+
+/* desktop */
+@media (min-width: 900px) {
+  .spelling-hero .title {
+    font-size: 2.75rem;
+  }
+
+  .tiny-helper {
+    max-width: 260px;
+  }
+
+  .game-card {
+    max-width: 720px;
+  }
+
+  .spell-input {
+    max-width: 420px;
+  }
+
+  .wave {
+    height: 100px;
+  }
+}

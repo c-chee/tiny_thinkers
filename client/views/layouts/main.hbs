@@ -19,8 +19,13 @@
       rel="stylesheet"
     />
 
-    <!-- css link -->
+    <!-- base css link -->
     <link rel="stylesheet" href="/css/home.css" />
+
+    <!-- spelling page css -->
+    {{#if pageCss}}
+      <link rel="stylesheet" href="{{pageCss}}" />
+    {{/if}}
   </head>
 
   <body>

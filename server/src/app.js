@@ -18,28 +18,42 @@ app.use(cors()); // Enables cross-origin requests
 app.use(express.json()); // Allows server to read JSON req
 
 // === HANDLEBARS ===
+// Static files: client/public -> /css, /js, /images, etc.
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
-// Handlebars templaing setup
+// Handlebars templating setup
 app.engine(
-    "hbs",
-    engine({
-        extname: "hbs",
-        defaultLayout: "main",
-        layoutsDir: path.join(__dirname, "../../client/views/layouts"),
-        partialsDir: path.join(__dirname, "../../client/views/partials"),
-    }),
+  "hbs",
+  engine({
+    extname: "hbs",
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "../../client/views/layouts"),
+    partialsDir: path.join(__dirname, "../../client/views/partials"),
+  }),
 );
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
+// === PAGE ROUTES ===
 app.get("/", (req, res) => {
-    res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+  res.render("home", { pageTitle: "Tiny Thinkers | Home" });
 });
 
+app.get("/spelling", (req, res) => {
+  res.render("spelling", {
+    pageTitle: "Tiny Thinkers | Spelling",
+    pageCss: "/css/spelling.css",
+  });
+});
 
+//login
+app.get("/Login", (req, res) => {
+  res.render("Login", { pageTitle: "Login" });
+});
+
+// === API ROUTES ===
 app.get("/api/status", (req, res) => {
-    res.json({ status: "Tiny Thinkers API running" });
+  res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === DATABASE ===
@@ -52,30 +66,15 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-module.exports = app;
-//login 
-app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle : "Login"});
-});
-
-// === RESOURCE ===
-// app.get('/resources', (req, res) => {
-//   res.render('resources', {
-//     layout: 'resourcelayout',
-//     title: 'Resources',
-//     categories: resourcesData.categories,
-//   });
-// });
-
 // === VOLUNTEER ===
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
-      layout: 'volunteerlayout',
-      title: 'Volunteer'
-    });
+app.get("/volunteer", (req, res) => {
+  res.render("volunteer", {
+    layout: "volunteerlayout",
+    title: "Volunteer",
+  });
 });
 
-// === 404 HANDLER === 
+// === 404 HANDLER ===
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
@@ -83,3 +82,4 @@ app.use((req, res) => {
   });
 });
 
+module.exports = app;
