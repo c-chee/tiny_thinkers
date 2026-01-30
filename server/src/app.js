@@ -49,19 +49,9 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-// === DATABASE ===
-// User route connection
-app.use("/api/users", userRoutes);
-
-// DB connection test route
-app.get("/db-test", async (req, res) => {
-  const [rows] = await db.query("SELECT 1");
-  res.json({ db: "connected" });
-});
-
 // === LOGIN === 
-app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle : "Login",
+app.get("/login", (req, res) => {
+  res.render("Login", { pageTitle : "Tiny Thinkers | Login",
     layout: "loginlayout"
   });
 });
@@ -72,6 +62,16 @@ app.get('/volunteer', (req, res) => {
       layout: 'volunteerlayout',
       title: 'Volunteer'
     });
+});
+
+// === DATABASE ===
+// User route connection
+app.use("/api/users", userRoutes);
+
+// DB connection test route
+app.get("/db-test", async (req, res) => {
+  const [rows] = await db.query("SELECT 1");
+  res.json({ db: "connected" });
 });
 
 // === 404 HANDLER === 
