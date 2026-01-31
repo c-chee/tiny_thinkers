@@ -64,10 +64,6 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-<<<<<<< HEAD
-=======
-
->>>>>>> origin/homepage-layout
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
@@ -98,7 +94,7 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-// === 404 HANDLER === 
+// === 404 HANDLER ===
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
