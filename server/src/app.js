@@ -14,6 +14,8 @@ const app = express();
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
 
+const dashboardRoutes = require("./routes/dashboard.routes");
+
 app.use(cors()); // Enables cross-origin requests
 app.use(express.json()); // Allows server to read JSON req
 
@@ -95,9 +97,12 @@ app.get("/db-test", async (req, res) => {
   const [rows] = await db.query("SELECT 1");
   res.json({ db: "connected" });
 });
- 
+
 module.exports = app;
-//login 
+
+// === DASHBOARD ===
+app.use("/dashboard", dashboardRoutes);
+
 
 // === LOGIN === 
 
@@ -124,15 +129,6 @@ app.use('/', readingRoutes);
 //     categories: resourcesData.categories,
 //   });
 // });
-
-
-// === VOLUNTEER ===
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
-      layout: 'volunteerlayout',
-      title: 'Volunteer'
-    });
-});
 
 // === 404 HANDLER === 
 // *** Must be last ***
