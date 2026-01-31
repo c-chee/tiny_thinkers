@@ -1,0 +1,22 @@
+<main class="dashboard">
+
+    <section class="dashboard-header">
+        <h1>Welcome Back</h1>
+        <p>Grade {{grade_level}}</p>
+    </section>
+
+    <section class="bento-grid">
+        {{#each boxes}}
+        <div class="bento-card">
+            <h3>{{label}}</h3>
+
+            <a
+            href="{{route}}?grade={{../grade_level}}&type={{key}}"
+            class="btn-pill btn-solid"
+            >
+            Open
+            </a>
+        </div>
+        {{/each}}
+    </section>
+</main>
