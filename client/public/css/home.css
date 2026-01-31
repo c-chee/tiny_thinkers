@@ -1,4 +1,6 @@
-/* - - - - - global styles - - - - - */
+/* ==========================
+        GLOBAL STYLES
+============================= */
 :root {
   --pink: #f7d6e0;
   --yellow: #fee440;
@@ -7,12 +9,16 @@
   --aqua: #b2f7ef;
   --lav: #dfebff;
   --purple: #9b5de5;
+  --dark-purple: #482475;
   --hotpink: #f15bb5;
   --red: #ff3864;
   --orange: #ff9f1c;
   --peach: #fff1dc;
   --white: #ffffff;
   --ink: #1c1c1c;
+
+  --nav-bg: linear-gradient(to right, #f2dbeb 12%, #cefbf4);
+  --footer-bg: #f5ebff;
 }
 
 * {
@@ -38,6 +44,9 @@ body {
   background: var(--white);
 }
 
+/* ==========================
+   OG SITE WRAPPERS (safe)
+============================= */
 .site-header,
 .site-footer {
   background: transparent;
@@ -57,7 +66,319 @@ body {
   padding: 26px 14px; /* mobile default */
 }
 
-/* - - - - - hero - - - - - */
+/* ==========================
+          HEADER
+   Blended to match OG spacing
+============================= */
+/* Keep header styling but avoid "everything shifted" issues:
+   - sticky (not fixed) so content doesn't jump underneath
+   - width: 100% (not 100vw) to avoid horizontal jitter
+   - background on header to remove white strip above nav
+*/
+header {
+  margin: 0;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: var(--nav-bg);
+  border-bottom: 3px solid rgba(0, 0, 0, 0.1);
+}
+
+/* force gradient onto the actual header element used in header.hbs */
+.site-header {
+  background: var(--nav-bg);
+}
+
+.top-nav {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 11px 20px;
+  background: transparent;
+}
+
+.home-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* logo */
+.nav-logo {
+  height: 50px;
+  width: auto;
+  filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
+}
+
+/* page title */
+.page-title {
+  margin: 0;
+  font-size: 1.3rem;
+  font-family: "Finger Paint", cursive;
+  color: var(--dark-purple);
+  filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
+}
+
+header h1,
+header h2,
+header h3,
+header p {
+  margin: 0;
+}
+
+/* desktop nav hidden on mobile */
+.nav-desktop-container {
+  display: none;
+}
+
+@media (min-width: 700px) {
+  .home-link {
+    cursor: pointer;
+  }
+
+  .nav-mobile-container {
+    display: none;
+  }
+
+  .nav-desktop-container {
+    display: block;
+  }
+}
+
+/* Signup Button */
+.signup-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--dark-purple);
+  padding: 0 1em;
+}
+
+.signup-btn:hover {
+  cursor: pointer;
+  transform: translateY(-1px);
+  color: var(--purple);
+  filter: drop-shadow(0 5px 7px rgba(255, 255, 255, 0.6));
+}
+
+/* Login Button */
+.login-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 20px;
+  border-radius: 999px;
+  font-weight: 1000;
+  text-decoration: none;
+  overflow: hidden;
+  border: 2px solid var(--dark-purple);
+  color: var(--dark-purple);
+  background: repeating-linear-gradient(
+    -12deg,
+    #edd9ff 0px,
+    #edd9ff 6px,
+    #f5ebff 6px,
+    #f5ebff 12px
+  );
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease;
+}
+
+.login-btn:hover {
+  cursor: pointer;
+  transform: translateY(-1px);
+  background-color: var(--orange);
+  filter: drop-shadow(0 5px 7px rgba(255, 255, 255, 0.6));
+}
+
+/* ==========================
+          FOOTER
+   Blended to match OG spacing
+============================= */
+footer {
+  padding: 0;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  width: 100%;
+  overflow-x: hidden;
+  background: var(--footer-bg);
+  border-top: 2px solid rgba(20, 20, 20, 0.1);
+}
+
+.site-footer {
+  display: grid;
+  grid-template:
+    "brand" auto
+    "quote" auto
+    "connect" auto
+    "copy" auto
+    / 1fr;
+
+  width: 100%;
+  max-width: 980px; /* match OG */
+  gap: 0.5em;
+  padding: 14px 20px; /* blend like OG placeholder */
+  align-items: flex-start;
+  text-align: center;
+  background: transparent;
+}
+
+.footer-personal-brand {
+  grid-area: brand;
+}
+
+.footer-quote {
+  grid-area: quote;
+  place-self: center;
+  font-size: 1.25em;
+  color: var(--orange);
+  font-family: "Finger Paint", cursive;
+  filter: drop-shadow(0 5px 7px rgba(255, 255, 255, 0.6));
+}
+
+.footer-connect {
+  grid-area: connect;
+  color: var(--dark-purple);
+}
+
+.footer-connect h3 {
+  margin: 1em 0 0.5em 0;
+}
+
+.brand-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-decoration: none;
+  color: inherit;
+}
+
+.footer-logo {
+  height: 10em;
+  width: auto;
+  filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
+}
+
+.footer-title {
+  display: flex;
+  justify-content: center;
+  margin: 0;
+  font-size: 1.3rem;
+  font-family: "Finger Paint", cursive;
+  color: var(--dark-purple);
+  filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
+  margin-bottom: -1em; /* pull closer to image */
+}
+
+.contact-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.contact-container h4 {
+  margin: 1em 0 0.25em 0;
+}
+
+.footer-connect p {
+  margin: 0;
+}
+
+.footer-connect img {
+  width: 2em;
+}
+
+.footer-connect img:hover {
+  cursor: pointer;
+  opacity: 60%;
+}
+
+.footer-copyright {
+  grid-area: copy;
+  opacity: 60%;
+}
+
+.footer-copyright p {
+  margin: 0;
+}
+
+.footer-nav ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 1em;
+}
+
+.footer-nav a {
+  padding: 0;
+  color: var(--ink);
+  font-weight: 400;
+  text-decoration: none;
+  transition:
+    color 0.3s ease,
+    text-underline-offset 0.3s ease;
+}
+
+.footer-nav a:hover {
+  cursor: pointer;
+  text-decoration: underline var(--purple);
+  text-decoration-thickness: 1.5px;
+  text-underline-offset: 5px;
+}
+
+@media (min-width: 768px) {
+  .site-footer {
+    grid-template:
+      "brand connect" auto
+      "quote quote" auto
+      "copy  copy" auto
+      / 1fr 1fr;
+
+    gap: 3em;
+    padding: 1em 2em;
+  }
+
+  .footer-quote ul {
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1024px) {
+  .site-footer {
+    grid-template:
+      "brand quote connect" auto
+      "copy  copy copy" auto
+      / 1fr 1fr 1fr;
+
+    gap: 3em;
+    padding: 1em 2em;
+  }
+
+  .footer-quote ul {
+    flex-direction: column;
+  }
+}
+
+/* ==========================
+          HERO
+============================= */
 .hero-band {
   background:
     radial-gradient(
@@ -471,6 +792,9 @@ body {
   gap: 8px;
   margin-top: 18px;
   margin-bottom: 8px;
+  position: relative;
+  z-index: 5;
+  padding-bottom: 10px;
 }
 
 .dot {
@@ -620,7 +944,7 @@ body {
 
 .squiggle-hero-right {
   right: -40px;
-  top: 24px;
+  top: 24px; /* OG position */
 }
 
 .squiggle-mint-right {
@@ -745,6 +1069,9 @@ body {
   }
 }
 
+/* ==========================
+   Button tweak for lavender
+============================= */
 .band-lavender .btn-solid {
   color: var(--ink); /* black text */
   border-color: var(--ink); /* black border */
@@ -764,7 +1091,9 @@ body {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
-/* - - - - - mobile first breakouts - - - - - */
+/* ==========================
+   MOBILE FIRST BREAKPOINTS
+============================= */
 /* mobile */
 @media (max-width: 699px) {
   .band-stats {
@@ -869,6 +1198,18 @@ body {
   .stat-slide .speech {
     max-width: 320px;
     width: 100%;
+  }
+
+  /* allow dots to be visible */
+  .stats-container,
+  .stats-slideshow {
+    overflow: visible;
+  }
+
+  .slideshow-dots {
+    position: relative;
+    z-index: 10;
+    padding-bottom: 14px;
   }
 }
 
@@ -1009,9 +1350,33 @@ body {
   .stats-track {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
   }
+
+  .site-footer {
+    grid-template:
+      "brand quote connect" auto
+      "copy  copy copy" auto
+      / 1fr 1fr 1fr;
+
+    gap: 3em;
+    padding: 1em 2em;
+    justify-items: center;
+    align-items: start;
+    text-align: center;
+    margin: 0 auto;
+  }
+
+  .footer-personal-brand,
+  .footer-quote,
+  .footer-connect,
+  .footer-copyright {
+    justify-self: center;
+    text-align: center;
+  }
 }
 
-/* - - - - - prefers reduced motion preset - - - - - */
+/* ==========================
+   PREFERS REDUCED MOTION
+============================= */
 @media (prefers-reduced-motion: reduce) {
   html:focus-within {
     scroll-behavior: auto;
