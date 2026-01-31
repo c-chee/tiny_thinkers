@@ -64,6 +64,10 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/homepage-layout
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
@@ -94,40 +98,7 @@ app.get("/db-test", async (req, res) => {
   res.json({ db: "connected" });
 });
 
-module.exports = app;
-//login
-
-// === LOGIN ===
-
-app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle: "Login", layout: "loginlayout" });
-});
-
-// reading comprehension
-const readingRoutes = require("./routes/reading.routes");
-app.use("/", readingRoutes);
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
-// === RESOURCE ===
-// app.get('/resources', (req, res) => {
-//   res.render('resources', {
-//     layout: 'resourcelayout',
-//     title: 'Resources',
-//     categories: resourcesData.categories,
-//   });
-// });
-
-// === VOLUNTEER ===
-app.get("/volunteer", (req, res) => {
-  res.render("volunteer", {
-    layout: "volunteerlayout",
-    title: "Volunteer",
-  });
-});
-
-// === 404 HANDLER ===
+// === 404 HANDLER === 
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
