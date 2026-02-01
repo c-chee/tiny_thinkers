@@ -26,19 +26,18 @@ app.use(express.static(path.join(__dirname, "../../client/public")));
 
 // Handlebars templating setup
 app.engine(
-
-    "hbs",
-    engine({
-        extname: "hbs",
-        defaultLayout: "main",
-        layoutsDir: path.join(__dirname, "../../client/views/layouts"),
-        partialsDir: path.join(__dirname, "../../client/views/partials"),
-        helpers: {
-          isSelected: (current, value) => {
-            return current === value ? 'selected' : '';
-          }
-        }
-    }),
+  "hbs",
+  engine({
+    extname: "hbs",
+    defaultLayout: "main",
+    layoutsDir: path.join(__dirname, "../../client/views/layouts"),
+    partialsDir: path.join(__dirname, "../../client/views/partials"),
+    helpers: {
+      isSelected: (current, value) => {
+        return current === value ? "selected" : "";
+      },
+    },
+  }),
 
   "hbs",
   engine({
@@ -47,7 +46,6 @@ app.engine(
     layoutsDir: path.join(__dirname, "../../client/views/layouts"),
     partialsDir: path.join(__dirname, "../../client/views/partials"),
   }),
-
 );
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
@@ -76,15 +74,15 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-// === LOGIN === 
+// === LOGIN ===
 app.get("/login", (req, res) => {
-  res.render("Login", { pageTitle : "Tiny Thinkers | Login",
-    layout: "loginlayout"
+  res.render("Login", {
+    pageTitle: "Tiny Thinkers | Login",
+    layout: "loginlayout",
   });
 });
 
@@ -105,6 +103,7 @@ app.get("/db-test", async (req, res) => {
   const [rows] = await db.query("SELECT 1");
   res.json({ db: "connected" });
 });
+<<<<<<< HEAD
 
 module.exports = app;
 
@@ -134,14 +133,15 @@ app.get("/Login", (req, res) => {
 // });
 
 // === 404 HANDLER === 
+=======
+
+// === 404 HANDLER ===
+>>>>>>> main
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
-    pageTitle: "tiny thinkers | not found"
+    pageTitle: "tiny thinkers | not found",
   });
 });
 
-
-
 module.exports = app;
-
