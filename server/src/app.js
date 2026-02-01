@@ -18,6 +18,7 @@ const userRoutes = require("./routes/user.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
 const readingRoutes = require("./routes/reading.routes");
+const dictionaryRoutes = require("./routes/dictionary.routes");
 
 app.use(cors());
 app.use(express.json());
@@ -92,6 +93,7 @@ app.use("/api/users", userRoutes);
 app.use("/", readingRoutes); // reading comprehension routes
 app.use("/dashboard", dashboardRoutes);
 app.use("/content", contentRoutes);
+app.use("/api", dictionaryRoutes);
 
 // DB connection test route
 app.get("/db-test", async (req, res) => {
@@ -103,6 +105,12 @@ app.get("/db-test", async (req, res) => {
     res.status(500).json({ error: "DB connection failed" });
   }
 });
+
+// === USERS ===
+app.use("/api/users", userRoutes);
+
+// === READING COMPREHENSION ===
+app.use("/", readingRoutes);
 
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);

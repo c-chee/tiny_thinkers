@@ -820,41 +820,39 @@ footer {
   border-width: 2px;
 }
 
-<<<<<<< HEAD
-=======
 /* Tablet: 2 columns */
 @media (min-width: 700px) {
   .stats-slideshow {
     overflow: visible;
   }
-  
+
   .stats-track {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     transform: none !important;
   }
-  
+
   .stat-slide {
     min-width: auto;
     max-width: none;
     padding: 0;
   }
-  
+
   .stat-slide .speech {
     margin: 0;
     padding: 16px 18px;
   }
-  
+
   .stat-slide .speech p {
     font-size: 1.05rem;
   }
-  
+
   .stat-slide .speech strong {
     font-size: 2rem;
     margin-bottom: 6px;
   }
-  
+
   .slideshow-dots {
     display: none;
   }
@@ -986,7 +984,6 @@ footer {
   border-width: 2px;
 }
 
->>>>>>> main
 /* - - - - - how it works section - - - - - */
 .how-grid {
   display: grid;
@@ -1238,18 +1235,9 @@ footer {
   }
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 /* ==========================
    Button tweak for lavender
 ============================= */
->>>>>>> main
-=======
-/* ==========================
-   Button tweak for lavender
-============================= */
->>>>>>> refs/remotes/origin/homepage-layout
 .band-lavender .btn-solid {
   color: var(--ink); /* black text */
   border-color: var(--ink); /* black border */
@@ -1269,15 +1257,6 @@ footer {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-/* - - - - - mobile first breakouts - - - - - */
-=======
-/* ==========================
-   MOBILE FIRST BREAKPOINTS
-============================= */
->>>>>>> main
-=======
 /* - - - - - back to top button - - - - - */
 .back-to-top-wrap {
   background: var(--lav);
@@ -1316,7 +1295,44 @@ footer {
 /* ==========================
    MOBILE FIRST BREAKPOINTS
 ============================= */
->>>>>>> refs/remotes/origin/homepage-layout
+/* - - - - - back to top button - - - - - */
+.back-to-top-wrap {
+  background: var(--lav);
+  display: flex;
+  justify-content: center;
+  padding: 18px 14px 34px;
+}
+
+.back-to-top-btn {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.back-to-top-btn::before {
+  background: repeating-linear-gradient(
+    -12deg,
+    #7cb798 0px,
+    #7cb798 6px,
+    #85c8a5 6px,
+    #85c8a5 12px
+  );
+}
+
+/* hover state */
+.back-to-top-btn:hover {
+  color: white;
+  border-color: white;
+}
+/* optional: slightly smaller on mobile */
+@media (max-width: 699px) {
+  .back-to-top-btn {
+    padding: 10px 18px;
+  }
+}
+
+/* ==========================
+   MOBILE FIRST BREAKPOINTS
+============================= */
 /* mobile */
 @media (max-width: 699px) {
   .band-stats {
@@ -1422,11 +1438,6 @@ footer {
     max-width: 320px;
     width: 100%;
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> refs/remotes/origin/homepage-layout
 
   /* allow dots to be visible */
   .stats-container,
@@ -1485,10 +1496,6 @@ footer {
     opacity: 0.6;
     font-size: 0.95rem;
   }
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> refs/remotes/origin/homepage-layout
 }
 
 /* tablet */
@@ -1628,12 +1635,6 @@ footer {
   .stats-track {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
   }
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> refs/remotes/origin/homepage-layout
-
   .site-footer {
     grid-template:
       "brand quote connect" auto
@@ -1655,10 +1656,6 @@ footer {
     justify-self: center;
     text-align: center;
   }
-<<<<<<< HEAD
->>>>>>> main
-=======
->>>>>>> refs/remotes/origin/homepage-layout
 }
 
 /* ==========================
