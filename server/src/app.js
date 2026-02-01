@@ -127,14 +127,21 @@ app.get("/Login", (req, res) => {
 });
 
 
-// === RESOURCE ===
-// app.get('/resources', (req, res) => {
-//   res.render('resources', {
-//     layout: 'resourcelayout',
-//     title: 'Resources',
-//     categories: resourcesData.categories,
-//   });
-// });
+
+// === VOLUNTEER ===
+app.get('/volunteer', (req, res) => {
+    res.render('volunteer', {
+      layout: 'volunteerlayout',
+      title: 'Volunteer'
+    });
+});
+// === Resources ===
+app.get('/resources', (req, res) => {
+    res.render('resources', {
+      layout: 'resourceslayout',
+      title: 'Resources'
+    });
+})
 
 // === 404 HANDLER === 
 // *** Must be last ***
