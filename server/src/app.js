@@ -103,7 +103,6 @@ app.get("/db-test", async (req, res) => {
   const [rows] = await db.query("SELECT 1");
   res.json({ db: "connected" });
 });
-<<<<<<< HEAD
 
 module.exports = app;
 
@@ -133,10 +132,6 @@ app.get("/Login", (req, res) => {
 // });
 
 // === 404 HANDLER === 
-=======
-
-// === 404 HANDLER ===
->>>>>>> main
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
