@@ -129,7 +129,7 @@ header {
 }
 
 /* Login Button */
-.login-btn {
+.logout-btn {
     position: relative;
     display: inline-flex;
     align-items: center;
@@ -152,14 +152,7 @@ header {
     transition: transform 0.15s ease;
 }
 
-.signup-btn:hover {
-    cursor: pointer;
-    transform: translateY(-1px);
-    color: var(--purple);
-    filter: drop-shadow(0 5px 7px rgba(255, 255, 255, 0.6));
-}
-
-.login-btn:hover {
+.logout-btn:hover {
     cursor: pointer;
     transform: translateY(-1px);
     background-color: var(--orange);
@@ -348,8 +341,40 @@ footer {
         DASHBOARD STYLES
 ============================= */
 
+main {
+    padding: 5em 2em;
+}
+
 .bento-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px,1fr));
     gap: 20px;
+}
+
+.bento-card {
+    background: var(--lav);
+    padding: 1em;
+    margin-top: 2em;
+}
+
+.bento-card h3 {
+    margin: 0;
+    text-transform: capitalize;
+}
+
+.settings-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 20px;
+    border-radius: 999px;
+    font-weight: 1000;
+    text-decoration: none;
+    overflow: hidden;
+    border: 2px solid var(--dark-purple);
+    color: var(--dark-purple);
+    background: var(--lav);
+    box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
+    transition: transform 0.15s ease;
 }

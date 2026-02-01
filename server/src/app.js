@@ -15,6 +15,7 @@ const db = require("./db");
 const userRoutes = require("./routes/user.routes");
 
 const dashboardRoutes = require("./routes/dashboard.routes");
+const contentRoutes = require("./routes/content.routes");
 
 app.use(cors()); // Enables cross-origin requests
 app.use(express.json()); // Allows server to read JSON req
@@ -63,6 +64,13 @@ app.get("/spelling", (req, res) => {
   });
 });
 
+// reading comprehension 
+const readingRoutes = require('./routes/reading.routes');
+app.use('/', readingRoutes);
+
+// const pageRoutes = require('./routes/pages.routes');
+// app.use('/', pageRoutes);
+
 // === API ROUTES ===
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
@@ -103,6 +111,9 @@ module.exports = app;
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
 
+// === CONTENT ===
+app.use("/content", contentRoutes);
+
 
 // === LOGIN === 
 
@@ -111,14 +122,6 @@ app.get("/Login", (req, res) => {
     layout: "loginlayout"
   });
 });
-
-
-// reading comprehension 
-const readingRoutes = require('./routes/reading.routes');
-app.use('/', readingRoutes);
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
 
 
 // === RESOURCE ===

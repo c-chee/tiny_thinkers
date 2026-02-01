@@ -5,7 +5,7 @@
 module.exports = {
     reading: {
         label: "Reading Practice",
-        route: "/cards"
+        route: "/reading"
     },
     alphabet: {
         label: "Alphabet Cards",
@@ -13,14 +13,14 @@ module.exports = {
     },
     vocab: {
         label: "Vocabulary Cards",
-        route: "/cards"
+        route: "/vocab"
     },
     spelling: {
         label: "Spelling Practice",
-        route: "/cards"
+        route: "/spelling"
     },
     dictionary: {
         label: "Dictionary",
-        route: "/cards"
+        route: "/dictionary"
     }
 };
