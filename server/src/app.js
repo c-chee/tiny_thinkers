@@ -107,6 +107,7 @@ app.get("/db-test", async (req, res) => {
     console.error(err);
     res.status(500).json({ error: "DB connection failed" });
   }
+});
 
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
