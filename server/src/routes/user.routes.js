@@ -6,6 +6,10 @@ const router = express.Router();
 
 const userController = require('../controllers/user.controller');
 
+router.get('/', (req, res) =>{
+    res.json({message: 'user route works'});
+});
+
 // POST /api/users/signup
 router.post('/signup', userController.signup);
 

@@ -14,14 +14,18 @@ const app = express();
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
 
-app.use(cors()); // Enables cross-origin requests
-app.use(express.json()); // Allows server to read JSON req
+// Optional / newer routes (only keep if these files exist in your repo)
+const dashboardRoutes = require("./routes/dashboard.routes");
+const contentRoutes = require("./routes/content.routes");
+const readingRoutes = require("./routes/reading.routes");
 
-// === HANDLEBARS ===
-// Static files: client/public -> /css, /js, /images, etc.
+app.use(cors());
+app.use(express.json());
+
+// === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
-// Handlebars templating setup
+// === HANDLEBARS ===
 app.engine(
   "hbs",
   engine({
@@ -29,8 +33,12 @@ app.engine(
     defaultLayout: "main",
     layoutsDir: path.join(__dirname, "../../client/views/layouts"),
     partialsDir: path.join(__dirname, "../../client/views/partials"),
+    helpers: {
+      isSelected: (current, value) => (current === value ? "selected" : ""),
+    },
   }),
 );
+
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
@@ -53,7 +61,6 @@ app.get("/spelling", (req, res) => {
   });
 });
 
-// === LOGIN ===
 app.get("/login", (req, res) => {
   res.render("Login", {
     pageTitle: "Tiny Thinkers | Login",
@@ -61,11 +68,17 @@ app.get("/login", (req, res) => {
   });
 });
 
-// === VOLUNTEER ===
 app.get("/volunteer", (req, res) => {
   res.render("volunteer", {
     layout: "volunteerlayout",
     title: "Volunteer",
+  });
+});
+
+app.get("/resources", (req, res) => {
+  res.render("resources", {
+    layout: "resourceslayout",
+    title: "Resources",
   });
 });
 
@@ -74,18 +87,24 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-// === DATABASE ===
-// User route connection
+// === FEATURE ROUTES ===
 app.use("/api/users", userRoutes);
+app.use("/", readingRoutes); // reading comprehension routes
+app.use("/dashboard", dashboardRoutes);
+app.use("/content", contentRoutes);
 
 // DB connection test route
 app.get("/db-test", async (req, res) => {
-  const [rows] = await db.query("SELECT 1");
-  res.json({ db: "connected" });
+  try {
+    const [rows] = await db.query("SELECT 1 + 1 AS result");
+    res.json({ db: "connected", result: rows[0].result });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "DB connection failed" });
+  }
 });
 
-// === 404 HANDLER ===
-// *** Must be last ***
+// === 404 HANDLER (must be last) ===
 app.use((req, res) => {
   res.status(404).render("404", {
     pageTitle: "tiny thinkers | not found",
