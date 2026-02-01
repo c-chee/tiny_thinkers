@@ -182,7 +182,9 @@
   width: 100%;
   height: 100%;
 }
-
+.login-page .toggle-box h1 {
+  margin-bottom: 20px;
+}
 .login-page .toggle-box::before {
   content: '';
   position: absolute;
