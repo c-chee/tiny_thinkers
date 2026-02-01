@@ -25,8 +25,6 @@ app.use(express.static(path.join(__dirname, "../../client/public")));
 
 // Handlebars templating setup
 app.engine(
-<<<<<<< HEAD
-=======
 
     "hbs",
     engine({
@@ -41,7 +39,6 @@ app.engine(
         }
     }),
 
->>>>>>> c65f7f861e2e8ac8b99f00b1e261e5656e6dc1d0
   "hbs",
   engine({
     extname: "hbs",
@@ -49,10 +46,6 @@ app.engine(
     layoutsDir: path.join(__dirname, "../../client/views/layouts"),
     partialsDir: path.join(__dirname, "../../client/views/partials"),
   }),
-<<<<<<< HEAD
-=======
-
->>>>>>> c65f7f861e2e8ac8b99f00b1e261e5656e6dc1d0
 );
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
@@ -62,13 +55,6 @@ app.get("/", (req, res) => {
   res.render("home", { pageTitle: "Tiny Thinkers | Home" });
 });
 
-<<<<<<< HEAD
-app.get("/cards", (req, res) => {
-  res.render("cards", {
-    pageTitle: "Tiny Thinkers | Cards",
-    pageCss: "/css/cards.css",
-  });
-=======
 app.get("/spelling", (req, res) => {
   res.render("spelling", {
     pageTitle: "Tiny Thinkers | Spelling",
@@ -79,14 +65,11 @@ app.get("/spelling", (req, res) => {
 // === API ROUTES ===
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
->>>>>>> c65f7f861e2e8ac8b99f00b1e261e5656e6dc1d0
 });
 
 
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
-<<<<<<< HEAD
-=======
 });
 
 // === LOGIN === 
@@ -102,7 +85,6 @@ app.get("/volunteer", (req, res) => {
     layout: "volunteerlayout",
     title: "Volunteer",
   });
->>>>>>> c65f7f861e2e8ac8b99f00b1e261e5656e6dc1d0
 });
 
 // === DATABASE ===
@@ -114,25 +96,18 @@ app.get("/db-test", async (req, res) => {
   const [rows] = await db.query("SELECT 1");
   res.json({ db: "connected" });
 });
-<<<<<<< HEAD
-
-// === LOGIN === 
-=======
  
 module.exports = app;
 //login 
 
 // === LOGIN === 
 
->>>>>>> c65f7f861e2e8ac8b99f00b1e261e5656e6dc1d0
 app.get("/Login", (req, res) => {
   res.render("Login", { pageTitle : "Login",
     layout: "loginlayout"
   });
 });
 
-<<<<<<< HEAD
-=======
 
 // reading comprehension 
 const readingRoutes = require('./routes/reading.routes');
@@ -152,7 +127,6 @@ app.use('/', readingRoutes);
 // });
 
 
->>>>>>> c65f7f861e2e8ac8b99f00b1e261e5656e6dc1d0
 // === VOLUNTEER ===
 app.get('/volunteer', (req, res) => {
     res.render('volunteer', {
@@ -176,11 +150,7 @@ app.use((req, res) => {
   });
 });
 
-<<<<<<< HEAD
-module.exports = app;
-=======
 
 
 module.exports = app;
 
->>>>>>> c65f7f861e2e8ac8b99f00b1e261e5656e6dc1d0
