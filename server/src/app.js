@@ -62,6 +62,13 @@ app.get("/spelling", (req, res) => {
   });
 });
 
+app.get("/settings", (req, res) => {
+  res.render("settings", { 
+    pageTitle: "Tiny Thinkers | Settings",
+    pageCss: "/css/settings.css"  
+  });
+});
+
 // reading comprehension 
 const readingRoutes = require('./routes/reading.routes');
 app.use('/', readingRoutes);
