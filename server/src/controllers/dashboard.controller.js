@@ -1,17 +1,29 @@
-const settingsService = require("../services/settings.service");
-const contentService = require("../services/content.service");
-const dictService = require("../services/dictionary.service");
+const db = require("../db");
 
-// GET /api/dashboard
-// GET /api/dashboard?word=cheese
 exports.getDashboard = async (req, res) => {
-    const prefs = await settingsService.getPreferences(req.user.id); // Reads the suth user ID from req.user and fetcches info (grade, content, etc)
+    try {
+        // TEMP fake user until auth exists
+        const userId = 1;
 
-    const content = await contentService.getContent(prefs); // Grabs 1sy AP learning content by its preferenes 
+        const [prefs] = await db.query(
+        "SELECT * FROM user_preferences WHERE user_id = ?",
+        [userId]
+        );
 
-    // Calls the dictionary api 
-    const word = req.query.word || "learn"; // fallback
-    const wordData = await dictService.lookup(word);
+        let contentTypes = ["reading", "dictionary", "spelling", "cards"];
 
-    res.json({ content, dictionary: wordData }); // Dashboard ress, sends all the info back to the front 
+        if (prefs.length && prefs[0].content_type !== "all") {
+        contentTypes = prefs[0].content_type.split(",");
+        }
+
+        res.render("dashboard", {
+        layout: "dashboard-layout",
+        pageTitle: "Dashboard",
+        contentTypes
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Dashboard error");
+    }
 };
