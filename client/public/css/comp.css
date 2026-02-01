@@ -1,0 +1,123 @@
+/* ==========================
+   READING COMPREHENSION
+   (added in newer version)
+============================= */
+.comp-container {
+  padding: 2rem 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.comp-header {
+  font-family: "Finger Paint", cursive;
+  text-align: center;
+}
+
+.comp-subheader {
+  color: #3a4f7a;
+}
+
+.grade-selector label {
+  font-weight: bold;
+}
+
+.books-section,
+.tips-section,
+.questions-section,
+.reading-tracker {
+  margin-top: 70px;
+  background-color: #f5f6f4;
+  border-radius: 10px;
+  padding: 10px 10px;
+}
+
+.books {
+  list-style-type: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+}
+
+.book-item img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 6px;
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease; /* fixed typo */
+}
+
+.book-item a {
+  text-decoration: none;
+  display: block;
+  color: #3a4f7a;
+}
+
+.book-item:hover img {
+  cursor: pointer;
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(58, 79, 122, 0.35);
+}
+
+.books h3,
+.books p {
+  text-align: center;
+}
+
+.parent-note {
+  text-align: center;
+  font-size: 17px;
+}
+
+.tips-list,
+.question-list {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.tips-list li::before,
+.question-list li::before {
+  content: "⭐️";
+  margin-right: 6px;
+}
+
+.day {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  gap: 12px;
+}
+
+.day input {
+  border: 2px solid #3a4f7a;
+  height: 35px;
+  width: 200px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.selector {
+  text-align: center;
+}
+
+.selector label {
+  color: #3a4f7a;
+}
+
+.grade-selector select {
+  border: 2px solid #3a4f7a;
+  height: 35px;
+  width: 200px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.total-minutes {
+  font-size: 17px;
+  text-align: center;
+}
