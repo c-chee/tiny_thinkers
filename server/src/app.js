@@ -119,13 +119,12 @@ app.use('/', readingRoutes);
 
 
 // === RESOURCE ===
-// app.get('/resources', (req, res) => {
-//   res.render('resources', {
-//     layout: 'resourcelayout',
-//     title: 'Resources',
-//     categories: resourcesData.categories,
-//   });
-// });
+app.get('/resources', (req, res) => {
+  res.render('resources', {
+    layout: 'resourcelayout',
+    title: 'Resources'
+  });
+});
 
 
 // === VOLUNTEER ===
