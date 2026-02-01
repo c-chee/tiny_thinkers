@@ -2,7 +2,7 @@ const express = require('express');
 
 const router = express.Router();
 
-const { learnerDictionaryWord } = require('../services/learning_service');
+const { learnerDictionaryWord } = require('../services/learning.service');
 
 //learning dictionary
 router.get('/dictionary/:word', async (req, res) => {
