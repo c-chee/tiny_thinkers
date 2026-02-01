@@ -15,7 +15,9 @@ fetch("./json/resources.json")
             <div class="resource-card-content">
                 <h3>${resource.name}</h3>
                 <p>${resource.description}</p>
-                <a href="${resource.url}">Learn More </a>
+                <p><strong>Language:</strong> ${resource.languages}</p>
+                <p><strong>Cost:</strong> ${resource.cost}</p>
+                <a href="${resource.url}">Learn More</a>
             </div>
         </div>`
       ).join("");
