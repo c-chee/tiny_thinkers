@@ -104,7 +104,22 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-// === 404 HANDLER (must be last) ===
+// === DASHBOARD ===
+app.use("/dashboard", dashboardRoutes);
+
+// === CONTENT ===
+app.use("/content", contentRoutes);
+
+// === Resources ===
+app.get("/resources", (req, res) => {
+  res.render("resources", {
+    layout: "resourceslayout",
+    title: "Resources",
+  });
+});
+
+// === 404 HANDLER ===
+// *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
     pageTitle: "tiny thinkers | not found",
