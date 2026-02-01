@@ -794,6 +794,9 @@ footer {
   gap: 8px;
   margin-top: 18px;
   margin-bottom: 8px;
+  position: relative;
+  z-index: 5;
+  padding-bottom: 10px;
 }
 
 .dot {
@@ -1236,11 +1239,17 @@ footer {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 /* ==========================
    Button tweak for lavender
 ============================= */
 >>>>>>> main
+=======
+/* ==========================
+   Button tweak for lavender
+============================= */
+>>>>>>> refs/remotes/origin/homepage-layout
 .band-lavender .btn-solid {
   color: var(--ink); /* black text */
   border-color: var(--ink); /* black border */
@@ -1261,12 +1270,53 @@ footer {
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 /* - - - - - mobile first breakouts - - - - - */
 =======
 /* ==========================
    MOBILE FIRST BREAKPOINTS
 ============================= */
 >>>>>>> main
+=======
+/* - - - - - back to top button - - - - - */
+.back-to-top-wrap {
+  background: var(--lav);
+  display: flex;
+  justify-content: center;
+  padding: 18px 14px 34px;
+}
+
+.back-to-top-btn {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.back-to-top-btn::before {
+  background: repeating-linear-gradient(
+    -12deg,
+    #7cb798 0px,
+    #7cb798 6px,
+    #85c8a5 6px,
+    #85c8a5 12px
+  );
+}
+
+/* hover state */
+.back-to-top-btn:hover {
+  color: white;
+  border-color: white;
+}
+/* optional: slightly smaller on mobile */
+@media (max-width: 699px) {
+  .back-to-top-btn {
+    padding: 10px 18px;
+  }
+}
+
+/* ==========================
+   MOBILE FIRST BREAKPOINTS
+============================= */
+>>>>>>> refs/remotes/origin/homepage-layout
 /* mobile */
 @media (max-width: 699px) {
   .band-stats {
@@ -1373,7 +1423,10 @@ footer {
     width: 100%;
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> refs/remotes/origin/homepage-layout
 
   /* allow dots to be visible */
   .stats-container,
@@ -1432,7 +1485,10 @@ footer {
     opacity: 0.6;
     font-size: 0.95rem;
   }
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> refs/remotes/origin/homepage-layout
 }
 
 /* tablet */
@@ -1573,7 +1629,10 @@ footer {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> refs/remotes/origin/homepage-layout
 
   .site-footer {
     grid-template:
@@ -1596,7 +1655,10 @@ footer {
     justify-self: center;
     text-align: center;
   }
+<<<<<<< HEAD
 >>>>>>> main
+=======
+>>>>>>> refs/remotes/origin/homepage-layout
 }
 
 /* ==========================

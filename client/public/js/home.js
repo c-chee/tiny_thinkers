@@ -1,3 +1,18 @@
+// - - - - - - - - - - - - - - -
+// back to top btn functionality
+// - - - - - - - - - - - - - - -
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("backToTopBtn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    // iOS Safari sometimes behaves better with requestAnimationFrame
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+});
+
 // wait until the html is fully loaded before running any javascript
 document.addEventListener("DOMContentLoaded", () => {
   // grab the hero tiny animation container by its id
