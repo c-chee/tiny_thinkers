@@ -1093,6 +1093,41 @@ footer {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
+/* - - - - - back to top button - - - - - */
+.back-to-top-wrap {
+  background: var(--lav);
+  display: flex;
+  justify-content: center;
+  padding: 18px 14px 34px;
+}
+
+.back-to-top-btn {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.back-to-top-btn::before {
+  background: repeating-linear-gradient(
+    -12deg,
+    #7cb798 0px,
+    #7cb798 6px,
+    #85c8a5 6px,
+    #85c8a5 12px
+  );
+}
+
+/* hover state */
+.back-to-top-btn:hover {
+  color: white;
+  border-color: white;
+}
+/* optional: slightly smaller on mobile */
+@media (max-width: 699px) {
+  .back-to-top-btn {
+    padding: 10px 18px;
+  }
+}
+
 /* ==========================
    MOBILE FIRST BREAKPOINTS
 ============================= */
