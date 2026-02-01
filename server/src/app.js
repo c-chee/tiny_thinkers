@@ -100,8 +100,13 @@ app.use("/api/users", userRoutes);
 
 // DB connection test route
 app.get("/db-test", async (req, res) => {
-  const [rows] = await db.query("SELECT 1");
-  res.json({ db: "connected" });
+  try {
+    const [rows] = await db.query("SELECT 1 + 1 AS result");
+    res.json({ db: "connected", result: rows[0].result });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "DB connection failed" });
+  }
 });
 
 module.exports = app;
