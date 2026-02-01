@@ -109,7 +109,6 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-module.exports = app;
 
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
@@ -117,24 +116,6 @@ app.use("/dashboard", dashboardRoutes);
 // === CONTENT ===
 app.use("/content", contentRoutes);
 
-
-// === LOGIN === 
-
-app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle : "Login",
-    layout: "loginlayout"
-  });
-});
-
-
-
-// === VOLUNTEER ===
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
-      layout: 'volunteerlayout',
-      title: 'Volunteer'
-    });
-});
 // === Resources ===
 app.get('/resources', (req, res) => {
     res.render('resources', {
