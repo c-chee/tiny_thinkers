@@ -1,0 +1,16 @@
+<main class="dashboard">
+
+    <h1>Dashboard</h1>
+
+    <a href = "/settings" class = "settings-btn">Settings</a>
+
+    <div class="bento-grid">
+        {{#each contentTypes}}
+        <div class="bento-card">
+            <h3>{{this}}</h3>
+            <a href="/content/{{this}}" class="btn">Open</a>
+        </div>
+        {{/each}}
+    </div>
+</main>
+

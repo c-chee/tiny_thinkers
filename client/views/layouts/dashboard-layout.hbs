@@ -1,46 +1,43 @@
 <!doctype html>
-<html lang="en">
-  <head>
+<html>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>{{pageTitle}}</title>
 
     <!-- font links -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Urbanist:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap"
-      rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap"
+        rel="stylesheet"
     />
 
     {{!-- Tab Icon --}}
     <link rel="icon" type="image/png" href="/images/tiny1.PNG">
 
-    <!-- base css link -->
-    <link rel="stylesheet" href="/css/home.css" />
 
-    <!-- spelling page css -->
-    {{#if pageCss}}
-      <link rel="stylesheet" href="{{pageCss}}" />
-    {{/if}}
-  </head>
+    {{!-- Styles --}}
+    <link rel="stylesheet" href="/css/dashboard.css">
+</head>
+<body>
 
-  <body>
-    {{> header}}
+    {{> header-parent}}
 
     {{{body}}}
 
     {{> footer}}
 
-    <!-- script link -->
-    <script src="/js/home.js"></script>
-    <script src="/js/navbar.js"></script>
-  </body>
-</html>
 
+    {{!-- Script --}}
+    <script src="/js/dashboard.js"></script>
+
+</body>
+</html>

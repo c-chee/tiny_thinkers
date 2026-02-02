@@ -1,0 +1,20 @@
+<main class="content-page">
+
+    <h1>{{type}} — Grade {{grade}}</h1>
+
+    {{#if content.length}}
+        <div class="content-grid">
+        {{#each content}}
+            <div class="content-card">
+            <h3>{{title}}</h3>
+            <p>{{body}}</p>
+            </div>
+        {{/each}}
+        </div>
+    {{else}}
+        <p>No content available yet.</p>
+    {{/if}}
+
+    <a href="/dashboard">← Back to dashboard</a>
+
+</main>
