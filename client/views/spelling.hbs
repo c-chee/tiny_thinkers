@@ -1,0 +1,133 @@
+<main class="spelling-page">
+
+  <!-- hero -->
+  <section class="hero-band spelling-hero">
+
+    <div class="container center-stack">
+      <h1 class="title">Spelling</h1>
+      <p class="subtitle">listen, spell it, and grow your skills with Tiny.</p>
+
+      <div class="spelling-badges">
+        <span class="badge" id="gradeBadge">Grade: —</span>
+        <span class="badge" id="levelBadge">Level: —</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- wave -->
+  <div class="wave wave-orange-to-blue"></div>
+
+  <!-- spelling section -->
+  <section class="spelling-area">
+    <div class="container center-stack">
+
+      <img
+        src="/images/tiny7.png"
+        alt="Tiny cheering you on"
+        class="tiny-helper"
+      />
+
+      <p class="helper-text">
+        Press
+        <strong>Play</strong>, then type the word you hear!
+      </p>
+
+      <div class="helper-actions">
+        <button class="btn-pill btn-solid" type="button" id="playWordBtn">
+          play
+        </button>
+        <button class="btn-pill btn-ghost" type="button" id="hintBtn">
+          hint
+        </button>
+      </div>
+
+      <!-- game card -->
+      <section class="game-card" aria-label="spelling game card">
+        <p class="label">Spelling Practice</p>
+
+        <h2 class="game-title" id="promptTitle">Ready?</h2>
+        <p class="body small" id="promptSub">Click play to hear your word.</p>
+
+        <div class="input-row">
+          <input
+            class="spell-input"
+            id="spellInput"
+            type="text"
+            placeholder="type your spelling here…"
+            autocomplete="off"
+            spellcheck="false"
+          />
+          <button class="btn-pill btn-solid" type="button" id="checkBtn">
+            check
+          </button>
+        </div>
+
+        <div class="feedback" aria-live="polite">
+          <p class="body small" id="feedbackText">Let’s do this!</p>
+        </div>
+
+        <div class="progress-row">
+          <span class="progress-pill" id="progressPill">0 / 10</span>
+          <button class="btn-pill btn-ghost" type="button" id="nextBtn">
+            next word
+          </button>
+        </div>
+      </section>
+
+    </div>
+  </section>
+
+  <!-- wave -->
+  <div class="wave wave-blue-to-orange"></div>
+
+  <!-- orange section -->
+  <section class="cards-back">
+    <div class="container">
+      <div class="back-row">
+        <a href="/dashboard" class="btn-pill btn-solid back-btn">
+          Back to Dashboard
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- popup modal -->
+  <div class="modal-overlay" id="resultModal" aria-hidden="true">
+    <div
+      class="modal-card"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="resultTitle"
+    >
+      <button
+        class="modal-close"
+        type="button"
+        id="resultClose"
+        aria-label="close"
+      >×</button>
+
+      <img
+        id="resultTinyImg"
+        class="tiny-modal-img"
+        src="/images/tiny6.PNG"
+        alt="Tiny"
+      />
+
+      <h2 class="h2" id="resultTitle">Nice!</h2>
+      <p class="body" id="resultMessage">Message goes here.</p>
+
+      <div class="modal-actions">
+        <button
+          class="btn-pill btn-solid"
+          type="button"
+          id="resultOkBtn"
+        >ok</button>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- script link -->
+<script src="/js/spelling.js"></script>

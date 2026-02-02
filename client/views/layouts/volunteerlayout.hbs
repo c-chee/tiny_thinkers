@@ -1,9 +1,9 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{pageTitle}}</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
 
     <!-- font links -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -18,28 +18,23 @@
       href="https://fonts.googleapis.com/css2?family=Finger+Paint&display=swap"
       rel="stylesheet"
     />
+    <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+/>
 
-    <!-- base css link -->
-    <link rel="stylesheet" href="/css/home.css" />
-    {{#if pageCss}}
-        <link rel="stylesheet" href="{{pageCss}}" />
-    {{/if}}
-    <!-- spelling page css -->
-    {{#if pageCss}}
-      <link rel="stylesheet" href="{{pageCss}}" />
-    {{/if}}
-  </head>
 
-  <body>
+    <link rel="stylesheet" href="/css/volunteer.css" />
+
+</head>
+
+<body>
     {{> header}}
 
     {{{body}}}
 
     {{> footer}}
 
-    <!-- script link -->
-    <script src="/js/home.js"></script>
-    <script src="/js/navbar.js"></script>
-  </body>
+    <script src="/js/volunteer.js"></script>    
+</body>
 </html>
-
