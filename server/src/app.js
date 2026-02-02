@@ -4,25 +4,26 @@
  * - CORS
  * - Routes
  */
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { engine } = require("express-handlebars");
-
-const app = express();
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 const db = require("./db");
+
 const userRoutes = require("./routes/user.routes");
 const readingRoutes = require("./routes/reading.routes");
 const dictionaryRoutes = require("./routes/dictionary.routes");
 const spellingRoutes = require("./routes/spelling.routes");
-
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
 
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
+const app = express();
 
+// === MIDDLEWARE ===
 app.use(cors());
 app.use(express.json());
 app.use(cookieParser());
@@ -66,29 +67,11 @@ app.get("/spelling", (req, res) => {
   });
 });
 
-// === READING COMPREHENSION ===
-// reading comprehension
-const readingRoutes = require("./routes/reading.routes");
-app.use("/", readingRoutes);
-
-// === SETTINGS ===
 app.get("/settings", (req, res) => {
   res.render("settings", {
     pageTitle: "Tiny Thinkers | Settings",
     pageCss: "/css/settings.css",
   });
-});
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
-// === API ROUTES ===
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Tiny Thinkers API running" });
-});
-
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === LOGIN ===
@@ -99,7 +82,9 @@ app.get("/login", (req, res) => {
     try {
       jwt.verify(token, process.env.JWT_SECRET);
       return res.redirect("/dashboard");
-    } catch {}
+    } catch (err) {
+      // invalid/expired token -> fall through to render login
+    }
   }
 
   res.render("Login", {
@@ -122,14 +107,17 @@ app.get("/resources", (req, res) => {
   });
 });
 
-// === API ROUTES ===
+// === API ROUTES (SIMPLE) ===
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === FEATURE ROUTES ===
 app.use("/api/users", userRoutes);
+
+// If reading.routes defines paths like "/reading", "/quiz", etc., mounting at "/" is fine.
 app.use("/", readingRoutes);
+
 app.use("/dashboard", dashboardRoutes);
 app.use("/content", contentRoutes);
 
@@ -148,36 +136,11 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-// === USERS ===
-app.use("/api/users", userRoutes);
-
-// === DASHBOARD ===
-app.use("/dashboard", dashboardRoutes);
-
-// === CONTENT ===
-app.use("/content", contentRoutes);
-
-// === RESOURCES ===
-app.get("/resources", (req, res) => {
-  res.render("resources", {
-    layout: "resourceslayout",
-    title: "Resources",
-  });
-});
-
-// === VOLUNTEER ===
-app.get("/volunteer", (req, res) => {
-  res.render("volunteer", {
-    layout: "volunteerlayout",
-    title: "Volunteer",
-  });
-});
-
 // === 404 HANDLER ===
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
-    pageTitle: "tiny thinkers | not found",
+    pageTitle: "Tiny Thinkers | Not Found",
   });
 });
 
