@@ -14,7 +14,14 @@ function attachLogoutHandler(id) {
         localStorage.removeItem("token");
 
         // redirect to login
-        window.location.href = "/login";
+        // window.location.href = "/login";
+        fetch("/api/users/logout", {
+            method: "POST",
+            credentials: "include"
+        }).then(() => {
+            window.location.href = "/login";
+        });
+
     });
 }
 

@@ -70,3 +70,27 @@ document.getElementById("registerForm")
         alert(result.message);
     }
 });
+
+// Login to Dashboard Redirect
+document.querySelector(".form-box.login form")
+    .addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = e.target.querySelector('input[type="email"]').value;
+        const password = e.target.querySelector('input[type="password"]').value;
+
+        const res = await fetch("/api/users/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include", // IMPORTANT for cookies
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+            window.location.href = "/dashboard";
+        } else {
+            alert(data.message || "Login failed");
+        }
+});
