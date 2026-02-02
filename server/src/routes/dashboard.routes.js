@@ -3,16 +3,11 @@
  */
 const express = require("express");
 const router = express.Router();
+
+const authMiddleware = require("../middleware/auth.middleware");
 const dashboardController = require("../controllers/dashboard.controller");
 
-
-// router.get(
-//     '/',
-//     authMiddleware,
-//     dashboardController.getDashboard
-// );
-
-
-router.get("/", dashboardController.getDashboard);
+// Protect dashboard
+router.get("/", authMiddleware, dashboardController.getDashboard);
 
 module.exports = router;

@@ -37,24 +37,27 @@ const allContentTypes = ["reading", "alphabet", "vocab", "spelling", "dictionary
 exports.getDashboard = async (req, res) => {
     try {
         // TEMP user until auth is ready
-        const userId = 1;
+        // const userId = 1;
+
+        // FOR actual user
+        const userId = req.user.id;
 
         // Fetch user preferences
-        const [prefsRows] = await db.query(
-        "SELECT * FROM user_preferences WHERE user_id = ?",
-        [userId]
+        const [prefs] = await db.query(
+            "SELECT * FROM user_preferences WHERE user_id = ?",
+            [userId]
         );
 
-        let contentTypes = allContentTypes;
+        let contentTypes = ["reading", "dictionary", "spelling", "cards"];
 
-        if (prefsRows.length && prefsRows[0].content_type !== "all") {
-        contentTypes = prefsRows[0].content_type.split(",");
+        if (prefs.length && prefs[0].content_type !== "all") {
+            contentTypes = prefs[0].content_type.split(",");
         }
 
         res.render("dashboard", {
-        layout: "dashboard-layout",
-        pageTitle: "Dashboard",
-        contentTypes
+            layout: "dashboard-layout",
+            pageTitle: "Dashboard",
+            contentTypes
         });
 
     } catch (err) {
