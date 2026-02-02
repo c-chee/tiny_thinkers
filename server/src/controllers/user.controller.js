@@ -15,33 +15,44 @@ const jwt = require('jsonwebtoken'); // Token creation
 // POST /api/users/signup
 exports.signup = async (req, res) => {
     try {
-        const { email, password, first_name, last_name } = req.body; // Body fields
+        const { email, password, first_name, last_name } = req.body;
 
-        // --- Validation for signup ---
-        // Prevents empty users
         if (!email || !password || !first_name || !last_name) {
-            return res.status(400).json({ message: 'All fields required' });
+            return res.status(400).json({ message: "All fields required" });
         }
 
-        // --- Creates user ---
         const user = await userService.createUser(
             email,
             password,
             first_name,
             last_name
         );
-        
 
-        // 201 = resource created
+        // create token immediately
+        const token = jwt.sign(
+            { id: user.id, email },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        // store token in cookie
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false, // true in production HTTPS
+            sameSite: "lax",
+            maxAge: 60 * 60 * 1000
+        });
+
         res.status(201).json({
-            message: 'User created',
-            userId: user.id,
+            message: "User created",
+            userId: user.id
         });
 
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
 };
+
 
 // === Login ===
 // POST /api/users/login
