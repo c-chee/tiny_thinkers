@@ -10,6 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
   const nextBtn = document.getElementById("nextBtn");
   const input = document.getElementById("spellInput");
 
+  const promptTitle = document.getElementById("promptTitle");
+  const promptSub = document.getElementById("promptSub");
+
   const modal = document.getElementById("resultModal");
   const modalClose = document.getElementById("resultClose");
   const modalOk = document.getElementById("resultOkBtn");
@@ -17,15 +20,119 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultMsg = document.getElementById("resultMessage");
   const resultImg = document.getElementById("resultTinyImg");
 
-  // PLACEHOLDER ( replace later with API + grade )
-  let gradeLevel = "2";
-  let level = 1;
+  const yay = new Audio("/audio/yay.mp3");
+  yay.volume = 0.7;
 
-  const bank = ["apple", "turtle", "garden", "rocket", "cookie", "pencil"];
-  let currentWord = bank[Math.floor(Math.random() * bank.length)];
+  const confettiCanvas = document.createElement("canvas");
+  confettiCanvas.id = "confettiCanvas";
+  Object.assign(confettiCanvas.style, {
+    position: "fixed",
+    inset: "0",
+    width: "100%",
+    height: "100%",
+    pointerEvents: "none",
+    zIndex: "20000",
+  });
+  document.body.appendChild(confettiCanvas);
+
+  const confettiFront = confetti.create(confettiCanvas, {
+    resize: true,
+    useWorker: true,
+  });
+
+  function fireConfetti() {
+    confettiFront({
+      particleCount: 120,
+      spread: 80,
+      origin: { y: 0.45 },
+      zIndex: 1000,
+      colors: ["#ff9aa2", "#ffdac1", "#b5ead7", "#c7ceea", "#fdfd96"],
+    });
+  }
+
+  let bank = [];
+  let currentWord = null;
+
+  let gradeLevel = "—";
+  let level = 1;
 
   let correct = 0;
   const total = 10;
+
+  async function fetchSpellingWords() {
+    const res = await fetch("/api/spelling/words", {
+      credentials: "same-origin", // helps with cookie auth
+    });
+
+    if (!res.ok) {
+      throw new Error(`Spelling words API failed: ${res.status}`);
+    }
+
+    return res.json();
+  }
+
+  async function ensureBankLoaded() {
+    if (bank.length > 0) return true;
+
+    try {
+      const payload = await fetchSpellingWords();
+
+      gradeLevel = payload.grade ?? "—";
+      level = payload.level ?? level;
+
+      bank = Array.isArray(payload.words) ? [...payload.words] : [];
+
+      render();
+
+      if (bank.length === 0) {
+        if (feedbackText) {
+          feedbackText.textContent = "No words available for your grade yet.";
+        }
+        return false;
+      }
+
+      return true;
+    } catch (err) {
+      console.error(err);
+      if (feedbackText) {
+        feedbackText.textContent =
+          "Couldn't load words. Please log in or try again.";
+      }
+      return false;
+    }
+  }
+
+  async function fetchDictionary(word) {
+    const res = await fetch(`/api/dictionary/${encodeURIComponent(word)}`);
+    if (!res.ok) throw new Error(`Dictionary API failed: ${res.status}`);
+    return res.json();
+  }
+
+  function merriamAudioUrl(audio) {
+    if (!audio) return null;
+
+    const a = String(audio).toLowerCase();
+    let subdir = a[0];
+
+    if (a.startsWith("bix")) subdir = "bix";
+    else if (a.startsWith("gg")) subdir = "gg";
+    else if (/^\d/.test(a)) subdir = "number";
+
+    return `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdir}/${a}.mp3`;
+  }
+
+  function extractMerriamAudio(apiData) {
+    if (!Array.isArray(apiData) || apiData.length === 0) return null;
+    if (typeof apiData[0] === "string") return null; // suggestions
+
+    const entry = apiData.find((x) => x && typeof x === "object");
+    const audio =
+      entry?.hwi?.prs?.find((p) => p?.sound?.audio)?.sound?.audio || null;
+
+    return audio;
+  }
+
+  let audioPlayer = null;
 
   function render() {
     if (gradeBadge) gradeBadge.textContent = `Grade: ${gradeLevel}`;
@@ -54,6 +161,13 @@ document.addEventListener("DOMContentLoaded", () => {
     resultImg.alt = "Tiny celebrating";
     resultTitle.textContent = "That’s right!";
     resultMsg.textContent = "Good job! You spelled it correctly!";
+
+    fireConfetti();
+    try {
+      yay.currentTime = 0;
+      yay.play();
+    } catch (e) {}
+
     openModal();
   }
 
@@ -66,17 +180,40 @@ document.addEventListener("DOMContentLoaded", () => {
     openModal();
   }
 
-  function playWord() {
+  async function playWord() {
     if (!currentWord) return;
 
-    speechSynthesis.cancel();
-    const utter = new SpeechSynthesisUtterance(currentWord);
-    utter.rate = 0.9;
-    speechSynthesis.speak(utter);
+    try {
+      const data = await fetchDictionary(currentWord);
+
+      const audioName = extractMerriamAudio(data);
+      const url = merriamAudioUrl(audioName);
+
+      if (url) {
+        if (!audioPlayer) audioPlayer = new Audio();
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        audioPlayer.src = url;
+        await audioPlayer.play();
+        return;
+      }
+
+      speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(currentWord);
+      utter.rate = 0.9;
+      speechSynthesis.speak(utter);
+    } catch (err) {
+      console.error(err);
+
+      speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(currentWord);
+      utter.rate = 0.9;
+      speechSynthesis.speak(utter);
+    }
   }
 
   function hint() {
-    if (!feedbackText) return;
+    if (!feedbackText || !currentWord) return;
     feedbackText.textContent = `Hint: starts with "${currentWord[0].toUpperCase()}"`;
   }
 
@@ -86,6 +223,11 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!guess) {
       if (feedbackText) feedbackText.textContent = "Type your spelling first!";
       input?.focus();
+      return;
+    }
+
+    if (!currentWord) {
+      if (feedbackText) feedbackText.textContent = "Press next word first!";
       return;
     }
 
@@ -101,28 +243,42 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  function nextWord() {
-    currentWord = bank[Math.floor(Math.random() * bank.length)];
+  async function nextWord() {
+    const ok = await ensureBankLoaded();
+    if (!ok) return;
+
+    // Take the next word from the bank
+    currentWord = bank.shift();
+
+    if (!currentWord) {
+      if (feedbackText) feedbackText.textContent = "No more words right now!";
+      return;
+    }
+
+    if (promptTitle) promptTitle.textContent = "New word!";
+    if (promptSub) promptSub.textContent = "Press play to hear it.";
+
     if (feedbackText) feedbackText.textContent = "New word ready. Press play!";
     if (input) input.value = "";
     input?.focus();
+
+    try {
+      await fetchDictionary(currentWord);
+    } catch {}
   }
 
-  // close modal handlers
   modalClose?.addEventListener("click", closeModal);
   modalOk?.addEventListener("click", closeModal);
   modal?.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
 
-  // esc closes modal
   document.addEventListener("keydown", (e) => {
     if (e.key === "Escape" && modal?.classList.contains("is-open")) {
       closeModal();
     }
   });
 
-  // Enter key checks spelling (only when modal isn't open)
   input?.addEventListener("keydown", (e) => {
     if (e.key === "Enter" && !modal?.classList.contains("is-open")) {
       e.preventDefault();
@@ -130,16 +286,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // button handlers
   playBtn?.addEventListener("click", playWord);
   hintBtn?.addEventListener("click", hint);
   checkBtn?.addEventListener("click", check);
   nextBtn?.addEventListener("click", nextWord);
 
-  // initial render
   render();
+  nextWord();
 
-  // ===== DEV ONLY: force modal open for styling =====
   window.__showSpellingModal = (type = "correct") => {
     if (!modal) return;
 
