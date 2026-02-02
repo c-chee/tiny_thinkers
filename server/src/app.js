@@ -127,10 +127,9 @@ app.get("/Login", (req, res) => {
 });
 
 
-<<<<<<< HEAD
-// reading comprehension 
-const readingRoutes = require('./routes/reading.routes');
-app.use('/', readingRoutes);
+// // reading comprehension 
+// const readingRoutes = require('./routes/reading.routes');
+// app.use('/', readingRoutes);
 
 // const pageRoutes = require('./routes/pages.routes');
 // app.use('/', pageRoutes);
@@ -139,13 +138,11 @@ app.use('/', readingRoutes);
 // === RESOURCE ===
 app.get('/resources', (req, res) => {
   res.render('resources', {
-    layout: 'resourcelayout',
+    layout: 'resourceslayout',
     title: 'Resources'
   });
 });
 
-=======
->>>>>>> origin/main
 
 // === VOLUNTEER ===
 app.get('/volunteer', (req, res) => {
@@ -154,13 +151,6 @@ app.get('/volunteer', (req, res) => {
       title: 'Volunteer'
     });
 });
-// === Resources ===
-app.get('/resources', (req, res) => {
-    res.render('resources', {
-      layout: 'resourceslayout',
-      title: 'Resources'
-    });
-})
 
 // === 404 HANDLER === 
 // *** Must be last ***
