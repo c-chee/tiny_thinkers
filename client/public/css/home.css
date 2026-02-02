@@ -794,9 +794,6 @@ footer {
   gap: 8px;
   margin-top: 18px;
   margin-bottom: 8px;
-  position: relative;
-  z-index: 5;
-  padding-bottom: 10px;
 }
 
 .dot {
@@ -1257,6 +1254,8 @@ footer {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
+<<<<<<< HEAD
+=======
 /* - - - - - back to top button - - - - - */
 .back-to-top-wrap {
   background: var(--lav);
@@ -1330,6 +1329,7 @@ footer {
   }
 }
 
+>>>>>>> main
 /* ==========================
    MOBILE FIRST BREAKPOINTS
 ============================= */
@@ -1635,6 +1635,10 @@ footer {
   .stats-track {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
   }
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
   .site-footer {
     grid-template:
       "brand quote connect" auto

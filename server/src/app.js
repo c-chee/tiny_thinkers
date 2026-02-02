@@ -14,14 +14,20 @@ const app = express();
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
 
-// Optional / newer routes (only keep if these files exist in your repo)
-const dashboardRoutes = require("./routes/dashboard.routes");
-const contentRoutes = require("./routes/content.routes");
 const readingRoutes = require("./routes/reading.routes");
 const dictionaryRoutes = require("./routes/dictionary.routes");
 
-app.use(cors());
-app.use(express.json());
+// Optional / newer routes (only keep if these files exist in your repo)
+const dashboardRoutes = require("./routes/dashboard.routes");
+const contentRoutes = require("./routes/content.routes");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+
+app.use(cors()); // Enables cross-origin requests
+app.use(express.json()); // Allows server to read JSON req
+app.use(cookieParser());
+
+
 
 // === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
@@ -63,9 +69,18 @@ app.get("/spelling", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  const token = req.cookies?.token;
+
+  if (token) {
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+      return res.redirect("/dashboard");
+    } catch {}
+  }
+
   res.render("Login", {
     pageTitle: "Tiny Thinkers | Login",
-    layout: "loginlayout",
+    layout: "loginlayout"
   });
 });
 
