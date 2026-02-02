@@ -1,6 +1,6 @@
 console.log("Resource JS loaded!");
 
-fetch("/json/resource.json")
+fetch("./json/resources.json")
   .then(response => response.json())
   .then(data => {
     const container = document.querySelector("#resources");
@@ -15,7 +15,7 @@ fetch("/json/resource.json")
             <div class="resource-card-content">
                 <h3>${resource.name}</h3>
                 <p>${resource.description}</p>
-                <a href="${resource.url}">Learn More </a>
+                <a href="${resource.url}">Learn More</a>
             </div>
         </div>`
       ).join("");

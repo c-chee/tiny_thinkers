@@ -112,21 +112,39 @@ app.use("/api/users", userRoutes);
 // === READING COMPREHENSION ===
 app.use("/", readingRoutes);
 
+
+// // reading comprehension 
+// const readingRoutes = require('./routes/reading.routes');
+// app.use('/', readingRoutes);
+
+// const pageRoutes = require('./routes/pages.routes');
+// app.use('/', pageRoutes);
+
+
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
 
 // === CONTENT ===
 app.use("/content", contentRoutes);
 
-// === Resources ===
-app.get("/resources", (req, res) => {
-  res.render("resources", {
-    layout: "resourceslayout",
-    title: "Resources",
+// === RESOURCES ===
+app.get('/resources', (req, res) => {
+  res.render('resources', {
+    layout: 'resourceslayout',
+    title: 'Resources'
   });
 });
 
-// === 404 HANDLER ===
+
+// === VOLUNTEER ===
+app.get('/volunteer', (req, res) => {
+    res.render('volunteer', {
+      layout: 'volunteerlayout',
+      title: 'Volunteer'
+    });
+});
+
+// === 404 HANDLER === 
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
