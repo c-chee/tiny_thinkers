@@ -14,14 +14,24 @@ const app = express();
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
 
+const readingRoutes = require("./routes/reading.routes");
+const dictionaryRoutes = require("./routes/dictionary.routes");
+const spellingRoutes = require("./routes/spelling.routes");
+
+// Optional / newer routes (only keep if these files exist in your repo)
+const dashboardRoutes = require("./routes/dashboard.routes");
+const contentRoutes = require("./routes/content.routes");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+
 app.use(cors()); // Enables cross-origin requests
 app.use(express.json()); // Allows server to read JSON req
+app.use(cookieParser());
 
-// === HANDLEBARS ===
-// Static files: client/public -> /css, /js, /images, etc.
+// === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
-// Handlebars templating setup
+// === HANDLEBARS ===
 app.engine(
   "hbs",
   engine({
@@ -29,14 +39,25 @@ app.engine(
     defaultLayout: "main",
     layoutsDir: path.join(__dirname, "../../client/views/layouts"),
     partialsDir: path.join(__dirname, "../../client/views/partials"),
+    helpers: {
+      isSelected: (current, value) => (current === value ? "selected" : ""),
+    },
   }),
 );
+
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
 // === PAGE ROUTES ===
 app.get("/", (req, res) => {
   res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+});
+
+app.get("/cards", (req, res) => {
+  res.render("cards", {
+    pageTitle: "Tiny Thinkers | Cards",
+    pageCss: "/css/cards.css",
+  });
 });
 
 app.get("/spelling", (req, res) => {
@@ -46,9 +67,34 @@ app.get("/spelling", (req, res) => {
   });
 });
 
-//login
-app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle: "Login" });
+app.get("/login", (req, res) => {
+  const token = req.cookies?.token;
+
+  if (token) {
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+      return res.redirect("/dashboard");
+    } catch {}
+  }
+
+  res.render("Login", {
+    pageTitle: "Tiny Thinkers | Login",
+    layout: "loginlayout",
+  });
+});
+
+app.get("/volunteer", (req, res) => {
+  res.render("volunteer", {
+    layout: "volunteerlayout",
+    title: "Volunteer",
+  });
+});
+
+app.get("/resources", (req, res) => {
+  res.render("resources", {
+    layout: "resourceslayout",
+    title: "Resources",
+  });
 });
 
 // === API ROUTES ===
@@ -56,14 +102,50 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-// === DATABASE ===
-// User route connection
+// === FEATURE ROUTES ===
 app.use("/api/users", userRoutes);
+app.use("/", readingRoutes); // reading comprehension routes
+app.use("/dashboard", dashboardRoutes);
+app.use("/content", contentRoutes);
+app.use("/api", dictionaryRoutes);
+app.use("/api", spellingRoutes);
 
 // DB connection test route
 app.get("/db-test", async (req, res) => {
-  const [rows] = await db.query("SELECT 1");
-  res.json({ db: "connected" });
+  try {
+    const [rows] = await db.query("SELECT 1 + 1 AS result");
+    res.json({ db: "connected", result: rows[0].result });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: "DB connection failed" });
+  }
+});
+
+// === USERS ===
+app.use("/api/users", userRoutes);
+
+// === READING COMPREHENSION ===
+app.use("/", readingRoutes);
+
+// // reading comprehension
+// const readingRoutes = require('./routes/reading.routes');
+// app.use('/', readingRoutes);
+
+// const pageRoutes = require('./routes/pages.routes');
+// app.use('/', pageRoutes);
+
+// === DASHBOARD ===
+app.use("/dashboard", dashboardRoutes);
+
+// === CONTENT ===
+app.use("/content", contentRoutes);
+
+// === RESOURCES ===
+app.get("/resources", (req, res) => {
+  res.render("resources", {
+    layout: "resourceslayout",
+    title: "Resources",
+  });
 });
 
 // === VOLUNTEER ===
