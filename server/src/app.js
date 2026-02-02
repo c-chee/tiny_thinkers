@@ -13,21 +13,19 @@ const app = express();
 
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
-
 const readingRoutes = require("./routes/reading.routes");
 const dictionaryRoutes = require("./routes/dictionary.routes");
+const spellingRoutes = require("./routes/spelling.routes");
 
-// Optional / newer routes (only keep if these files exist in your repo)
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
+
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
-app.use(cors()); // Enables cross-origin requests
-app.use(express.json()); // Allows server to read JSON req
+app.use(cors());
+app.use(express.json());
 app.use(cookieParser());
-
-
 
 // === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
@@ -68,6 +66,7 @@ app.get("/spelling", (req, res) => {
   });
 });
 
+// Login page (redirects to dashboard if already logged in)
 app.get("/login", (req, res) => {
   const token = req.cookies?.token;
 
@@ -80,7 +79,7 @@ app.get("/login", (req, res) => {
 
   res.render("Login", {
     pageTitle: "Tiny Thinkers | Login",
-    layout: "loginlayout"
+    layout: "loginlayout",
   });
 });
 
@@ -105,10 +104,13 @@ app.get("/api/status", (req, res) => {
 
 // === FEATURE ROUTES ===
 app.use("/api/users", userRoutes);
-app.use("/", readingRoutes); // reading comprehension routes
+app.use("/", readingRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/content", contentRoutes);
+
+// Dictionary + spelling endpoints
 app.use("/api", dictionaryRoutes);
+app.use("/api", spellingRoutes);
 
 // DB connection test route
 app.get("/db-test", async (req, res) => {
@@ -121,45 +123,7 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-// === USERS ===
-app.use("/api/users", userRoutes);
-
-// === READING COMPREHENSION ===
-app.use("/", readingRoutes);
-
-
-// // reading comprehension 
-// const readingRoutes = require('./routes/reading.routes');
-// app.use('/', readingRoutes);
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
-
-// === DASHBOARD ===
-app.use("/dashboard", dashboardRoutes);
-
-// === CONTENT ===
-app.use("/content", contentRoutes);
-
-// === RESOURCES ===
-app.get('/resources', (req, res) => {
-  res.render('resources', {
-    layout: 'resourceslayout',
-    title: 'Resources'
-  });
-});
-
-
-// === VOLUNTEER ===
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
-      layout: 'volunteerlayout',
-      title: 'Volunteer'
-    });
-});
-
-// === 404 HANDLER === 
+// === 404 HANDLER ===
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
