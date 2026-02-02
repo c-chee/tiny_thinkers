@@ -13,10 +13,6 @@ const app = express();
 
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 const readingRoutes = require("./routes/reading.routes");
 const dictionaryRoutes = require("./routes/dictionary.routes");
 const spellingRoutes = require("./routes/spelling.routes");
@@ -27,7 +23,6 @@ const contentRoutes = require("./routes/content.routes");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
-<<<<<<< HEAD
 // Optional / newer routes (only keep if these files exist in your repo)
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
@@ -37,13 +32,6 @@ const jwt = require("jsonwebtoken");
 app.use(cors()); // Enables cross-origin requests
 app.use(express.json()); // Allows server to read JSON req
 app.use(cookieParser());
-
-
-=======
-app.use(cors());
-app.use(express.json());
-app.use(cookieParser());
->>>>>>> main
 
 // === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
