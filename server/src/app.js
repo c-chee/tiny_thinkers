@@ -116,7 +116,6 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-module.exports = app;
 
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
@@ -124,24 +123,13 @@ app.use("/dashboard", dashboardRoutes);
 // === CONTENT ===
 app.use("/content", contentRoutes);
 
-
-// === LOGIN === 
-
-app.get("/Login", (req, res) => {
-  res.render("Login", { pageTitle : "Login",
-    layout: "loginlayout"
-  });
-});
-
-
-// === RESOURCE ===
-// app.get('/resources', (req, res) => {
-//   res.render('resources', {
-//     layout: 'resourcelayout',
-//     title: 'Resources',
-//     categories: resourcesData.categories,
-//   });
-// });
+// === Resources ===
+app.get('/resources', (req, res) => {
+    res.render('resources', {
+      layout: 'resourceslayout',
+      title: 'Resources'
+    });
+})
 
 // === 404 HANDLER === 
 // *** Must be last ***
