@@ -22,3 +22,51 @@ if (loginPage) {
         container.classList.remove('active');
     }
 }
+
+// LOGIN
+document.getElementById("loginForm")
+?.addEventListener("submit", async e => {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form));
+
+    const res = await fetch("/api/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+        localStorage.setItem("token", result.token);
+        window.location.href = "/dashboard";
+    } else {
+        alert(result.message);
+    }
+});
+
+
+// REGISTER
+document.getElementById("registerForm")
+?.addEventListener("submit", async e => {
+    e.preventDefault();
+
+    const form = e.target;
+    const data = Object.fromEntries(new FormData(form));
+
+    const res = await fetch("/api/users/signup", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data)
+    });
+
+    const result = await res.json();
+
+    if (res.ok) {
+        alert("Account created! Please login.");
+    } else {
+        alert(result.message);
+    }
+});
