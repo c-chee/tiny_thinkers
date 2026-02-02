@@ -66,7 +66,32 @@ app.get("/spelling", (req, res) => {
   });
 });
 
-// Login page (redirects to dashboard if already logged in)
+// === READING COMPREHENSION ===
+// reading comprehension 
+const readingRoutes = require('./routes/reading.routes');
+app.use('/', readingRoutes);
+
+// === SETTINGS ===
+app.get("/settings", (req, res) => {
+  res.render("settings", { 
+    pageTitle: "Tiny Thinkers | Settings",
+    pageCss: "/css/settings.css"  
+  });
+});
+
+// const pageRoutes = require('./routes/pages.routes');
+// app.use('/', pageRoutes);
+
+// === API ROUTES ===
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
+});
+
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
+});
+
+// === LOGIN ===
 app.get("/login", (req, res) => {
   const token = req.cookies?.token;
 
@@ -123,7 +148,33 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-// === 404 HANDLER ===
+// === USERS ===
+app.use("/api/users", userRoutes);
+
+
+// === DASHBOARD ===
+app.use("/dashboard", dashboardRoutes);
+
+// === CONTENT ===
+app.use("/content", contentRoutes);
+
+// === RESOURCES ===
+app.get('/resources', (req, res) => {
+  res.render('resources', {
+    layout: 'resourceslayout',
+    title: 'Resources'
+  });
+});
+
+// === VOLUNTEER ===
+app.get('/volunteer', (req, res) => {
+    res.render('volunteer', {
+      layout: 'volunteerlayout',
+      title: 'Volunteer'
+    });
+});
+
+// === 404 HANDLER === 
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("404", {
