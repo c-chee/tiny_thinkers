@@ -702,16 +702,37 @@ footer {
   animation: appleFloat 3.5s ease-in-out infinite;
 }
 
-.stats-container {
-  grid-column: 1 / -1; /* Spans full width of the grid */
-  margin-top: 2rem;
-  margin-bottom: 1rem;
-  width: 100%;
-  max-width: 100%;
-  overflow: hidden; /* Prevent horizontal scroll */
+@keyframes appleFloat {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-9px);
+  }
 }
 
-/* Mobile-first: slideshow */
+/* - - - - - stats section - - - - - */
+.band-stats {
+  background: var(--white);
+  position: relative;
+  overflow: hidden;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: 1fr; /* mobile default */
+  gap: 18px;
+  align-items: start;
+}
+
+.stats-container {
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* mobile-first : slideshow */
 .stats-slideshow {
   position: relative;
   width: 100%;
@@ -733,7 +754,7 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 4px; /* Small padding to prevent edge cutoff */
+  padding: 0 4px;
   box-sizing: border-box;
 }
 
@@ -741,18 +762,21 @@ footer {
   width: 100%;
   max-width: 100%;
   margin: 12px 0;
-  background: rgba(255, 255, 255, 0.85);
+  background: var(--peach);
   padding: 16px 14px;
   border-radius: 18px;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.1);
+  box-shadow:
+    0 8px 20px rgba(0, 0, 0, 0.12),
+    0 2px 6px rgba(0, 0, 0, 0.06);
   box-sizing: border-box;
+  border: 2px solid rgba(255, 159, 28, 0.25);
 }
 
 .stat-slide .speech p {
   margin: 0;
   font-size: 1rem;
   line-height: 1.5;
-  color: rgba(0, 0, 0, 0.75);
+  color: rgba(0, 0, 0, 0.78);
   text-align: center;
 }
 
@@ -764,13 +788,15 @@ footer {
   margin-bottom: 4px;
 }
 
-/* Slideshow dots */
 .slideshow-dots {
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-top: 18px;
   margin-bottom: 8px;
+  position: relative;
+  z-index: 5;
+  padding-bottom: 10px;
 }
 
 .dot {
@@ -799,34 +825,34 @@ footer {
   .stats-slideshow {
     overflow: visible;
   }
-  
+
   .stats-track {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1rem;
     transform: none !important;
   }
-  
+
   .stat-slide {
     min-width: auto;
     max-width: none;
     padding: 0;
   }
-  
+
   .stat-slide .speech {
     margin: 0;
     padding: 16px 18px;
   }
-  
+
   .stat-slide .speech p {
     font-size: 1.05rem;
   }
-  
+
   .stat-slide .speech strong {
     font-size: 2rem;
     margin-bottom: 6px;
   }
-  
+
   .slideshow-dots {
     display: none;
   }
@@ -1231,6 +1257,79 @@ footer {
   clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
 }
 
+/* - - - - - back to top button - - - - - */
+.back-to-top-wrap {
+  background: var(--lav);
+  display: flex;
+  justify-content: center;
+  padding: 18px 14px 34px;
+}
+
+.back-to-top-btn {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.back-to-top-btn::before {
+  background: repeating-linear-gradient(
+    -12deg,
+    #7cb798 0px,
+    #7cb798 6px,
+    #85c8a5 6px,
+    #85c8a5 12px
+  );
+}
+
+/* hover state */
+.back-to-top-btn:hover {
+  color: white;
+  border-color: white;
+}
+/* optional: slightly smaller on mobile */
+@media (max-width: 699px) {
+  .back-to-top-btn {
+    padding: 10px 18px;
+  }
+}
+
+/* ==========================
+   MOBILE FIRST BREAKPOINTS
+============================= */
+/* - - - - - back to top button - - - - - */
+.back-to-top-wrap {
+  background: var(--lav);
+  display: flex;
+  justify-content: center;
+  padding: 18px 14px 34px;
+}
+
+.back-to-top-btn {
+  border-color: var(--ink);
+  color: var(--ink);
+}
+
+.back-to-top-btn::before {
+  background: repeating-linear-gradient(
+    -12deg,
+    #7cb798 0px,
+    #7cb798 6px,
+    #85c8a5 6px,
+    #85c8a5 12px
+  );
+}
+
+/* hover state */
+.back-to-top-btn:hover {
+  color: white;
+  border-color: white;
+}
+/* optional: slightly smaller on mobile */
+@media (max-width: 699px) {
+  .back-to-top-btn {
+    padding: 10px 18px;
+  }
+}
+
 /* ==========================
    MOBILE FIRST BREAKPOINTS
 ============================= */
@@ -1536,7 +1635,6 @@ footer {
   .stats-track {
     grid-template-columns: repeat(3, minmax(240px, 1fr));
   }
-
   .site-footer {
     grid-template:
       "brand quote connect" auto
