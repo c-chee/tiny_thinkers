@@ -19,12 +19,11 @@ const spellingRoutes = require("./routes/spelling.routes");
 
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
-
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // Enables cross-origin requests
+app.use(express.json()); // Allows server to read JSON req
 app.use(cookieParser());
 
 // === STATIC FILES ===
@@ -67,8 +66,6 @@ app.get("/spelling", (req, res) => {
 });
 
 // === READING COMPREHENSION ===
-// reading comprehension 
-const readingRoutes = require('./routes/reading.routes');
 app.use('/', readingRoutes);
 
 // === SETTINGS ===
@@ -104,7 +101,7 @@ app.get("/login", (req, res) => {
 
   res.render("Login", {
     pageTitle: "Tiny Thinkers | Login",
-    layout: "loginlayout",
+    layout: "loginlayout"
   });
 });
 
