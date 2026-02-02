@@ -19,13 +19,6 @@ const spellingRoutes = require("./routes/spelling.routes");
 
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
-
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
-
-// Optional / newer routes (only keep if these files exist in your repo)
-const dashboardRoutes = require("./routes/dashboard.routes");
-const contentRoutes = require("./routes/content.routes");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
@@ -73,8 +66,6 @@ app.get("/spelling", (req, res) => {
 });
 
 // === READING COMPREHENSION ===
-// reading comprehension 
-const readingRoutes = require('./routes/reading.routes');
 app.use('/', readingRoutes);
 
 // === SETTINGS ===
