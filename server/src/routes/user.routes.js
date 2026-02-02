@@ -16,5 +16,12 @@ router.post('/signup', userController.signup);
 // POST /api/users/login
 router.post('/login', userController.login);
 
+// POST /api/users/logout
+router.post('/logout', (req, res) => {
+    res.clearCookie("token");
+    res.json({ message: "Logged out" });
+});
+
+
 module.exports = router;
 

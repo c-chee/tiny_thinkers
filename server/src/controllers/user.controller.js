@@ -64,9 +64,28 @@ exports.login = async (req, res) => {
         );
 
         // Response, ssends the token and user profile to the frontend
+        // res.json({
+        //     message: 'Login successful',
+        //     token,
+        //     user: {
+        //         id: user.id,
+        //         first_name: user.first_name,
+        //         last_name: user.last_name,
+        //         email: user.email
+        //     }
+        // });
+
+
+        // Cookie handle
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false, // true only in HTTPS production
+            sameSite: "lax",
+            maxAge: 60 * 60 * 1000 // 1 hour
+        });
+
         res.json({
-            message: 'Login successful',
-            token,
+            message: "Login successful",
             user: {
                 id: user.id,
                 first_name: user.first_name,
@@ -74,6 +93,7 @@ exports.login = async (req, res) => {
                 email: user.email
             }
         });
+
     } catch (error) {
         res.status(401).json({ message: error.message });
     }
