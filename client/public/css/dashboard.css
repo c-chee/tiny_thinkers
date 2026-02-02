@@ -98,22 +98,9 @@ header {
     filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
 }
 
-/* desktop nav hidden on mobile */
-    .nav-desktop-container {
-    display: none;
-}
-
 @media (min-width: 700px) {
     .home-link {
         cursor: pointer;
-    }
-
-    .nav-mobile-container {
-        display: none;
-    }
-
-    .nav-desktop-container {
-        display: block;
     }
 }
 

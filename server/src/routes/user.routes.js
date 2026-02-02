@@ -3,25 +3,24 @@
  */
 const express = require('express');
 const router = express.Router();
-
 const userController = require('../controllers/user.controller');
 
-router.get('/', (req, res) =>{
-    res.json({message: 'user route works'});
-});
-
+// Signup
 // POST /api/users/signup
 router.post('/signup', userController.signup);
 
+// Login
 // POST /api/users/login
 router.post('/login', userController.login);
 
+// Logout
 // POST /api/users/logout
 router.post('/logout', (req, res) => {
-    res.clearCookie("token");
-    res.json({ message: "Logged out" });
+    // Remove the JWT cookie
+    res.clearCookie('token', { httpOnly: true, sameSite: 'lax' });
+    res.json({ message: 'Logged out' });
 });
 
-
 module.exports = router;
+
 

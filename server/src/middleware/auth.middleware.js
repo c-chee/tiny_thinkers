@@ -25,11 +25,12 @@ const jwt = require("jsonwebtoken"); // Imports the jwt (jsonwebtoken) library, 
 //     }
 // };
 
+// Protect routes
 module.exports = (req, res, next) => {
-    const token = req.cookies.token;
+    const token = req.cookies?.token; // read cookie
 
     if (!token) {
-        return res.status(401).json({ message: "No token provided" });
+        return res.status(401).redirect('/login'); // redirect to login if no token
     }
 
     try {
@@ -37,7 +38,6 @@ module.exports = (req, res, next) => {
         req.user = decoded;
         next();
     } catch (err) {
-        return res.status(401).json({ message: "Invalid token" });
+        return res.status(401).redirect('/login');
     }
 };
-

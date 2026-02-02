@@ -58,45 +58,20 @@ exports.signup = async (req, res) => {
 // POST /api/users/login
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body; // Credential verification
-
+        const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(400).json({ message: 'Email and password required' });
+            return res.status(400).json({ message: "Email and password required" });
         }
 
         const user = await userService.authenticateUser(email, password);
 
-        // --- Create JWT token ---
-        // Stores info in token and will explire in 1hr
-        const token = jwt.sign(
-            { id: user.id, email: user.email },
-            process.env.JWT_SECRET,
-            { expiresIn: '1h' }
-        );
+        // Set token in HTTP-only cookie
+        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.cookie('token', token, { httpOnly: true, sameSite: 'lax' });
 
-        // Response, ssends the token and user profile to the frontend
-        // res.json({
-        //     message: 'Login successful',
-        //     token,
-        //     user: {
-        //         id: user.id,
-        //         first_name: user.first_name,
-        //         last_name: user.last_name,
-        //         email: user.email
-        //     }
-        // });
-
-
-        // Cookie handle
-        res.cookie("token", token, {
-            httpOnly: true,
-            secure: false, // true only in HTTPS production
-            sameSite: "lax",
-            maxAge: 60 * 60 * 1000 // 1 hour
-        });
-
+        // Respond with success 
         res.json({
-            message: "Login successful",
+            message: 'Login successful',
             user: {
                 id: user.id,
                 first_name: user.first_name,
@@ -109,3 +84,4 @@ exports.login = async (req, res) => {
         res.status(401).json({ message: error.message });
     }
 };
+
