@@ -13,10 +13,21 @@ const app = express();
 
 const db = require("./db");
 const userRoutes = require("./routes/user.routes");
+<<<<<<< HEAD
 
+=======
+>>>>>>> main
 const readingRoutes = require("./routes/reading.routes");
 const dictionaryRoutes = require("./routes/dictionary.routes");
+const spellingRoutes = require("./routes/spelling.routes");
 
+const dashboardRoutes = require("./routes/dashboard.routes");
+const contentRoutes = require("./routes/content.routes");
+
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
+
+<<<<<<< HEAD
 // Optional / newer routes (only keep if these files exist in your repo)
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
@@ -28,6 +39,11 @@ app.use(express.json()); // Allows server to read JSON req
 app.use(cookieParser());
 
 
+=======
+app.use(cors());
+app.use(express.json());
+app.use(cookieParser());
+>>>>>>> main
 
 // === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
@@ -68,6 +84,32 @@ app.get("/spelling", (req, res) => {
   });
 });
 
+// === READING COMPREHENSION ===
+// reading comprehension 
+const readingRoutes = require('./routes/reading.routes');
+app.use('/', readingRoutes);
+
+// === SETTINGS ===
+app.get("/settings", (req, res) => {
+  res.render("settings", { 
+    pageTitle: "Tiny Thinkers | Settings",
+    pageCss: "/css/settings.css"  
+  });
+});
+
+// const pageRoutes = require('./routes/pages.routes');
+// app.use('/', pageRoutes);
+
+// === API ROUTES ===
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
+});
+
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
+});
+
+// === LOGIN ===
 app.get("/login", (req, res) => {
   const token = req.cookies?.token;
 
@@ -105,10 +147,13 @@ app.get("/api/status", (req, res) => {
 
 // === FEATURE ROUTES ===
 app.use("/api/users", userRoutes);
-app.use("/", readingRoutes); // reading comprehension routes
+app.use("/", readingRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/content", contentRoutes);
+
+// Dictionary + spelling endpoints
 app.use("/api", dictionaryRoutes);
+app.use("/api", spellingRoutes);
 
 // DB connection test route
 app.get("/db-test", async (req, res) => {
@@ -124,17 +169,6 @@ app.get("/db-test", async (req, res) => {
 // === USERS ===
 app.use("/api/users", userRoutes);
 
-// === READING COMPREHENSION ===
-app.use("/", readingRoutes);
-
-
-// // reading comprehension 
-// const readingRoutes = require('./routes/reading.routes');
-// app.use('/', readingRoutes);
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
 
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
@@ -149,7 +183,6 @@ app.get('/resources', (req, res) => {
     title: 'Resources'
   });
 });
-
 
 // === VOLUNTEER ===
 app.get('/volunteer', (req, res) => {

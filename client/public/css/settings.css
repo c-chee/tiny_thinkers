@@ -1,0 +1,497 @@
+/* - - - - - global styles - - - - - */
+/* - - - - - global styles - - - - - */
+:root {
+  --pink: #f7d6e0;
+  --yellow: #fee440;
+  --sky: #9ad0ec;
+  --mint: #7ae7c7;
+  --aqua: #b2f7ef;
+  --lav: #dfebff;
+  --purple: #9b5de5;
+  --dark-purple: #482475;
+  --hotpink: #f15bb5;
+  --red: #ff3864;
+  --orange: #ff9f1c;
+  --peach: #fff1dc;
+  --white: #ffffff;
+  --ink: #1c1c1c;
+
+  --nav-bg: linear-gradient(to right, #f2dbeb 12%, #cefbf4);
+  --footer-bg: #ebe3f6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+body {
+  font-family:
+    "Urbanist",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  color: var(--ink);
+  background: var(--white);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex: 1;
+}
+
+/* ==========================
+   UTILITY CLASSES
+============================= */
+.container {
+  max-width: 980px;
+  margin: 0 auto;
+  padding: 26px 14px;
+}
+
+.label {
+  display: inline-block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 1000;
+  color: var(--white);
+  background: repeating-linear-gradient(
+    -12deg,
+    #ff9f1c 0px,
+    #ff9f1c 6px,
+    #ffb347 6px,
+    #ffb347 12px
+  );
+  box-shadow: 0 8px 14px rgba(0, 0, 0, 0.12);
+}
+
+.h2 {
+  margin: 0 0 10px;
+  font-size: 2rem;
+  font-family: "Finger Paint", cursive;
+  color: var(--orange);
+}
+
+.h3 {
+  margin: 0 0 8px;
+  font-size: 1.4rem;
+}
+
+.body {
+  margin: 0 0 12px;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 1.05rem;
+  max-width: 62ch;
+}
+
+.body.small {
+  font-size: 1rem;
+}
+
+/* ==========================
+        SETTINGS PAGE
+============================= */
+.settings-page {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6em 1.5em 3em;
+  background:
+    radial-gradient(
+      circle at 20% 25%,
+      rgba(247, 214, 224, 0.95),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(178, 247, 239, 0.95),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 55% 85%,
+      rgba(254, 228, 64, 0.55),
+      transparent 55%
+    ),
+    linear-gradient(90deg, rgba(155, 93, 229, 0.2), rgba(0, 245, 212, 0.14));
+}
+
+.settings-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.settings-card {
+  background: var(--white);
+  border-radius: 24px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  padding: 50px;
+  position: relative;
+}
+
+/* - - - - - header - - - - - */
+.settings-header {
+  text-align: center;
+  margin-bottom: 40px;
+  padding-bottom: 30px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.settings-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--dark-purple);
+  margin-bottom: 10px;
+}
+
+.settings-header p {
+  font-size: 1.05rem;
+  color: #666;
+  font-weight: 500;
+}
+
+/* - - - - - form sections - - - - - */
+.form-section {
+  margin-bottom: 45px;
+}
+
+.section-title {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--ink);
+  margin-bottom: 8px;
+}
+
+.section-subtitle {
+  font-size: 0.95rem;
+  color: #777;
+  margin-bottom: 20px;
+}
+
+/* - - - - - grade selection grid - - - - - */
+.grade-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.grade-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.grade-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.grade-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 12px;
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  min-height: 70px;
+}
+
+.grade-label {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--ink);
+  text-align: center;
+}
+
+.grade-option:hover .grade-card {
+  border-color: var(--purple);
+  background: #f5f0ff;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(155, 93, 229, 0.15);
+}
+
+.grade-option input[type="radio"]:checked + .grade-card {
+  background: var(--purple);
+  border-color: var(--purple);
+  color: white;
+  box-shadow: 0 6px 20px rgba(155, 93, 229, 0.3);
+}
+
+.grade-option input[type="radio"]:checked + .grade-card .grade-label {
+  color: white;
+}
+
+/* - - - - - content selection grid - - - - - */
+.content-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.content-option {
+  position: relative;
+  cursor: pointer;
+}
+
+.content-option.disabled {
+  cursor: not-allowed;
+}
+
+.content-option input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.content-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  background: #f8f9fa;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.content-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+}
+
+.content-label {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--ink);
+}
+
+.content-description {
+  font-size: 0.9rem;
+  color: #777;
+  line-height: 1.4;
+}
+
+.checkbox-indicator {
+  width: 24px;
+  height: 24px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+  background: white;
+  position: relative;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.checkbox-indicator::after {
+  content: '✓';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  color: white;
+  font-size: 14px;
+  font-weight: bold;
+  transition: transform 0.2s ease;
+}
+
+.content-option:not(.disabled):hover .content-card {
+  border-color: var(--mint);
+  background: #f0fffc;
+  box-shadow: 0 4px 12px rgba(122, 231, 199, 0.15);
+}
+
+.content-option:not(.disabled):hover .checkbox-indicator {
+  border-color: var(--mint);
+}
+
+.content-option input[type="checkbox"]:checked + .content-card {
+  border-color: var(--mint);
+  background: #e6fff9;
+  box-shadow: 0 4px 12px rgba(122, 231, 199, 0.2);
+}
+
+.content-option input[type="checkbox"]:checked + .content-card .checkbox-indicator {
+  background: var(--mint);
+  border-color: var(--mint);
+}
+
+.content-option input[type="checkbox"]:checked + .content-card .checkbox-indicator::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+/* - - - - - disabled state - - - - - */
+.content-option.disabled .content-card {
+  background: #fafafa;
+  opacity: 0.6;
+}
+
+.content-option.disabled:hover .content-card {
+  border-color: #e0e0e0;
+  background: #fafafa;
+  box-shadow: none;
+  transform: none;
+}
+
+.content-option.disabled .checkbox-indicator {
+  background: #f0f0f0;
+  border-color: #ddd;
+}
+
+/* - - - - - coming soon badge - - - - - */
+.coming-soon-badge {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffa726 0%, #fb8c00 100%);
+  color: white;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-left: 8px;
+}
+
+/* - - - - - form actions - - - - - */
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid #f0f0f0;
+}
+
+.btn-cancel,
+.btn-save {
+  padding: 12px 28px;
+  border-radius: 8px;
+  font-family: "Urbanist", sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+  outline: none;
+}
+
+.btn-cancel {
+  background: transparent;
+  color: #666;
+  border: 2px solid #ddd;
+}
+
+.btn-cancel:hover {
+  background: #f5f5f5;
+  border-color: #999;
+  color: #333;
+}
+
+.btn-save {
+  background: var(--mint);
+  color: white;
+  border: 2px solid var(--mint);
+  box-shadow: 0 4px 12px rgba(122, 231, 199, 0.3);
+}
+
+.btn-save:hover {
+  background: #5ed9b8;
+  border-color: #5ed9b8;
+  box-shadow: 0 6px 16px rgba(122, 231, 199, 0.4);
+  transform: translateY(-1px);
+}
+
+/* ==========================
+   MOBILE FIRST BREAKPOINTS
+============================= */
+
+/* mobile */
+@media (max-width: 699px) {
+  .settings-card {
+    padding: 30px 20px;
+  }
+
+  .settings-header h1 {
+    font-size: 1.8rem;
+  }
+
+  .grade-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .form-actions {
+    flex-direction: column-reverse;
+  }
+
+  .btn-cancel,
+  .btn-save {
+    width: 100%;
+  }
+}
+
+/* tablet */
+@media (min-width: 700px) {
+  .grade-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* desktop */
+@media (min-width: 900px) {
+  .settings-card {
+    padding: 60px;
+  }
+
+  .grade-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .content-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* ==========================
+   PREFERS REDUCED MOTION
+============================= */
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .grade-card,
+  .content-card,
+  .btn-cancel,
+  .btn-save {
+    transition: none !important;
+  }
+}

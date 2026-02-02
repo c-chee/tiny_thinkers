@@ -1,36 +1,169 @@
-/* - - - - - global spelling styles - - - - - */
+/* - - - - - spelling page globals - - - - - */
 :root {
-  --spell-blue: #c8efff;
-  --spell-orange: #ffd9b3;
+  --spell-yellow: #fff3b0;
   --spell-cream: #fff7e6;
 }
 
 .spelling-page {
-  background: var(--spell-orange);
   min-height: 100vh;
+  background: var(--spell-yellow);
 }
 
+/* - - - - - waves - - - - - */
+.wave {
+  height: 110px;
+  width: 100%;
+  display: block;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 100%;
+}
+
+.wave-orange-to-blue {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='transparent'/%3E%3C/svg%3E");
+}
+
+.wave-blue-to-orange {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23fff3b0'/%3E%3C/svg%3E");
+}
+
+/* - - - - - spelling hero - - - - - */
 .spelling-hero {
-  background: var(--spell-orange);
+  position: relative;
+  padding: 22px 0 110px;
+  background: var(--spell-yellow);
+  overflow: hidden;
 }
 
-.spelling-area {
-  background: var(--spell-blue);
-  padding: 3rem 0 4rem;
+.spelling-hero .subtitle {
+  max-width: 52ch;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.spelling-page .container.center-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.spelling-hero .container.center-stack {
+  position: relative;
+  z-index: 2;
+  padding-top: 110px;
+}
+
+.spelling-hero .wave-orange-to-blue {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 1;
+}
+
+@media (min-width: 700px) {
+  .spelling-hero {
+    padding-top: 80px;
+  }
+}
+
+/* - - - - - title + subtitle animations - - - - - */
+.spelling-hero h1.title {
+  font-size: clamp(3.2rem, 5.5vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: 0.8px;
+
+  opacity: 0;
+  transform: scale(0.92) translateY(8px);
+  animation: popIn 0.6s ease-out forwards;
+}
+
+.spelling-hero p.subtitle {
+  margin-top: 14px;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+
+  opacity: 0;
+  transform: translateY(6px);
+  animation: popInSub 0.6s ease-out forwards;
+  animation-delay: 0.15s;
+}
+
+.spelling-hero .title,
+.spelling-hero .subtitle {
   text-align: center;
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes popInSub {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .spelling-badges {
   display: flex;
   justify-content: center;
+  margin: 12px auto 0;
   gap: 12px;
   flex-wrap: wrap;
+}
+
+/* - - - - - center (gradient exercise area) - - - - - */
+.spelling-area {
+  background:
+    radial-gradient(
+      circle at 20% 25%,
+      rgba(247, 214, 224, 0.95),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 80% 30%,
+      rgba(178, 247, 239, 0.95),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 55% 85%,
+      rgba(254, 228, 64, 0.55),
+      transparent 55%
+    ),
+    linear-gradient(90deg, rgba(155, 93, 229, 0.2), rgba(0, 245, 212, 0.14));
+
+  position: relative;
+  overflow: hidden;
+  padding: 12px 0 110px;
+  padding-top: 60px;
+}
+
+.spelling-area::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 110px;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 0 L0 0 Z' fill='%23fff3b0'/%3E%3C/svg%3E");
+}
+
+.spelling-area .wave-blue-to-orange {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 1;
+}
+
+.spelling-area .container.center-stack {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 
 .helper-actions {
@@ -53,11 +186,27 @@
   margin: 1.5rem auto 0;
 }
 
+/* - - - - - spelling badge - - - - - */
+.spell-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  letter-spacing: 0.3px;
+  color: #fff;
+  background: #ffb84d;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* - - - - - input - - - - - */
 .input-row {
   display: flex;
   justify-content: center;
   gap: 12px;
   flex-wrap: wrap;
+  margin-bottom: 0.75rem;
 }
 
 .spell-input {
@@ -84,30 +233,21 @@
   font-size: 0.9rem;
 }
 
-.input-row {
-  margin-bottom: 0.75rem;
-}
-
 .feedback {
   margin-top: 0.75rem;
 }
 
-.wave {
-  width: 100%;
-  height: 100px;
-  display: block;
-  background-repeat: repeat-x;
-  background-size: cover;
+#promptSub,
+#feedbackText {
+  max-width: 42ch;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
-.wave-orange-to-blue {
-  background-color: var(--spell-orange);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23c8efff'/%3E%3C/svg%3E");
-}
-
-.wave-blue-to-orange {
-  background-color: var(--spell-blue);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23ffd9b3'/%3E%3C/svg%3E");
+/* - - - - - modal - - - - - */
+.cards-back {
+  background: var(--spell-yellow);
 }
 
 .modal-overlay {
@@ -133,7 +273,6 @@
   padding: 2rem 1.75rem 1.75rem;
   text-align: center;
   position: relative;
-
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.18),
     0 6px 16px rgba(0, 0, 0, 0.12);
@@ -208,6 +347,18 @@
   border-color: #fff;
 }
 
+/* - - - - - spelling page buttons - - - - - */
+.spelling-page .btn-pill {
+  color: #000;
+  border-color: #000;
+}
+
+.spelling-page .btn-pill:hover {
+  color: #fff;
+  border-color: #fff;
+}
+
+/* - - - - - back to dash - - - - - */
 .back-row {
   display: flex;
   justify-content: center;
@@ -298,15 +449,11 @@
   }
 }
 
-/* - - - - - mobile first breakouts - - - - - */
+/* - - - - - breakpoints - - - - - */
 /* tablet */
 @media (min-width: 700px) {
   .spelling-hero {
-    padding: 22px 0 34px;
-  }
-
-  .spelling-hero .title {
-    font-size: 2.45rem;
+    padding: 22px 0 110px;
   }
 
   .spelling-hero .subtitle {
@@ -328,6 +475,7 @@
     justify-content: center;
     gap: 12px;
   }
+
   .spell-input {
     max-width: 380px;
   }
@@ -342,6 +490,7 @@
     justify-content: space-between;
     gap: 12px;
   }
+
   #nextBtn {
     width: auto;
   }
@@ -358,10 +507,6 @@
 
 /* desktop */
 @media (min-width: 900px) {
-  .spelling-hero .title {
-    font-size: 2.75rem;
-  }
-
   .tiny-helper {
     max-width: 260px;
   }
