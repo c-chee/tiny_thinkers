@@ -267,7 +267,7 @@ footer {
 }
 
 .footer-logo {
-  height: 10em;
+  height: 8em;
   width: auto;
   filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
 }
