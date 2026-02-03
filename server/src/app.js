@@ -113,7 +113,7 @@ app.get("/settings", authMiddleware, (req, res) => {
     pageTitle: "Tiny Thinkers | Settings",
     pageCss: "/css/settings.css",
     homeLink: "/dashboard",
-    pageScript: "/js/settings.js",
+    pageScript: "/js/settings.js"
   });
 });
 
@@ -122,8 +122,10 @@ app.get("/settings", authMiddleware, (req, res) => {
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
     layout: "dashboard-layout",
-    pageTitle: "Resources",
+    pageTitle: "Tiny Thinkers | Resources",
+    pageCss: "/css/resources.css",
     homeLink: "/dashboard",
+    pageScript: "/js/resources.js"
   });
 });
 
@@ -133,8 +135,10 @@ app.get("/resources", authMiddleware, (req, res) => {
 app.get("/volunteer", authMiddleware, (req, res) => {
   res.render("volunteer", {
     layout: "dashboard-layout",
-    pageTitle: "Volunteer",
+    pageTitle: "Tiny Thinkers | Volunteer",
+    pageCss: "/css/volunteer.css",
     homeLink: "/dashboard",
+    pageScript: "/js/volunteer.js",
   });
 });
 
