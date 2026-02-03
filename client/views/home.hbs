@@ -2,6 +2,8 @@
 
   <main>
     <!-- hero -->
+    <!-- back to top btn -->
+    <section class="hero-band" id="top">
     <section class="hero-band">
       <div class="squiggle squiggle-hero-right"></div>
       <div class="container hero-grid">
@@ -9,7 +11,7 @@
           <h1 class="title">Tiny Thinkers</h1>
           <p class="subtitle">
             Free, accessible learning support for Charlotte-Mecklenburg
-            elementary students— building strong literacy and math foundations
+            elementary students, building strong literacy and math foundations
             no matter a child's zip code.
           </p>
 
@@ -227,7 +229,7 @@
             Try a quick activity and meet Tiny inside the app.
           </p>
           <!-- start learning / sign up button -->
-          <a class="btn-pill btn-solid" href="/signup">Start learning</a>
+          <a class="btn-pill btn-solid" href="/login?mode=register">Start learning</a>
           <div class="start-tiny" id="startTinyScene">
             <div class="tiny-scene start-scene">
               <img
@@ -243,8 +245,16 @@
         </div>
       </div>
     </section>
+        <!-- back to top -->
+    <div class="back-to-top-wrap">
+      <button type="button" class="btn-pill btn-solid back-to-top-btn" id="backToTopBtn">
+        Back to top ▲
+      </button>
+    </div>
+
   </main>
 
   <!-- script link -->
   <script src="Home.js"></script>
+  <script src="/js/cards.js"></script>
 </body>

@@ -1,5 +1,9 @@
 /* - - - - - global styles - - - - - */
 :root {
+  --nav-bg: linear-gradient(to right, #f2dbeb 12%, #cefbf4);
+  --footer-bg: #f5ebff;
+
+
   --pink: #f7d6e0;
   --yellow: #fee440;
   --sky: #9ad0ec;
@@ -9,6 +13,8 @@
   --purple: #9b5de5;
   --hotpink: #f15bb5;
   --orange: #ff9f1c;
+  --peach: #fff1dc;
+  --orange-soft: #e6842a;
 
   --white: #ffffff;
   --ink: #1c1c1c;
@@ -23,8 +29,6 @@
     Roboto,
     Arial,
     sans-serif;
-    margin: 0;
-    padding: 0;
 }
 body {
     margin: 0;
@@ -37,19 +41,27 @@ body {
     Arial,
     sans-serif;
     color: var(--ink);
-    background: var(--lav);
+    background: var(--peach);
 }
-main {
+.resource-page .hero-section {
+    position: relative;
+    padding: 5rem 1rem 2rem;
     text-align: center;
-    padding: 20px 0;
-
 }
-main h1 {
-
-    font-size: 4rem;
+.resource-page .hero-section h1 {
+    position: relative;
     letter-spacing: -0.02em;
+    margin: 0;
+    text-align: center;
     font-family: "Finger Paint", cursive;
     color: var(--orange);
+    font-size: 4rem;
+    background: linear-gradient(
+      transparent 55%,
+      rgba(255, 159, 28, 0.25) 55%
+    );
+    display: inline-block;
+    padding: 0 0.5rem;
 }
 #resources {
     padding: 3rem 5vw;
@@ -62,7 +74,8 @@ main h1 {
     font-size: 1.8rem;
     letter-spacing: -0.02em;
     font-family: "Finger Paint", cursive;
-    color: var(--orange);
+    color: var(--orange-soft);
+    border-bottom: 3px solid rgba(255, 159, 28, 0.25);
 }
 .resource-grid {
     display: grid;
@@ -72,7 +85,8 @@ main h1 {
 .resource-card {
     background: var(--white);
     border-radius: 16px;
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
     overflow: hidden;
     display: flex;
     flex-direction: column;
@@ -85,6 +99,8 @@ main h1 {
 }
 .resource-card:hover h3 {
     color: var(--hotpink);
+    font-family: "Urbanist", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 800;
 }
 .resource-card img {
     height: 160px;
@@ -98,10 +114,11 @@ main h1 {
 .resource-card p {
     font-size: 0.9rem;
     line-height: 1.4;
+    color: rgba( 28, 28, 28, 0.75);
 }
 .resource-card a {
     margin-top: auto;
-    color: var(--hotpink);
+    color: var(--orange);
     font-weight: 600;
     text-decoration: none;
 }
@@ -111,35 +128,55 @@ main h1 {
     flex-direction: column;
     height: 100%;
 }
-.custom-shape-divider-top-1769565600 {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    overflow: hidden;
-    line-height: 0;
-}
-
-.custom-shape-divider-top-1769565600 svg {
-    position: relative;
-    display: block;
-    width: calc(300% + 1.3px);
-    height: 220px;
-}
-
-.custom-shape-divider-top-1769565600 .shape-fill {
-    fill: #7AE7C7;
-}
-@media (max-width: 600px) {
-    main h1 {
-        font-size: 3rem;
+@media (max-width: 900px) {
+  .resource-page .hero-section h1 {
+      font-size: 3.0rem;
+    }
+    #resources {
+    padding: 2.5rem 4vw;
+    gap: 3rem
     }
     .resource-category h2 {
-        font-size: 1.5rem;
+    font-size: 1.6rem;
+    }
+    .resource-grid {
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    }
+    .resource-card img {
+      height: 150px;
     }
 }
-@media (max-width: 400px) {
-    #resources {
-        padding: 2rem 3vw;
+@media (max-width: 600px) {
+    .resource-page.hero-section {
+      padding: 4rem 1rem 1rem;
     }
+    .resource-page .hero-section h1 {
+      font-size: 2.5rem;
+    }
+    #resources {
+    padding: 1.5rem 1rem;
+    gap: 2rem;
+    margin-top: 0;
+    }
+    .resource-grid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+    .resource-card-content {
+      padding: 1rem;
+    }
+    .resource-card img {
+      height: 130px;
+    }
+    .resource-card p {
+      font-size: 0.95rem;
+    }
+}
+@media (max-width: 300px) {
+  .resource-page .hero-section h1 {
+    font-size: 2rem;
+  }
+  .resource-category h2 {
+    font-size: 1.2rem;
+  }
 }

@@ -15,27 +15,37 @@ const jwt = require('jsonwebtoken'); // Token creation
 // POST /api/users/signup
 exports.signup = async (req, res) => {
     try {
-        const { email, password, first_name, last_name } = req.body; // Body fields
+        const { email, password, first_name, last_name } = req.body;
 
-        // --- Validation for signup ---
-        // Prevents empty users
         if (!email || !password || !first_name || !last_name) {
-            return res.status(400).json({ message: 'All fields required' });
+            return res.status(400).json({ message: "All fields required" });
         }
 
-        // --- Creates user ---
         const user = await userService.createUser(
             email,
             password,
             first_name,
             last_name
         );
-        
 
-        // 201 = resource created
+        // create token immediately
+        const token = jwt.sign(
+            { id: user.id, email },
+            process.env.JWT_SECRET,
+            { expiresIn: "1h" }
+        );
+
+        // store token in cookie
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: false, // true in production HTTPS
+            sameSite: "lax",
+            maxAge: 60 * 60 * 1000
+        });
+
         res.status(201).json({
-            message: 'User created',
-            userId: user.id,
+            message: "User created",
+            userId: user.id
         });
 
     } catch (error) {
@@ -43,30 +53,25 @@ exports.signup = async (req, res) => {
     }
 };
 
+
 // === Login ===
 // POST /api/users/login
 exports.login = async (req, res) => {
     try {
-        const { email, password } = req.body; // Credential verification
-
+        const { email, password } = req.body;
         if (!email || !password) {
-            return res.status(400).json({ message: 'Email and password required' });
+            return res.status(400).json({ message: "Email and password required" });
         }
 
         const user = await userService.authenticateUser(email, password);
 
-        // --- Create JWT token ---
-        // Stores info in token and will explire in 1hr
-        const token = jwt.sign(
-            { id: user.id, email: user.email },
-            process.env.JWT_SECRET,
-            { expiresIn: '1h' }
-        );
+        // Set token in HTTP-only cookie
+        const token = jwt.sign({ id: user.id, email: user.email }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        res.cookie('token', token, { httpOnly: true, sameSite: 'lax' });
 
-        // Response, ssends the token and user profile to the frontend
+        // Respond with success 
         res.json({
             message: 'Login successful',
-            token,
             user: {
                 id: user.id,
                 first_name: user.first_name,
@@ -74,7 +79,9 @@ exports.login = async (req, res) => {
                 email: user.email
             }
         });
+
     } catch (error) {
         res.status(401).json({ message: error.message });
     }
 };
+
