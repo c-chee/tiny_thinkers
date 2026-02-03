@@ -1,8 +1,30 @@
-// server/src/services/settings.service.js
-const settingsQueries = require("../db/queries/settings.queries");
+const db = require("../db");
 
-exports.saveSettings = (id, grade, type) =>
-    settingsQueries.save(id, grade, type);
+// Get user preferences
+exports.getPreferences = async (userId) => {
+    const [rows] = await db.query(
+        "SELECT grade_level, content_type FROM user_preferences WHERE user_id = ?",
+        [userId]
+    );
+    return rows[0] || null;
+};
 
-exports.getPreferences = (id) =>
-    settingsQueries.get(id);
+// Save user preferences
+exports.saveSettings = async (userId, grade_level, content_type) => {
+    const [existing] = await db.query(
+        "SELECT id FROM user_preferences WHERE user_id = ?",
+        [userId]
+    );
+
+    if (existing.length) {
+        await db.query(
+            "UPDATE user_preferences SET grade_level = ?, content_type = ? WHERE user_id = ?",
+            [grade_level, content_type, userId]
+        );
+    } else {
+        await db.query(
+            "INSERT INTO user_preferences (user_id, grade_level, content_type) VALUES (?, ?, ?)",
+            [userId, grade_level, content_type]
+        );
+    }
+};

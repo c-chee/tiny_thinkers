@@ -3,30 +3,52 @@
  * Later replace with API response
  */
 module.exports = {
-    reading: 
-    { 
-        label: "Reading Practice", 
-        route: "/reading" 
+    reading: {
+        label: "Reading",
+        route: "/reading",
+        class: "tile-reading",
+        description: "Practice comprehension with Tiny."
     },
 
-    alphabet: 
-    { 
-        label: "Alphabet Cards", 
-        route: "/cards" 
+    spelling: {
+        label: "Spelling",
+        route: "/spelling",
+        class: "tile-spelling",
+        description: "Listen, type, and level up."
     },
-    vocab: 
-    { 
-        label: "Vocabulary Cards", 
-        route: "/vocab" 
+
+    dictionary: {
+        label: "Dictionary",
+        route: "/dictionary",
+        class: "tile-dictionary",
+        description: "Look up words fast."
     },
-    spelling: 
-    { 
-        label: "Spelling Practice", 
-        route: "/spelling" 
+
+    cards: {
+        label: "Cards",
+        route: "/cards",
+        class: "tile-cards",
+        description: "Flashcards for quick practice."
     },
-    dictionary: 
-    { 
-        label: "Dictionary", 
-        route: "/dictionary" 
+
+    settings: {
+        label: "Settings",
+        route: "/settings",
+        class: "tile-settings",
+        description: "Update grade level and content"
+    },
+
+    resources: {
+        label: "Resources",
+        route: "/resources",
+        class: "tile-resources",
+        description: "Additional resources"
+    },
+    
+    volunteer: {
+        label: "Volunteer",
+        route: "/volunteer",
+        class: "tile-volunteer",
+        description: "Get involved"
     }
 };
