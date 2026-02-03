@@ -114,7 +114,7 @@ app.get("/settings", authMiddleware, (req, res) => {
 // === RESOURCES ===
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
-    layout: "dashboard-layout",
+    layout: "resourceslayout",
     pageTitle: "Tiny Thinkers | Resources",
     pageCss: "/css/resources.css",
     homeLink: "/dashboard",
@@ -199,40 +199,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-<<<<<<< HEAD
-
-// // reading comprehension 
-// const readingRoutes = require('./routes/reading.routes');
-// app.use('/', readingRoutes);
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
-
-// === RESOURCE ===
-app.get('/resources', (req, res) => {
-  res.render('resources', {
-    layout: 'resourceslayout',
-    title: 'Resources'
-  });
-});
-
-
-// === VOLUNTEER ===
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
-      layout: 'volunteerlayout',
-      title: 'Volunteer'
-    });
-});
-
-// === 404 HANDLER === 
-// *** Must be last ***
-=======
 // ===================================================
 // 404 HANDLER (must be last)
 // ===================================================
->>>>>>> 9a4e323732799be34083068ca1c20d1a9c362133
 app.use((req, res) => {
   res.status(404).render("error", {
     pageTitle: "Tiny Thinkers | Not Found",
