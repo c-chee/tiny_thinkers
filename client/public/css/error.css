@@ -1,0 +1,90 @@
+/* - - - - - error.css - - - - - */
+.error-page {
+  min-height: calc(100vh - 180px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6em 1.5em 3em;
+  background: white;
+}
+
+.error-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 14px;
+  width: 100%;
+  max-width: 520px;
+}
+
+.error-tiny {
+  width: min(280px, 75vw);
+  height: auto;
+}
+
+.error-code {
+  margin: 0;
+  font-family: "Finger Paint", cursive;
+  font-size: clamp(3rem, 10vw, 4.6rem);
+  color: var(--orange);
+  line-height: 1;
+}
+
+.error-message {
+  margin: 0;
+  font-size: 1.1rem;
+  color: rgba(0, 0, 0, 0.75);
+  max-width: 44ch;
+}
+
+.back-btn {
+  margin-top: 12px;
+}
+
+/* - - - - - button - - - - - */
+.error-page .btn-pill.btn-solid {
+  color: var(--ink);
+  border: 2px solid var(--ink);
+}
+
+.error-page .btn-pill.btn-solid::before {
+  background: repeating-linear-gradient(
+    -12deg,
+    #9b5de5 0px,
+    #9b5de5 6px,
+    #b794f4 6px,
+    #b794f4 12px
+  );
+}
+
+.error-page .btn-pill.btn-solid:hover {
+  color: var(--white);
+  border-color: var(--ink);
+}
+
+/* - - - - - tiny pop - - - - - */
+.error-tiny {
+  animation: tinyDrop 600ms cubic-bezier(0.22, 1, 0.36, 1) both;
+  transform-origin: center bottom;
+}
+
+@keyframes tinyDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.95);
+  }
+  70% {
+    opacity: 1;
+    transform: translateY(-6px) scale(1.03);
+  }
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .error-tiny {
+    animation: none !important;
+  }
+}
