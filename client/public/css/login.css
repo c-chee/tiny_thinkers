@@ -2,8 +2,7 @@
 :root {
   --nav-bg: linear-gradient(to right, #f2dbeb 12%, #cefbf4);
   --footer-bg: #f5ebff;
-
-      --pink: #f7d6e0;
+  --pink: #f7d6e0;
   --yellow: #fee440;
   --sky: #9ad0ec;
   --mint: #7ae7c7;
@@ -41,6 +40,14 @@
 html,
 body {
   overflow-x: hidden;
+  font-family:
+    "Urbanist",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
 }
 
 .login-page {
@@ -315,14 +322,6 @@ header {
   z-index: 50;
   background: var(--nav-bg);
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
-  font-family:
-    "Urbanist",
-    system-ui,
-    -apple-system,
-    Segoe UI,
-    Roboto,
-    Arial,
-    sans-serif;
 }
 
 /* force gradient onto the actual header element used in header.hbs */
