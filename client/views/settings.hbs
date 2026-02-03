@@ -1,0 +1,140 @@
+<main class="settings-page">
+
+  <div class="settings-container">
+    <div class="settings-card">
+      
+      <!-- header -->
+      <div class="settings-header">
+        <h1>Learning Settings</h1>
+        <p>Customize your child's educational experience</p>
+      </div>
+
+      <form action="/save-settings" method="POST" class="settings-form">
+        
+        <!-- grade level section -->
+        <div class="form-section">
+          <h2 class="section-title">Grade Level</h2>
+          
+          <div class="grade-grid">
+            <label class="grade-option">
+              <input type="radio" name="grade_level" value="K" required>
+              <div class="grade-card">
+                <span class="grade-label">Kindergarten</span>
+              </div>
+            </label>
+            
+            <label class="grade-option">
+              <input type="radio" name="grade" value="1">
+              <div class="grade-card">
+                <span class="grade-label">1st Grade</span>
+              </div>
+            </label>
+            
+            <label class="grade-option">
+              <input type="radio" name="grade" value="2">
+              <div class="grade-card">
+                <span class="grade-label">2nd Grade</span>
+              </div>
+            </label>
+            
+            <label class="grade-option">
+              <input type="radio" name="grade" value="3">
+              <div class="grade-card">
+                <span class="grade-label">3rd Grade</span>
+              </div>
+            </label>
+            
+            <label class="grade-option">
+              <input type="radio" name="grade" value="4">
+              <div class="grade-card">
+                <span class="grade-label">4th Grade</span>
+              </div>
+            </label>
+            
+            <label class="grade-option">
+              <input type="radio" name="grade" value="5">
+              <div class="grade-card">
+                <span class="grade-label">5th Grade</span>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- content types section -->
+        <div class="form-section">
+          <h2 class="section-title">Content Types</h2>
+          <p class="section-subtitle">Select the subjects you want to enable</p>
+          
+          <div class="content-grid">
+            <label class="content-option">
+              <input type="checkbox" name="content_type" value="spelling">
+              <div class="content-card">
+                <div class="content-info">
+                  <span class="content-label">Spelling</span>
+                  <span class="content-description">Word practice and vocabulary building</span>
+                </div>
+                <div class="checkbox-indicator"></div>
+              </div>
+            </label>
+            
+            <label class="content-option">
+              <input type="checkbox" name="content" value="reading">
+              <div class="content-card">
+                <div class="content-info">
+                  <span class="content-label">Reading</span>
+                  <span class="content-description">Comprehension and literacy skills</span>
+                </div>
+                <div class="checkbox-indicator"></div>
+              </div>
+            </label>
+            
+            <label class="content-option">
+              <input type="checkbox" name="content" value="math">
+              <div class="content-card">
+                <div class="content-info">
+                  <span class="content-label">Math</span>
+                  <span class="content-description">Numbers, counting, and problem solving</span>
+                </div>
+                <div class="checkbox-indicator"></div>
+              </div>
+            </label>
+            
+            <label class="content-option disabled">
+              <input type="checkbox" name="content" value="science" disabled>
+              <div class="content-card">
+                <div class="content-info">
+                  <span class="content-label">Science</span>
+                  <span class="content-description">Exploration and discovery</span>
+                  <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+                <div class="checkbox-indicator"></div>
+              </div>
+            </label>
+            
+            <label class="content-option disabled">
+              <input type="checkbox" name="content" value="writing" disabled>
+              <div class="content-card">
+                <div class="content-info">
+                  <span class="content-label">Writing</span>
+                  <span class="content-description">Creative expression and composition</span>
+                  <span class="coming-soon-badge">Coming Soon</span>
+                </div>
+                <div class="checkbox-indicator"></div>
+              </div>
+            </label>
+          </div>
+        </div>
+
+        <!-- form actions -->
+        <div class="form-actions">
+          <button type="button" class="btn-cancel" onclick="window.location.href='/dashboard'">Cancel</button>
+          <button type="submit" class="btn-save">Save Settings</button>
+        </div>
+      </form>
+      
+    </div>
+  </div>
+
+</main>
+
+<script src="/js/settings.js"></script>

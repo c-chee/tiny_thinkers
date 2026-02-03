@@ -20,7 +20,17 @@
         rel="stylesheet"
     />
 
+    {{!-- Tab Icon --}}
+    <link rel="icon" type="image/png" href="/images/tiny1.PNG">
+
+
+    {{!-- Styles --}}
     <link rel="stylesheet" href="/css/dashboard.css">
+
+    {{#if pageCss}}
+        <link rel="stylesheet" href="{{pageCss}}">
+    {{/if}}
+
 </head>
 <body>
 
@@ -29,6 +39,10 @@
     {{{body}}}
 
     {{> footer}}
+
+
+    {{!-- Script --}}
+    <script src="/js/dashboard.js"></script>
 
 </body>
 </html>

@@ -4,27 +4,39 @@
  * - CORS
  * - Routes
  */
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { engine } = require("express-handlebars");
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 const app = express();
 
 const db = require("./db");
-const userRoutes = require("./routes/user.routes");
 
+const userRoutes = require("./routes/user.routes");
+const readingRoutes = require("./routes/reading.routes");
+const dictionaryRoutes = require("./routes/dictionary.routes");
+const spellingRoutes = require("./routes/spelling.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
+const settingsRoutes = require("./routes/settings.routes");
 
+
+// === MIDDLEWARE ===
 app.use(cors()); // Enables cross-origin requests
 app.use(express.json()); // Allows server to read JSON req
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
 
-// === HANDLEBARS ===
-// Static files: client/public -> /css, /js, /images, etc.
+
+// === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
-// Handlebars templating setup
+
+// === HANDLEBARS ===
 app.engine(
   "hbs",
   engine({
@@ -33,26 +45,32 @@ app.engine(
     layoutsDir: path.join(__dirname, "../../client/views/layouts"),
     partialsDir: path.join(__dirname, "../../client/views/partials"),
     helpers: {
-      isSelected: (current, value) => {
-        return current === value ? "selected" : "";
-      },
+      isSelected: (current, value) =>
+        current === value ? "selected" : "",
     },
-  }),
-
-  "hbs",
-  engine({
-    extname: "hbs",
-    defaultLayout: "main",
-    layoutsDir: path.join(__dirname, "../../client/views/layouts"),
-    partialsDir: path.join(__dirname, "../../client/views/partials"),
-  }),
+  })
 );
+
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
-// === PAGE ROUTES ===
+
+// ===================================================
+// PAGE ROUTES
+// ===================================================
+
 app.get("/", (req, res) => {
-  res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+  res.render("home", {
+    pageTitle: "Tiny Thinkers | Home",
+    homeLink: "/",
+  });
+});
+
+app.get("/cards", (req, res) => {
+  res.render("cards", {
+    pageTitle: "Tiny Thinkers | Cards",
+    pageCss: "/css/cards.css",
+  });
 });
 
 app.get("/spelling", (req, res) => {
@@ -62,30 +80,46 @@ app.get("/spelling", (req, res) => {
   });
 });
 
-// reading comprehension 
-const readingRoutes = require('./routes/reading.routes');
-app.use('/', readingRoutes);
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
-// === API ROUTES ===
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Tiny Thinkers API running" });
-});
-
-
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Tiny Thinkers API running" });
-});
 
 // === LOGIN ===
 app.get("/login", (req, res) => {
+  const token = req.cookies?.token;
+
+  if (token) {
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+      return res.redirect("/dashboard");
+    } catch {
+      // invalid token -> show login
+    }
+  }
+
   res.render("Login", {
     pageTitle: "Tiny Thinkers | Login",
     layout: "loginlayout",
   });
 });
+
+
+// === SETTINGS PAGE ===
+app.get("/settings", (req, res) => {
+  res.render("settings", {
+    layout: "dashboard-layout",
+    pageTitle: "Tiny Thinkers | Settings",
+    pageCss: "/css/settings.css",
+    homeLink: "/dashboard",
+  });
+});
+
+
+// === RESOURCES ===
+app.get("/resources", (req, res) => {
+  res.render("resources", {
+    layout: "resourceslayout",
+    title: "Resources",
+  });
+});
+
 
 // === VOLUNTEER ===
 app.get("/volunteer", (req, res) => {
@@ -95,11 +129,45 @@ app.get("/volunteer", (req, res) => {
   });
 });
 
-// === DATABASE ===
-// User route connection
+
+// ===================================================
+// FEATURE ROUTES
+// ===================================================
+
+// Dashboard pages
+app.use("/dashboard", dashboardRoutes);
+
+// Content pages
+app.use("/content", contentRoutes);
+
+// Reading routes
+app.use("/", readingRoutes);
+
+
+// ===================================================
+// API ROUTES
+// ===================================================
+
+// Users
 app.use("/api/users", userRoutes);
 
-// DB connection test route
+// Settings
+app.use("/api/settings", settingsRoutes);
+
+// Dictionary + spelling APIs
+app.use("/api", dictionaryRoutes);
+app.use("/api", spellingRoutes);
+
+// API status
+app.get("/api/status", (req, res) => {
+  res.json({ status: "Tiny Thinkers API running" });
+});
+
+
+// ===================================================
+// DB TEST
+// ===================================================
+// connection test route
 app.get("/db-test", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT 1 + 1 AS result");
@@ -111,26 +179,36 @@ app.get("/db-test", async (req, res) => {
 });
 
 
-// === DASHBOARD ===
-app.use("/dashboard", dashboardRoutes);
+// ===================================================
+// ERROR HANDLER (500)
+// ===================================================
+app.use((err, req, res, next) => {
+  console.error(err);
 
-// === CONTENT ===
-app.use("/content", contentRoutes);
-
-// === Resources ===
-app.get('/resources', (req, res) => {
-    res.render('resources', {
-      layout: 'resourceslayout',
-      title: 'Resources'
-    });
-})
-
-// === 404 HANDLER === 
-// *** Must be last ***
-app.use((req, res) => {
-  res.status(404).render("404", {
-    pageTitle: "tiny thinkers | not found",
+  res.status(err.status || 500).render("error", {
+    pageTitle: "Tiny Thinkers | Something Went Wrong",
+    code: err.status || 500,
+    message: "oops… tiny tripped up. try again in a moment!",
+    imageSrc: "/images/tiny_confused.PNG",
+    imageAlt: "tiny looking confused",
+    pageCss: "/css/error.css",
   });
 });
+
+
+// ===================================================
+// 404 HANDLER
+// ===================================================
+app.use((req, res) => {
+  res.status(404).render("error", {
+    pageTitle: "Tiny Thinkers | Not Found",
+    code: 404,
+    message: "tiny can’t find this page... but that’s okay!",
+    imageSrc: "/images/tiny8.PNG",
+    imageAlt: "tiny searching",
+    pageCss: "/css/error.css",
+  });
+});
+
 
 module.exports = app;
