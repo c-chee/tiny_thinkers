@@ -1,16 +1,55 @@
 <main class="dashboard">
-
-    <h1>Dashboard</h1>
-
-    <a href = "/settings" class = "settings-btn">Settings</a>
-
-    <div class="bento-grid">
-        {{#each contentTypes}}
-        <div class="bento-card">
-            <h3>{{this}}</h3>
-            <a href="/content/{{this}}" class="btn">Open</a>
-        </div>
-        {{/each}}
+  <div class="dash-wrap">
+    <div class="dash-head">
+      <h1 class="dash-title">Dashboard</h1>
+      <p class="dash-sub">Pick an activity to get started.</p>
     </div>
-</main>
 
+    <section class="bento" aria-label="dashboard options">
+      <!-- box 1 -->
+      <a class="tile tile-reading" href="/content/Reading">
+        <div class="tile-inner">
+          <h2 class="tile-title">Reading</h2>
+          <p class="tile-text">Practice comprehension with Tiny.</p>
+          <span class="tile-cta">Open</span>
+        </div>
+      </a>
+
+      <!-- box 2 -->
+      <a class="tile tile-spelling" href="/spelling">
+        <div class="tile-inner">
+          <h2 class="tile-title">Spelling</h2>
+          <p class="tile-text">Listen, type, and level up.</p>
+          <span class="tile-cta">Open</span>
+        </div>
+      </a>
+
+      <!-- box 3 -->
+      <a class="tile tile-dictionary" href="/content/Dictionary">
+        <div class="tile-inner">
+          <h2 class="tile-title">Dictionary</h2>
+          <p class="tile-text">Look up words fast.</p>
+          <span class="tile-cta">Open</span>
+        </div>
+      </a>
+
+      <!-- box 4 -->
+      <a class="tile tile-cards" href="/cards">
+        <div class="tile-inner">
+          <h2 class="tile-title">Cards</h2>
+          <p class="tile-text">Flashcards for quick practice.</p>
+          <span class="tile-cta">Open</span>
+        </div>
+      </a>
+
+      <!-- box 5 -->
+      <a class="tile tile-settings" href="/settings">
+        <div class="tile-inner">
+          <h2 class="tile-title">Settings</h2>
+          <p class="tile-text">Update grade level and content.</p>
+          <span class="tile-cta">Open</span>
+        </div>
+      </a>
+    </section>
+  </div>
+</main>
