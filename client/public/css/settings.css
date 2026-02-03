@@ -1,5 +1,4 @@
 /* - - - - - global styles - - - - - */
-/* - - - - - global styles - - - - - */
 :root {
   --pink: #f7d6e0;
   --yellow: #fee440;
@@ -304,7 +303,7 @@ main {
 }
 
 .checkbox-indicator::after {
-  content: '✓';
+  content: "✓";
   position: absolute;
   top: 50%;
   left: 50%;
@@ -331,12 +330,18 @@ main {
   box-shadow: 0 4px 12px rgba(122, 231, 199, 0.2);
 }
 
-.content-option input[type="checkbox"]:checked + .content-card .checkbox-indicator {
+.content-option
+  input[type="checkbox"]:checked
+  + .content-card
+  .checkbox-indicator {
   background: var(--mint);
   border-color: var(--mint);
 }
 
-.content-option input[type="checkbox"]:checked + .content-card .checkbox-indicator::after {
+.content-option
+  input[type="checkbox"]:checked
+  + .content-card
+  .checkbox-indicator::after {
   transform: translate(-50%, -50%) scale(1);
 }
 

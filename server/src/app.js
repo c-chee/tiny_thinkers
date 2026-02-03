@@ -136,11 +136,31 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
+// === ERROR HANDLER (500) ===
+// *** Should be near the end , but BEFORE the 404 handler ***
+app.use((err, req, res, next) => {
+  console.error(err);
+
+  res.status(err.status || 500).render("error", {
+    pageTitle: "Tiny Thinkers | Something Went Wrong",
+    code: err.status || 500,
+    message: "oops… tiny tripped up. try again in a moment!",
+    imageSrc: "/images/tiny_confused.PNG",
+    imageAlt: "tiny looking confused",
+    pageCss: "/css/error.css",
+  });
+});
+
 // === 404 HANDLER ===
 // *** Must be last ***
 app.use((req, res) => {
-  res.status(404).render("404", {
+  res.status(404).render("error", {
     pageTitle: "Tiny Thinkers | Not Found",
+    code: 404,
+    message: "tiny can’t find this page... but that’s okay!",
+    imageSrc: "/images/tiny8.PNG",
+    imageAlt: "tiny searching",
+    pageCss: "/css/error.css",
   });
 });
 
