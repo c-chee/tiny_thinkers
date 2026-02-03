@@ -369,10 +369,11 @@ footer {
 @media (min-width: 900px) {
   .bento {
     grid-template-columns: 1.25fr 1fr 1fr;
-    grid-template-rows: 220px 200px 180px;
+    grid-template-rows: 220px 200px auto 180px;
     grid-template-areas:
       "reading spelling spelling"
       "reading dictionary cards"
+      "resources resources volunteer"
       "settings settings settings";
   }
 
@@ -387,6 +388,12 @@ footer {
   }
   .tile-cards {
     grid-area: cards;
+  }
+  .tile-resources {
+    grid-area: resources;
+  }
+  .tile-volunteer {
+    grid-area: volunteer;
   }
   .tile-settings {
     grid-area: settings;
@@ -489,6 +496,14 @@ footer {
 
 .tile-cards {
   background: #fbeab1;
+}
+
+.tile-resources {
+  background: #a9e7ff;
+}
+
+.tile-volunteer {
+  background: #aea9ff;
 }
 
 .tile-settings {

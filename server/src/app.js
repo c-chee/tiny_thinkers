@@ -130,7 +130,6 @@ app.get("/resources", authMiddleware, (req, res) => {
 });
 
 
-
 // === VOLUNTEER ===
 app.get("/volunteer", authMiddleware, (req, res) => {
   res.render("volunteer", {
