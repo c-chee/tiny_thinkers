@@ -25,17 +25,16 @@ const contentRoutes = require("./routes/content.routes");
 const settingsRoutes = require("./routes/settings.routes");
 const authMiddleware = require("./middleware/auth.middleware");
 
+const authMiddleware = require("./middleware/auth.middleware");
 
 // === MIDDLEWARE ===
-app.use(cors()); // Enables cross-origin requests
-app.use(express.json()); // Allows server to read JSON req
+app.use(cors());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
 // === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
-
 
 // === HANDLEBARS ===
 app.engine(
@@ -46,15 +45,13 @@ app.engine(
     layoutsDir: path.join(__dirname, "../../client/views/layouts"),
     partialsDir: path.join(__dirname, "../../client/views/partials"),
     helpers: {
-      isSelected: (current, value) =>
-        current === value ? "selected" : "",
+      isSelected: (current, value) => (current === value ? "selected" : ""),
     },
-  })
+  }),
 );
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
-
 
 // ===================================================
 // PAGE ROUTES
@@ -105,7 +102,6 @@ app.get("/login", (req, res) => {
   });
 });
 
-
 // === SETTINGS PAGE ===
 app.get("/settings", authMiddleware, (req, res) => {
   res.render("settings", {
@@ -117,7 +113,6 @@ app.get("/settings", authMiddleware, (req, res) => {
   });
 });
 
-
 // === RESOURCES ===
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
@@ -128,7 +123,6 @@ app.get("/resources", authMiddleware, (req, res) => {
     pageScript: "/js/resources.js"
   });
 });
-
 
 // === VOLUNTEER ===
 app.get("/volunteer", authMiddleware, (req, res) => {
@@ -154,7 +148,6 @@ app.use("/content", contentRoutes);
 // Reading routes
 app.use("/", readingRoutes);
 
-
 // ===================================================
 // API ROUTES
 // ===================================================
@@ -174,11 +167,9 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-
 // ===================================================
 // DB TEST
 // ===================================================
-// connection test route
 app.get("/db-test", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT 1 + 1 AS result");
@@ -188,7 +179,6 @@ app.get("/db-test", async (req, res) => {
     res.status(500).json({ error: "DB connection failed" });
   }
 });
-
 
 // ===================================================
 // ERROR HANDLER (500)
@@ -206,9 +196,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-
 // ===================================================
-// 404 HANDLER
+// 404 HANDLER (must be last)
 // ===================================================
 app.use((req, res) => {
   res.status(404).render("error", {
@@ -220,6 +209,5 @@ app.use((req, res) => {
     pageCss: "/css/error.css",
   });
 });
-
 
 module.exports = app;
