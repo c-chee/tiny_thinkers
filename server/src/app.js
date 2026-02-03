@@ -25,8 +25,6 @@ const contentRoutes = require("./routes/content.routes");
 const settingsRoutes = require("./routes/settings.routes");
 const authMiddleware = require("./middleware/auth.middleware");
 
-const authMiddleware = require("./middleware/auth.middleware");
-
 // === MIDDLEWARE ===
 app.use(cors());
 app.use(express.json());
