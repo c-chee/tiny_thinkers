@@ -59,9 +59,11 @@ main {
 /* Landing */
 header {
   margin: 0;
-  width: 100vw;
-  position: fixed;
+  width: 100%;
+  position: sticky;
+  top: 0;
   z-index: 50;
+  background: var(--nav-bg);
   border-bottom: 3px solid rgba(0, 0, 0, 0.1);
 }
 
@@ -70,8 +72,10 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 11px 32px;
-  background: var(--nav-bg);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 11px 20px;
+  background: transparent;
 }
 
 /* brand link */
@@ -158,7 +162,7 @@ footer {
   justify-content: center;
   width: 100vw;
   overflow-x: hidden;
-  background: transparent;
+  background: var(--footer-bg);
   border-top: 2px solid rgba(20, 20, 20, 0.1);
 }
 
@@ -172,11 +176,12 @@ footer {
     / 1fr;
 
   width: 100%;
+  max-width: 1500px;
   gap: 0.5em;
   padding: 0;
   align-items: flex-start;
   text-align: center;
-  background: var(--footer-bg);
+  background: transparent;
 }
 
 .footer-personal-brand {
@@ -208,7 +213,7 @@ footer {
 }
 
 .footer-logo {
-  height: 10em;
+  height: 8em;
   width: auto;
   filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
 }
@@ -330,7 +335,7 @@ footer {
 
 /* - - - - - dash - - - - - */
 .dashboard {
-  padding: 6.5em 1.5em 3em;
+  padding: 3em 1.5em 7em 1.5em;
   background: var(--white);
 }
 
@@ -364,10 +369,11 @@ footer {
 @media (min-width: 900px) {
   .bento {
     grid-template-columns: 1.25fr 1fr 1fr;
-    grid-template-rows: 220px 200px 180px;
+    grid-template-rows: 220px 200px auto 180px;
     grid-template-areas:
       "reading spelling spelling"
       "reading dictionary cards"
+      "resources resources volunteer"
       "settings settings settings";
   }
 
@@ -382,6 +388,12 @@ footer {
   }
   .tile-cards {
     grid-area: cards;
+  }
+  .tile-resources {
+    grid-area: resources;
+  }
+  .tile-volunteer {
+    grid-area: volunteer;
   }
   .tile-settings {
     grid-area: settings;
@@ -486,6 +498,14 @@ footer {
   background: #fbeab1;
 }
 
+.tile-resources {
+  background: #a9e7ff;
+}
+
+.tile-volunteer {
+  background: #aea9ff;
+}
+
 .tile-settings {
   background: #ffd5b5;
 }
@@ -510,7 +530,7 @@ footer {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--white);
+  background: rgba(255, 255, 255, 0.684);
   clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
   transition: clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
 

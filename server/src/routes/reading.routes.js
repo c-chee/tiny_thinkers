@@ -1,6 +1,19 @@
 const express = require('express');
 const router = express.Router();
+const authMiddleware = require('../middleware/auth.middleware');
 
+router.get('/reading', authMiddleware, (req, res) => {
+    const grade = req.query.grade || 'kindergarten';
+
+    res.render('comp', {
+        layout: 'dashboard-layout',       // uses dashboard layout
+        pageTitle: 'Tiny Thinkers | Reading',
+        pageCss: '/css/reading.css',      // page-specific CSS
+        homeLink: '/dashboard',           // for nav
+        grade,
+        data: readingData[grade],         // dynamic grade content
+    });
+});
 
 // res.json(readingData[grade] || {});
 

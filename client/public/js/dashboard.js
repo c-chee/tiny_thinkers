@@ -2,31 +2,34 @@
  * Used for all parent dash related JS
  */
 
-// Logout
 document.addEventListener("DOMContentLoaded", () => {
+
+    /* === LOGOUT === */
     const logoutBtn = document.getElementById("logoutBtn");
-    if (!logoutBtn) return;
 
-    logoutBtn.addEventListener("click", async (e) => {
-        console.log("Logout clicked");
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
 
-        e.preventDefault();
+            try {
+                const res = await fetch("/api/users/logout", {
+                    method: "POST",
+                    credentials: "include"
+                });
 
-        try {
-            const res = await fetch("/api/users/logout", {
-                method: "POST",
-                credentials: "include"
-            });
-
-            if (res.ok) {
-                window.location.href = "/";
-            } else {
-                alert("Logout failed");
+                if (res.ok) {
+                    window.location.href = "/";
+                } else {
+                    alert("Logout failed");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Logout error");
             }
-        } catch (err) {
-            console.error(err);
-            alert("Logout error");
-        }
-    });
-});
+        });
+    }
 
+    /* === LOAD USER SETTINGS
+        (only if inputs exist) ==== */
+    loadSettings();
+});
