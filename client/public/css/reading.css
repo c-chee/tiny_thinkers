@@ -2,27 +2,95 @@
    READING COMPREHENSION
    (added in newer version)
 ============================= */
+:root {
+  --pink: #f7d6e0;
+  --yellow: #fee440;
+  --sky: #9ad0ec;
+  --mint: #c9feee;
+  --aqua: #b2f7ef;
+  --lav: #dfebff;
+  --purple: #9b5de5;
+  --dark-purple: #482475;
+  --hotpink: #f15bb5;
+  --red: #ff3864;
+  --orange: #ff9f1c;
+  --peach: #fff1dc;
+  --white: #ffffff;
+  --ink: #1c1c1c;
+
+  --nav-bg: linear-gradient(to right, #f2dbeb 12%, #cefbf4);
+  --footer-bg: #ebe3f6;
+}
+
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family:
+    "Urbanist",
+    system-ui,
+    -apple-system,
+    Segoe UI,
+    Roboto,
+    Arial,
+    sans-serif;
+  color: var(--ink);
+  background: var(--peach);
+}
+
 .comp-container {
   padding: 2rem 1rem;
   max-width: 1000px;
   margin: 0 auto;
 }
 
-.comp-header {
-  font-family: "Finger Paint", cursive;
-  text-align: center;
-}
 
-.comp-subheader {
-  color: #3a4f7a;
+
+/* main */
+#typingTitle {
+  text-align: center;
+  margin-bottom: 20px;
+  font-family: "Finger Paint", cursive;
+  color: var(--orange);
+  font-size: 56px;
 }
 
 .grade-selector label {
   font-weight: bold;
 }
 
+
+
+/* tips section */
+.tips-section {
+  position: relative;
+  background-color: var(--aqua);
+  padding: 18px 40px 32px;
+  border: 7px solid var(--purple);
+  border-radius: 20px;
+  overflow: visible;
+}
+
+
+.tips-dino {
+  width: 300px;
+  height: auto;
+  position: absolute;
+  right: 20px;
+  top: -20px;
+  z-index: 2;
+}
+.tips-section .comp-subheader {
+  font-size: 29px;
+  font-family: "Finger Paint", cursive;
+  color: var(--ink);
+}
+
+
+
+/* books section  */
 .books-section,
-.tips-section,
 .questions-section,
 .reading-tracker {
   margin-top: 70px;
