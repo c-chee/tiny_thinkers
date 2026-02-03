@@ -12,12 +12,12 @@
         <span class="badge" id="levelBadge">Level: —</span>
       </div>
     </div>
+
+    <!-- hero wave (same behavior as cards) -->
+    <div class="wave wave-orange-to-blue"></div>
   </section>
 
-  <!-- wave -->
-  <div class="wave wave-orange-to-blue"></div>
-
-  <!-- spelling section -->
+  <!-- spelling / gradient section -->
   <section class="spelling-area">
     <div class="container center-stack">
 
@@ -43,7 +43,7 @@
 
       <!-- game card -->
       <section class="game-card" aria-label="spelling game card">
-        <p class="label">Spelling Practice</p>
+        <p class="spell-label">Spelling Practice</p>
 
         <h2 class="game-title" id="promptTitle">Ready?</h2>
         <p class="body small" id="promptSub">Click play to hear your word.</p>
@@ -75,19 +75,18 @@
       </section>
 
     </div>
+
+    <!-- bottom wave (same behavior as cards-area bottom wave) -->
+    <div class="wave wave-blue-to-orange"></div>
   </section>
 
-  <!-- wave -->
-  <div class="wave wave-blue-to-orange"></div>
-
-  <!-- orange section -->
+  <!-- bottom yellow section -->
   <section class="cards-back">
     <div class="container">
       <div class="back-row">
         <a href="/dashboard" class="btn-pill btn-solid back-btn">
           Back to Dashboard
         </a>
-
       </div>
     </div>
   </section>
@@ -129,5 +128,8 @@
 
 </main>
 
-<!-- script link -->
+<!-- scripts -->
+<script
+  src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"
+></script>
 <script src="/js/spelling.js"></script>
