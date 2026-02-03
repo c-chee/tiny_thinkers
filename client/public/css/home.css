@@ -820,8 +820,6 @@ footer {
   border-width: 2px;
 }
 
-<<<<<<< HEAD
-=======
 /* Tablet: 2 columns */
 @media (min-width: 700px) {
   .stats-slideshow {
@@ -986,7 +984,6 @@ footer {
   border-width: 2px;
 }
 
->>>>>>> main
 /* - - - - - how it works section - - - - - */
 .how-grid {
   display: grid;
