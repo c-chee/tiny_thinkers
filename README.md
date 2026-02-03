@@ -91,7 +91,7 @@ The application offers:
 ### Hosted Site
 [Visit Tiny Thinkers Live](--link soon--)  
 
-### For older systems
+### For older systems...
 **Chrome Glitch:**  
 1. Open Chrome settings → System  
 2. Turn off **Use hardware acceleration when available**  
