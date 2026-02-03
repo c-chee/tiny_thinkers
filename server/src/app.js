@@ -23,7 +23,6 @@ const spellingRoutes = require("./routes/spelling.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
 const settingsRoutes = require("./routes/settings.routes");
-
 const authMiddleware = require("./middleware/auth.middleware");
 
 // === MIDDLEWARE ===
@@ -64,7 +63,6 @@ app.get("/", (req, res) => {
   });
 });
 
-// Protected pages that are rendered directly here
 app.get("/cards", authMiddleware, (req, res) => {
   res.render("cards", {
     layout: "dashboard-layout",
@@ -109,7 +107,7 @@ app.get("/settings", authMiddleware, (req, res) => {
     pageTitle: "Tiny Thinkers | Settings",
     pageCss: "/css/settings.css",
     homeLink: "/dashboard",
-    pageScript: "/js/settings.js",
+    pageScript: "/js/settings.js"
   });
 });
 
@@ -120,7 +118,7 @@ app.get("/resources", authMiddleware, (req, res) => {
     pageTitle: "Tiny Thinkers | Resources",
     pageCss: "/css/resources.css",
     homeLink: "/dashboard",
-    pageScript: "/js/resources.js",
+    pageScript: "/js/resources.js"
   });
 });
 

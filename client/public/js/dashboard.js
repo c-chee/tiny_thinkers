@@ -3,34 +3,33 @@
  */
 
 document.addEventListener("DOMContentLoaded", () => {
-  /* === LOGOUT === */
-  const logoutBtn = document.getElementById("logoutBtn");
 
-  if (logoutBtn) {
-    logoutBtn.addEventListener("click", async (e) => {
-      e.preventDefault();
+    /* === LOGOUT === */
+    const logoutBtn = document.getElementById("logoutBtn");
 
-      try {
-        const res = await fetch("/api/users/logout", {
-          method: "POST",
-          credentials: "include",
+    if (logoutBtn) {
+        logoutBtn.addEventListener("click", async (e) => {
+            e.preventDefault();
+
+            try {
+                const res = await fetch("/api/users/logout", {
+                    method: "POST",
+                    credentials: "include"
+                });
+
+                if (res.ok) {
+                    window.location.href = "/";
+                } else {
+                    alert("Logout failed");
+                }
+            } catch (err) {
+                console.error(err);
+                alert("Logout error");
+            }
         });
+    }
 
-        if (res.ok) {
-          window.location.href = "/";
-        } else {
-          alert("Logout failed");
-        }
-      } catch (err) {
-        console.error(err);
-        alert("Logout error");
-      }
-    });
-  }
-
-  /* === LOAD USER SETTINGS
+    /* === LOAD USER SETTINGS
         (only if inputs exist) ==== */
-  if (typeof loadSettings === "function") {
     loadSettings();
-  }
 });
