@@ -9,9 +9,10 @@ const db = require('../index'); // Imports the shared MySQL connection pool
 exports.save = async (userId, grade, type) => {
     const [result] = await db.query(
         `
-            INSERT INTO user_preferences (user_id, grade_level, content_type)
-            VALUES (?, ?, ?)
-            ON DUPLICATE KEY UPDATE
+        INSERT INTO user_preferences
+        (user_id, grade_level, content_type)
+        VALUES (?, ?, ?)
+        ON DUPLICATE KEY UPDATE
             grade_level = VALUES(grade_level),
             content_type = VALUES(content_type)
         `,
@@ -25,12 +26,12 @@ exports.save = async (userId, grade, type) => {
 exports.get = async (userId) => {
     const [rows] = await db.query(
         `
-            SELECT grade_level, content_type
-            FROM user_preferences
-            WHERE user_id = ?
+        SELECT grade_level, content_type
+        FROM user_preferences
+        WHERE user_id = ?
         `,
         [userId]
     );
 
-    return rows[0]; 
+    return rows[0];
 };
