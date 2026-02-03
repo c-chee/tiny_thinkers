@@ -99,7 +99,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 980px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 11px 20px;
   background: transparent;
@@ -242,7 +242,7 @@ footer {
 .site-footer {
   display: grid;
   width: 100%;
-  max-width: 980px;
+  max-width: 1500px;
   margin: 0 auto;
   gap: 0.5em;
   padding: 14px 20px;
@@ -280,7 +280,7 @@ footer {
 }
 
 .footer-logo {
-  height: 10em;
+  height: 8em;
   width: auto;
   filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
 }
@@ -1330,6 +1330,7 @@ footer {
 .back-to-top-btn:hover {
   color: white;
   border-color: white;
+  cursor: pointer;
 }
 /* optional: slightly smaller on mobile */
 @media (max-width: 699px) {
