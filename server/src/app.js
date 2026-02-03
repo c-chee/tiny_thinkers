@@ -152,6 +152,10 @@ app.use("/", readingRoutes);
 
 // Users
 app.use("/api/users", userRoutes);
+app.use("/", readingRoutes); // reading comprehension routes
+app.use("/dashboard", dashboardRoutes);
+app.use("/content", contentRoutes);
+app.use("/api", dictionaryRoutes);
 
 // Settings
 app.use("/api/settings", settingsRoutes);
