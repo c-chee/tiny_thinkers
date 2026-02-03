@@ -335,7 +335,7 @@ footer {
 
 /* - - - - - dash - - - - - */
 .dashboard {
-  padding: 6.5em 1.5em 3em;
+  padding: 3em 1.5em 7em 1.5em;
   background: var(--white);
 }
 
