@@ -48,8 +48,12 @@ app.set("views", path.join(__dirname, "../../client/views"));
 
 // === PAGE ROUTES ===
 app.get("/", (req, res) => {
-  res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+  res.render("home", {
+    pageTitle: "Tiny Thinkers | Home",
+    homeLink: "/"
+  });
 });
+
 
 app.get("/cards", (req, res) => {
   res.render("cards", {

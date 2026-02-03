@@ -56,9 +56,11 @@ exports.getDashboard = async (req, res) => {
 
         res.render("dashboard", {
             layout: "dashboard-layout",
-            pageTitle: "Dashboard",
-            contentTypes
+            pageTitle: "Tiny Thinkers | Dashboard",
+            contentTypes,
+            homeLink: "/dashboard"
         });
+
 
     } catch (err) {
         console.error(err);
