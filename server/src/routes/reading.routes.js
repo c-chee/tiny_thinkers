@@ -8,7 +8,7 @@ router.get('/reading', authMiddleware, (req, res) => {
     res.render('comp', {
         layout: 'dashboard-layout',       // uses dashboard layout
         pageTitle: 'Tiny Thinkers | Reading',
-        pageCss: '/css/comp.css',      // page-specific CSS
+        pageCss: '/css/reading.css',      // page-specific CSS
         homeLink: '/dashboard',           // for nav
         grade,
         data: readingData[grade],         // dynamic grade content
