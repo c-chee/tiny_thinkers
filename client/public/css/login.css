@@ -13,7 +13,8 @@
   --purple: #9b5de5;
   --hotpink: #f15bb5;
   --orange: #ff9f1c;
-  --peach: #fff1dc;
+  --dark-orange: #ec8a00;
+  --peach: #fff2de;
 
   --white: #ffffff;
   --ink: #1c1c1c;
@@ -37,6 +38,11 @@
     box-sizing: border-box;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 .login-page {
   font-family:
     "Urbanist",
@@ -47,15 +53,13 @@
     Arial,
     sans-serif;
   align-items: center;
-  min-height: 100vh;
-  min-height: 100vh;
   margin: 0;
   padding: 0;
-  background: var(--peach);
+  background: var(--nav-bg);
 }
 
 .login-page .login-container{
-  padding: 10em 0 5em 0;
+  padding: 5em 0 5em 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -67,7 +71,7 @@
   position: relative;
   width: 850px;
   height: 550px;
-  background: var(--lav);
+  background: var(--white);
   border-radius: 30px;
   box-shadow: 0 0 30px rgba(0, 0, 0, .2);
   margin: 20px;
@@ -81,7 +85,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  background: var(--lav);
+  background: var(--white);
   padding: 40px;
   z-index: 1;
   transition: .6s ease-in-out 1.2s, visibility 0s 1s;
@@ -94,24 +98,24 @@
   justify-content: center;
   align-items: end;
   flex-direction: column;
-  padding-right: 30px;
+  padding-right: 35px;
 }
 .login-page .form-box.login .img-top img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: -60px;
+  width: 60px;
+  height: 60px;
+  margin-bottom: -45px;
 }
 .login-page .form-box.register .img-top {
   display: flex;
   justify-content: center;
   align-items: end;
   flex-direction: column;
-  padding-right: 20px;
+  padding-right: 25px;
 }
 .login-page .form-box.register .img-top img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: -60px;
+  width: 60px;
+  height: 60px;
+  margin-bottom: -45px;
 }
 .login-page .form-box.register {
   visibility: hidden;
@@ -127,7 +131,7 @@
   margin: 10px;
   font-family: "Finger Paint", cursive;
   color: var(--orange);
-  filter: drop-shadow(0 5px 10px rgba(255, 255, 255, 0.6));
+  filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.118));
   animation: wiggle 9s ease-in-out infinite;
 }
 .login-page .input-box {
@@ -177,6 +181,13 @@
   color:var(--white);
   font-weight: 600;
 }
+
+.login-page .btn:hover {
+  box-shadow: 0 6px 16px rgba(122, 231, 199, 0.4);
+  transform: translateY(-1px);
+  background-color: var(--dark-orange);
+}
+
 .login-page .toggle-box {
   position: absolute;
   width: 100%;
@@ -189,7 +200,7 @@
   left: -250%;
   width: 300%;
   height: 100%;
-  background: var(--pink);
+  background: var(--lav);
   border-radius: 150px;
   z-index: 2;
   transition: 1.8s ease-in-out;
@@ -237,6 +248,12 @@
   background: var(--orange);
   transition: border-color 0.2s ease, box-shadow 0.2s ease, color 0.2s ease;
 }
+.login-page .toggle-panel .btn:hover {
+  box-shadow: 0 6px 16px rgba(122, 231, 199, 0.4);
+  transform: translateY(-1px);
+  background-color: var(--dark-orange);
+}
+
 @media (max-width: 650px) {
   .login-page .container {
     height: calc(100vh - 40px);
@@ -281,6 +298,15 @@
   }
 }
 
+/* ==========================
+          HEADER
+   Blended to match OG spacing
+============================= */
+/* Keep header styling but avoid "everything shifted" issues:
+   - sticky (not fixed) so content doesn't jump underneath
+   - width: 100% (not 100vw) to avoid horizontal jitter
+   - background on header to remove white strip above nav
+*/
 header {
   margin: 0;
   width: 100%;
