@@ -2,11 +2,20 @@ const settingsService = require("../services/settings.service"); // Imports the 
 
 // POST /api/settings
 exports.saveSettings = async (req, res) => {
-    const userId = req.user.id; // USer is from the JWT middleware
+    const userId = req.user.id;
 
-    const { grade_level, content_type } = req.body; // Reads the frontend settings form data
+    let { grade_level, content_type } = req.body;
 
-    await settingsService.saveSettings(userId, grade_level, content_type); // Saves settings to DB
+    // Convert checkbox array to CSV
+    if (Array.isArray(content_type)) {
+        content_type = content_type.join(",");
+    }
 
-    res.json({ message: "Settings saved" }); // Confirmation res
+    await settingsService.saveSettings(
+        userId,
+        grade_level,
+        content_type
+    );
+
+    res.redirect("/dashboard");
 };
