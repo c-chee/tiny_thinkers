@@ -4,27 +4,27 @@
  * - CORS
  * - Routes
  */
+
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
 const { engine } = require("express-handlebars");
-
-const app = express();
+const cookieParser = require("cookie-parser");
+const jwt = require("jsonwebtoken");
 
 const db = require("./db");
+
 const userRoutes = require("./routes/user.routes");
 const readingRoutes = require("./routes/reading.routes");
 const dictionaryRoutes = require("./routes/dictionary.routes");
 const spellingRoutes = require("./routes/spelling.routes");
-
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
-
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
-app.use(cors());
-app.use(express.json());
+app.use(cors()); // Enables cross-origin requests
+app.use(express.json()); // Allows server to read JSON req
 app.use(cookieParser());
 
 // === STATIC FILES ===
@@ -67,28 +67,14 @@ app.get("/spelling", (req, res) => {
 });
 
 // === READING COMPREHENSION ===
-// reading comprehension 
-const readingRoutes = require('./routes/reading.routes');
 app.use('/', readingRoutes);
 
 // === SETTINGS ===
 app.get("/settings", (req, res) => {
-  res.render("settings", { 
+  res.render("settings", {
     pageTitle: "Tiny Thinkers | Settings",
-    pageCss: "/css/settings.css"  
+    pageCss: "/css/settings.css",
   });
-});
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
-// === API ROUTES ===
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Tiny Thinkers API running" });
-});
-
-app.get("/api/status", (req, res) => {
-  res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === LOGIN ===
@@ -99,12 +85,14 @@ app.get("/login", (req, res) => {
     try {
       jwt.verify(token, process.env.JWT_SECRET);
       return res.redirect("/dashboard");
-    } catch {}
+    } catch (err) {
+      // invalid/expired token -> fall through to render login
+    }
   }
 
   res.render("Login", {
     pageTitle: "Tiny Thinkers | Login",
-    layout: "loginlayout",
+    layout: "loginlayout"
   });
 });
 
@@ -122,14 +110,17 @@ app.get("/resources", (req, res) => {
   });
 });
 
-// === API ROUTES ===
+// === API ROUTES (SIMPLE) ===
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
 // === FEATURE ROUTES ===
 app.use("/api/users", userRoutes);
+
+// If reading.routes defines paths like "/reading", "/quiz", etc., mounting at "/" is fine.
 app.use("/", readingRoutes);
+
 app.use("/dashboard", dashboardRoutes);
 app.use("/content", contentRoutes);
 
@@ -174,11 +165,31 @@ app.get('/volunteer', (req, res) => {
     });
 });
 
-// === 404 HANDLER === 
+// === ERROR HANDLER (500) ===
+// *** Should be near the end , but BEFORE the 404 handler ***
+app.use((err, req, res, next) => {
+  console.error(err);
+
+  res.status(err.status || 500).render("error", {
+    pageTitle: "Tiny Thinkers | Something Went Wrong",
+    code: err.status || 500,
+    message: "oops… tiny tripped up. try again in a moment!",
+    imageSrc: "/images/tiny_confused.PNG",
+    imageAlt: "tiny looking confused",
+    pageCss: "/css/error.css",
+  });
+});
+
+// === 404 HANDLER ===
 // *** Must be last ***
 app.use((req, res) => {
-  res.status(404).render("404", {
-    pageTitle: "tiny thinkers | not found",
+  res.status(404).render("error", {
+    pageTitle: "Tiny Thinkers | Not Found",
+    code: 404,
+    message: "tiny can’t find this page... but that’s okay!",
+    imageSrc: "/images/tiny8.PNG",
+    imageAlt: "tiny searching",
+    pageCss: "/css/error.css",
   });
 });
 
