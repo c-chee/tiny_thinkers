@@ -23,6 +23,7 @@ const spellingRoutes = require("./routes/spelling.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
 const settingsRoutes = require("./routes/settings.routes");
+const authMiddleware = require("./middleware/auth.middleware");
 
 
 // === MIDDLEWARE ===
@@ -59,6 +60,7 @@ app.set("views", path.join(__dirname, "../../client/views"));
 // PAGE ROUTES
 // ===================================================
 
+// Public Route
 app.get("/", (req, res) => {
   res.render("home", {
     pageTitle: "Tiny Thinkers | Home",
@@ -66,20 +68,23 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/cards", (req, res) => {
+app.get("/cards", authMiddleware, (req, res) => {
   res.render("cards", {
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Cards",
     pageCss: "/css/cards.css",
+    homeLink: "/dashboard",
   });
 });
 
-app.get("/spelling", (req, res) => {
+app.get("/spelling", authMiddleware, (req, res) => {
   res.render("spelling", {
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Spelling",
     pageCss: "/css/spelling.css",
+    homeLink: "/dashboard",
   });
 });
-
 
 // === LOGIN ===
 app.get("/login", (req, res) => {
@@ -102,34 +107,36 @@ app.get("/login", (req, res) => {
 
 
 // === SETTINGS PAGE ===
-app.get("/settings", (req, res) => {
+app.get("/settings", authMiddleware, (req, res) => {
   res.render("settings", {
     layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Settings",
     pageCss: "/css/settings.css",
     homeLink: "/dashboard",
-    pageScript: "/js/settings.js"
+    pageScript: "/js/settings.js",
   });
 });
 
 
 // === RESOURCES ===
-app.get("/resources", (req, res) => {
+app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
-    layout: "resourceslayout",
-    title: "Resources",
+    layout: "dashboard-layout",
+    pageTitle: "Resources",
+    homeLink: "/dashboard",
   });
 });
+
 
 
 // === VOLUNTEER ===
-app.get("/volunteer", (req, res) => {
+app.get("/volunteer", authMiddleware, (req, res) => {
   res.render("volunteer", {
-    layout: "volunteerlayout",
-    title: "Volunteer",
+    layout: "dashboard-layout",
+    pageTitle: "Volunteer",
+    homeLink: "/dashboard",
   });
 });
-
 
 // ===================================================
 // FEATURE ROUTES
