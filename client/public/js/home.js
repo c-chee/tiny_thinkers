@@ -1,3 +1,18 @@
+// - - - - - - - - - - - - - - -
+// back to top btn functionality
+// - - - - - - - - - - - - - - -
+document.addEventListener("DOMContentLoaded", () => {
+  const btn = document.getElementById("backToTopBtn");
+  if (!btn) return;
+
+  btn.addEventListener("click", () => {
+    // iOS Safari sometimes behaves better with requestAnimationFrame
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    });
+  });
+});
+
 // wait until the html is fully loaded before running any javascript
 document.addEventListener("DOMContentLoaded", () => {
   // grab the hero tiny animation container by its id
@@ -109,6 +124,7 @@ if (toggle && nav) {
 // - - - - - - - - - - - - - - -
 // stats slideshow functionality
 // - - - - - - - - - - - - - - -
+<<<<<<< HEAD
 (function() {
   const statsTrack = document.querySelector('.stats-track');
   const slides = document.querySelectorAll('.stat-slide');
@@ -116,15 +132,29 @@ if (toggle && nav) {
   
   if (!statsTrack || !slides.length || !dotsContainer) return;
   
+=======
+(function () {
+  const statsTrack = document.querySelector(".stats-track");
+  const slides = document.querySelectorAll(".stat-slide");
+  const dotsContainer = document.getElementById("statsDots");
+
+  if (!statsTrack || !slides.length || !dotsContainer) return;
+
+>>>>>>> main
   // Check for reduced motion preference
   const prefersReducedMotion = window.matchMedia?.(
     "(prefers-reduced-motion: reduce)",
   )?.matches;
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> main
   let currentSlide = 0;
   const totalSlides = slides.length;
   const slideInterval = 4000; // 4 seconds per slide
   let autoSlideTimer;
+<<<<<<< HEAD
   
   // Create dots
   for (let i = 0; i < totalSlides; i++) {
@@ -148,6 +178,31 @@ if (toggle && nav) {
     });
   }
   
+=======
+
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement("button");
+    dot.classList.add("dot");
+    dot.setAttribute("aria-label", `Go to slide ${i + 1}`);
+    if (i === 0) dot.classList.add("active");
+    dot.addEventListener("click", () => goToSlide(i));
+    dotsContainer.appendChild(dot);
+  }
+
+  const dots = document.querySelectorAll(".dot");
+
+  function updateSlidePosition() {
+    const offset = -currentSlide * 100;
+    statsTrack.style.transform = `translateX(${offset}%)`;
+
+    // Update dots
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentSlide);
+    });
+  }
+
+>>>>>>> main
   function goToSlide(index) {
     currentSlide = index;
     updateSlidePosition();
@@ -155,21 +210,34 @@ if (toggle && nav) {
       resetAutoSlide();
     }
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> main
   function nextSlide() {
     currentSlide = (currentSlide + 1) % totalSlides;
     updateSlidePosition();
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> main
   function startAutoSlide() {
     if (prefersReducedMotion) return; // Don't auto-advance if reduced motion
     autoSlideTimer = setInterval(nextSlide, slideInterval);
   }
+<<<<<<< HEAD
   
+=======
+
+>>>>>>> main
   function resetAutoSlide() {
     clearInterval(autoSlideTimer);
     startAutoSlide();
   }
+<<<<<<< HEAD
   
   // Touch/swipe support for mobile
   let touchStartX = 0;
@@ -188,6 +256,34 @@ if (toggle && nav) {
     const swipeThreshold = 50;
     const diff = touchStartX - touchEndX;
     
+=======
+
+  // Touch/swipe support for mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
+
+  statsTrack.addEventListener(
+    "touchstart",
+    (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    },
+    { passive: true },
+  );
+
+  statsTrack.addEventListener(
+    "touchend",
+    (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    },
+    { passive: true },
+  );
+
+  function handleSwipe() {
+    const swipeThreshold = 50;
+    const diff = touchStartX - touchEndX;
+
+>>>>>>> main
     if (Math.abs(diff) > swipeThreshold) {
       if (diff > 0) {
         // Swipe left - next slide
@@ -202,6 +298,7 @@ if (toggle && nav) {
       }
     }
   }
+<<<<<<< HEAD
   
   // Start the slideshow (only if motion is okay)
   startAutoSlide();
@@ -213,6 +310,19 @@ if (toggle && nav) {
     });
     
     statsTrack.addEventListener('mouseleave', () => {
+=======
+
+  // Start the slideshow (only if motion is okay)
+  startAutoSlide();
+
+  // Pause on hover (desktop) - only if auto-sliding
+  if (!prefersReducedMotion) {
+    statsTrack.addEventListener("mouseenter", () => {
+      clearInterval(autoSlideTimer);
+    });
+
+    statsTrack.addEventListener("mouseleave", () => {
+>>>>>>> main
       startAutoSlide();
     });
   }
