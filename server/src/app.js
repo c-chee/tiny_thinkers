@@ -23,18 +23,16 @@ const spellingRoutes = require("./routes/spelling.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
 const settingsRoutes = require("./routes/settings.routes");
-
+const authMiddleware = require("./middleware/auth.middleware");
 
 // === MIDDLEWARE ===
-app.use(cors()); // Enables cross-origin requests
-app.use(express.json()); // Allows server to read JSON req
+app.use(cors());
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
 // === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
-
 
 // === HANDLEBARS ===
 app.engine(
@@ -45,20 +43,19 @@ app.engine(
     layoutsDir: path.join(__dirname, "../../client/views/layouts"),
     partialsDir: path.join(__dirname, "../../client/views/partials"),
     helpers: {
-      isSelected: (current, value) =>
-        current === value ? "selected" : "",
+      isSelected: (current, value) => (current === value ? "selected" : ""),
     },
-  })
+  }),
 );
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
-
 // ===================================================
 // PAGE ROUTES
 // ===================================================
 
+// Public Route
 app.get("/", (req, res) => {
   res.render("home", {
     pageTitle: "Tiny Thinkers | Home",
@@ -66,20 +63,23 @@ app.get("/", (req, res) => {
   });
 });
 
-app.get("/cards", (req, res) => {
+app.get("/cards", authMiddleware, (req, res) => {
   res.render("cards", {
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Cards",
     pageCss: "/css/cards.css",
+    homeLink: "/dashboard",
   });
 });
 
-app.get("/spelling", (req, res) => {
+app.get("/spelling", authMiddleware, (req, res) => {
   res.render("spelling", {
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Spelling",
     pageCss: "/css/spelling.css",
+    homeLink: "/dashboard",
   });
 });
-
 
 // === LOGIN ===
 app.get("/login", (req, res) => {
@@ -100,35 +100,38 @@ app.get("/login", (req, res) => {
   });
 });
 
-
 // === SETTINGS PAGE ===
-app.get("/settings", (req, res) => {
+app.get("/settings", authMiddleware, (req, res) => {
   res.render("settings", {
     layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Settings",
     pageCss: "/css/settings.css",
     homeLink: "/dashboard",
+    pageScript: "/js/settings.js"
   });
 });
-
 
 // === RESOURCES ===
-app.get("/resources", (req, res) => {
+app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
-    layout: "resourceslayout",
-    title: "Resources",
+    layout: "dashboard-layout",
+    pageTitle: "Tiny Thinkers | Resources",
+    pageCss: "/css/resources.css",
+    homeLink: "/dashboard",
+    pageScript: "/js/resources.js"
   });
 });
-
 
 // === VOLUNTEER ===
-app.get("/volunteer", (req, res) => {
+app.get("/volunteer", authMiddleware, (req, res) => {
   res.render("volunteer", {
-    layout: "volunteerlayout",
-    title: "Volunteer",
+    layout: "dashboard-layout",
+    pageTitle: "Tiny Thinkers | Volunteer",
+    pageCss: "/css/volunteer.css",
+    homeLink: "/dashboard",
+    pageScript: "/js/volunteer.js",
   });
 });
-
 
 // ===================================================
 // FEATURE ROUTES
@@ -143,13 +146,16 @@ app.use("/content", contentRoutes);
 // Reading routes
 app.use("/", readingRoutes);
 
-
 // ===================================================
 // API ROUTES
 // ===================================================
 
 // Users
 app.use("/api/users", userRoutes);
+app.use("/", readingRoutes); // reading comprehension routes
+app.use("/dashboard", dashboardRoutes);
+app.use("/content", contentRoutes);
+app.use("/api", dictionaryRoutes);
 
 // Settings
 app.use("/api/settings", settingsRoutes);
@@ -163,11 +169,9 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-
 // ===================================================
 // DB TEST
 // ===================================================
-// connection test route
 app.get("/db-test", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT 1 + 1 AS result");
@@ -178,7 +182,7 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-
+// *** Should be near the end , but BEFORE the 404 handler ***
 // ===================================================
 // ERROR HANDLER (500)
 // ===================================================
@@ -195,9 +199,8 @@ app.use((err, req, res, next) => {
   });
 });
 
-
 // ===================================================
-// 404 HANDLER
+// 404 HANDLER (must be last)
 // ===================================================
 app.use((req, res) => {
   res.status(404).render("error", {
@@ -209,6 +212,5 @@ app.use((req, res) => {
     pageCss: "/css/error.css",
   });
 });
-
 
 module.exports = app;

@@ -25,6 +25,7 @@
 
 
     {{!-- Styles --}}
+    <link rel="stylesheet" href="/css/home.css" />
     <link rel="stylesheet" href="/css/dashboard.css">
 
     {{#if pageCss}}
@@ -43,6 +44,8 @@
 
     {{!-- Script --}}
     <script src="/js/dashboard.js"></script>
-
+    {{#if pageScript}}
+        <script src="{{pageScript}}"></script>
+    {{/if}}
 </body>
 </html>
