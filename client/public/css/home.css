@@ -97,7 +97,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 980px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 11px 20px;
   background: transparent;
@@ -229,7 +229,7 @@ footer {
 .site-footer {
   display: grid;
   width: 100%;
-  max-width: 980px;
+  max-width: 1500px;
   margin: 0 auto;
   gap: 0.5em;
   padding: 14px 20px;

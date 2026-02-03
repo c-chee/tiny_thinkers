@@ -335,7 +335,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  max-width: 980px;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 11px 20px;
   background: transparent;
@@ -452,7 +452,7 @@ footer {
     justify-content: center;
     width: 100vw;
     overflow-x: hidden;
-    background: transparent;
+    background: var(--footer-bg);
     border-top: 2px solid rgba(20, 20, 20, 0.1);
 
     flex-shrink: 0;
@@ -468,11 +468,12 @@ footer {
         / 1fr;
 
     width: 100%;
+    max-width: 1500px;
     gap: 0.5em;
     padding: 0;
     align-items: flex-start;
     text-align: center;
-    background: var(--footer-bg);
+    background: transparent;
 }
 
 .footer-personal-brand { grid-area: brand; }
