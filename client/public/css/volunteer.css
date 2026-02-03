@@ -235,7 +235,7 @@ body {
     animation: sparkle 1.1s linear infinite;
     right: 20%;
     bottom: 30%;
-    transition: left 1.1s ease-in-out;
+    transition: left 1.1gits ease-in-out;
 }
 .thankYouMessage {
     display: none;
