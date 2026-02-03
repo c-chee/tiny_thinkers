@@ -108,6 +108,7 @@ app.get("/settings", (req, res) => {
     pageTitle: "Tiny Thinkers | Settings",
     pageCss: "/css/settings.css",
     homeLink: "/dashboard",
+    pageScript: "/js/settings.js"
   });
 });
 
