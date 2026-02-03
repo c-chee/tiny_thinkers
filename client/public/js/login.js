@@ -24,6 +24,33 @@ if (loginPage) {
 }
 
 /* =========================
+    PASSWORD VISIBILITY TOGGLE
+========================= */
+const loginPassword = document.getElementById('loginPassword');
+const toggleLogin = document.getElementById('toggleLoginPassword');
+
+if (loginPassword && toggleLogin) {
+    toggleLogin.addEventListener('click', () => {
+        const type = loginPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        loginPassword.setAttribute('type', type);
+        toggleLogin.classList.toggle('fa-eye');
+        toggleLogin.classList.toggle('fa-eye-slash');
+    });
+}
+
+const registerPassword = document.getElementById('registerPassword');
+const toggleRegister = document.getElementById('toggleRegisterPassword');
+
+if (registerPassword && toggleRegister) {
+    toggleRegister.addEventListener('click', () => {
+        const type = registerPassword.getAttribute('type') === 'password' ? 'text' : 'password';
+        registerPassword.setAttribute('type', type);
+        toggleRegister.classList.toggle('fa-eye');
+        toggleRegister.classList.toggle('fa-eye-slash');
+    });
+}
+
+/* =========================
     LOGIN
 ========================= */
 document.querySelector(".form-box.login form")

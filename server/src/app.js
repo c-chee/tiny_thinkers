@@ -12,6 +12,8 @@ const { engine } = require("express-handlebars");
 const cookieParser = require("cookie-parser");
 const jwt = require("jsonwebtoken");
 
+const app = express();
+
 const db = require("./db");
 
 const userRoutes = require("./routes/user.routes");
@@ -20,11 +22,13 @@ const dictionaryRoutes = require("./routes/dictionary.routes");
 const spellingRoutes = require("./routes/spelling.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
-const cookieParser = require("cookie-parser");
-const jwt = require("jsonwebtoken");
+const settingsRoutes = require("./routes/settings.routes");
+const authMiddleware = require("./middleware/auth.middleware");
 
-app.use(cors()); // Enables cross-origin requests
-app.use(express.json()); // Allows server to read JSON req
+// === MIDDLEWARE ===
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 // === STATIC FILES ===
@@ -47,33 +51,33 @@ app.engine(
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
-// === PAGE ROUTES ===
+// ===================================================
+// PAGE ROUTES
+// ===================================================
+
+// Public Route
 app.get("/", (req, res) => {
-  res.render("home", { pageTitle: "Tiny Thinkers | Home" });
+  res.render("home", {
+    pageTitle: "Tiny Thinkers | Home",
+    homeLink: "/",
+  });
 });
 
-app.get("/cards", (req, res) => {
+app.get("/cards", authMiddleware, (req, res) => {
   res.render("cards", {
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Cards",
     pageCss: "/css/cards.css",
+    homeLink: "/dashboard",
   });
 });
 
-app.get("/spelling", (req, res) => {
+app.get("/spelling", authMiddleware, (req, res) => {
   res.render("spelling", {
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Spelling",
     pageCss: "/css/spelling.css",
-  });
-});
-
-// === READING COMPREHENSION ===
-app.use('/', readingRoutes);
-
-// === SETTINGS ===
-app.get("/settings", (req, res) => {
-  res.render("settings", {
-    pageTitle: "Tiny Thinkers | Settings",
-    pageCss: "/css/settings.css",
+    homeLink: "/dashboard",
   });
 });
 
@@ -85,50 +89,85 @@ app.get("/login", (req, res) => {
     try {
       jwt.verify(token, process.env.JWT_SECRET);
       return res.redirect("/dashboard");
-    } catch (err) {
-      // invalid/expired token -> fall through to render login
+    } catch {
+      // invalid token -> show login
     }
   }
 
   res.render("Login", {
     pageTitle: "Tiny Thinkers | Login",
-    layout: "loginlayout"
+    layout: "loginlayout",
   });
 });
 
-app.get("/volunteer", (req, res) => {
-  res.render("volunteer", {
-    layout: "volunteerlayout",
-    title: "Volunteer",
+// === SETTINGS PAGE ===
+app.get("/settings", authMiddleware, (req, res) => {
+  res.render("settings", {
+    layout: "dashboard-layout",
+    pageTitle: "Tiny Thinkers | Settings",
+    pageCss: "/css/settings.css",
+    homeLink: "/dashboard",
+    pageScript: "/js/settings.js"
   });
 });
 
-app.get("/resources", (req, res) => {
+// === RESOURCES ===
+app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
-    layout: "resourceslayout",
-    title: "Resources",
+    layout: "dashboard-layout",
+    pageTitle: "Tiny Thinkers | Resources",
+    pageCss: "/css/resources.css",
+    homeLink: "/dashboard",
+    pageScript: "/js/resources.js"
   });
 });
 
-// === API ROUTES (SIMPLE) ===
+// === VOLUNTEER ===
+app.get("/volunteer", authMiddleware, (req, res) => {
+  res.render("volunteer", {
+    layout: "dashboard-layout",
+    pageTitle: "Tiny Thinkers | Volunteer",
+    pageCss: "/css/volunteer.css",
+    homeLink: "/dashboard",
+    pageScript: "/js/volunteer.js",
+  });
+});
+
+// ===================================================
+// FEATURE ROUTES
+// ===================================================
+
+// Dashboard pages
+app.use("/dashboard", dashboardRoutes);
+
+// Content pages
+app.use("/content", contentRoutes);
+
+// Reading routes
+app.use("/", readingRoutes);
+
+// ===================================================
+// API ROUTES
+// ===================================================
+
+// Users
+app.use("/api/users", userRoutes);
+
+// Settings
+app.use("/api/settings", settingsRoutes);
+
+// Dictionary + spelling APIs
+app.use("/api", dictionaryRoutes);
+app.use("/api", spellingRoutes);
+
+// API status
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
-// === FEATURE ROUTES ===
-app.use("/api/users", userRoutes);
-
-// If reading.routes defines paths like "/reading", "/quiz", etc., mounting at "/" is fine.
-app.use("/", readingRoutes);
-
-app.use("/dashboard", dashboardRoutes);
-app.use("/content", contentRoutes);
-
-// Dictionary + spelling endpoints
-app.use("/api", dictionaryRoutes);
-app.use("/api", spellingRoutes);
-
-// DB connection test route
+// ===================================================
+// DB TEST
+// ===================================================
 app.get("/db-test", async (req, res) => {
   try {
     const [rows] = await db.query("SELECT 1 + 1 AS result");
@@ -165,8 +204,9 @@ app.get('/volunteer', (req, res) => {
     });
 });
 
-// === ERROR HANDLER (500) ===
-// *** Should be near the end , but BEFORE the 404 handler ***
+// ===================================================
+// ERROR HANDLER (500)
+// ===================================================
 app.use((err, req, res, next) => {
   console.error(err);
 
@@ -180,8 +220,9 @@ app.use((err, req, res, next) => {
   });
 });
 
-// === 404 HANDLER ===
-// *** Must be last ***
+// ===================================================
+// 404 HANDLER (must be last)
+// ===================================================
 app.use((req, res) => {
   res.status(404).render("error", {
     pageTitle: "Tiny Thinkers | Not Found",

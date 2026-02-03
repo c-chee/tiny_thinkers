@@ -1,12 +1,42 @@
 const settingsService = require("../services/settings.service"); // Imports the service that talks to the DB
 
+
+// GET /api/settings
+exports.getSettings = async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const prefs = await settingsService.getPreferences(userId);
+
+        res.json(prefs || {});
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to load settings" });
+    }
+};
+
 // POST /api/settings
 exports.saveSettings = async (req, res) => {
-    const userId = req.user.id; // USer is from the JWT middleware
+    try {
+        const userId = req.user.id;
 
-    const { grade_level, content_type } = req.body; // Reads the frontend settings form data
+        let { grade_level, content_type } = req.body;
 
-    await settingsService.saveSettings(userId, grade_level, content_type); // Saves settings to DB
+        // checkbox array → CSV
+        if (Array.isArray(content_type)) {
+            content_type = content_type.join(",");
+        }
 
-    res.json({ message: "Settings saved" }); // Confirmation res
+        await settingsService.saveSettings(
+            userId,
+            grade_level,
+            content_type
+        );
+
+        res.redirect("/dashboard");
+        
+    } catch (err) {
+        console.error(err);
+        res.status(500).send("Failed to save settings");
+    }
 };

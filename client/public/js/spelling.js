@@ -20,34 +20,44 @@ document.addEventListener("DOMContentLoaded", () => {
   const resultMsg = document.getElementById("resultMessage");
   const resultImg = document.getElementById("resultTinyImg");
 
+  let audioPlayer = new Audio();
+  audioPlayer.preload = "auto";
+
   const yay = new Audio("/audio/yay.mp3");
   yay.volume = 0.7;
 
-  const confettiCanvas = document.createElement("canvas");
-  confettiCanvas.id = "confettiCanvas";
-  Object.assign(confettiCanvas.style, {
-    position: "fixed",
-    inset: "0",
-    width: "100%",
-    height: "100%",
-    pointerEvents: "none",
-    zIndex: "20000",
-  });
-  document.body.appendChild(confettiCanvas);
+  let fireConfetti = () => {};
+  try {
+    if (window.confetti && typeof window.confetti.create === "function") {
+      const confettiCanvas = document.createElement("canvas");
+      confettiCanvas.id = "confettiCanvas";
+      Object.assign(confettiCanvas.style, {
+        position: "fixed",
+        inset: "0",
+        width: "100%",
+        height: "100%",
+        pointerEvents: "none",
+        zIndex: "20000",
+      });
+      document.body.appendChild(confettiCanvas);
 
-  const confettiFront = confetti.create(confettiCanvas, {
-    resize: true,
-    useWorker: true,
-  });
+      const confettiFront = window.confetti.create(confettiCanvas, {
+        resize: true,
+        useWorker: true,
+      });
 
-  function fireConfetti() {
-    confettiFront({
-      particleCount: 120,
-      spread: 80,
-      origin: { y: 0.45 },
-      zIndex: 1000,
-      colors: ["#ff9aa2", "#ffdac1", "#b5ead7", "#c7ceea", "#fdfd96"],
-    });
+      fireConfetti = () => {
+        confettiFront({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.45 },
+          zIndex: 1000,
+          colors: ["#ff9aa2", "#ffdac1", "#b5ead7", "#c7ceea", "#fdfd96"],
+        });
+      };
+    }
+  } catch (err) {
+    console.warn("Confetti disabled:", err);
   }
 
   let bank = [];
@@ -59,13 +69,31 @@ document.addEventListener("DOMContentLoaded", () => {
   let correct = 0;
   const total = 10;
 
+  function render() {
+    if (gradeBadge) gradeBadge.textContent = `Grade: ${gradeLevel}`;
+    if (levelBadge) levelBadge.textContent = `Level: ${level}`;
+    if (progressPill) progressPill.textContent = `${correct} / ${total}`;
+  }
+
   async function fetchSpellingWords() {
     const res = await fetch("/api/spelling/words", {
-      credentials: "same-origin", // helps with cookie auth
+      method: "GET",
+      credentials: "include",
+      headers: { Accept: "application/json" },
     });
 
+    const contentType = res.headers.get("content-type") || "";
+
     if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      console.error("Words API error:", res.status, text.slice(0, 200));
       throw new Error(`Spelling words API failed: ${res.status}`);
+    }
+
+    if (!contentType.includes("application/json")) {
+      const text = await res.text().catch(() => "");
+      console.error("Expected JSON but got:", contentType, text.slice(0, 200));
+      throw new Error("Words API did not return JSON (likely redirected).");
     }
 
     return res.json();
@@ -76,18 +104,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
     try {
       const payload = await fetchSpellingWords();
-
       gradeLevel = payload.grade ?? "—";
       level = payload.level ?? level;
-
       bank = Array.isArray(payload.words) ? [...payload.words] : [];
 
       render();
 
       if (bank.length === 0) {
-        if (feedbackText) {
-          feedbackText.textContent = "No words available for your grade yet.";
-        }
+        if (feedbackText) feedbackText.textContent = "No words available yet.";
         return false;
       }
 
@@ -103,41 +127,92 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   async function fetchDictionary(word) {
-    const res = await fetch(`/api/dictionary/${encodeURIComponent(word)}`);
+    const res = await fetch(`/api/dictionary/${encodeURIComponent(word)}`, {
+      credentials: "include",
+      headers: { Accept: "application/json" },
+    });
+
+    const contentType = res.headers.get("content-type") || "";
     if (!res.ok) throw new Error(`Dictionary API failed: ${res.status}`);
+    if (!contentType.includes("application/json")) {
+      throw new Error("Dictionary did not return JSON (redirect/HTML).");
+    }
     return res.json();
   }
 
   function merriamAudioUrl(audio) {
     if (!audio) return null;
-
     const a = String(audio).toLowerCase();
     let subdir = a[0];
-
     if (a.startsWith("bix")) subdir = "bix";
     else if (a.startsWith("gg")) subdir = "gg";
     else if (/^\d/.test(a)) subdir = "number";
-
     return `https://media.merriam-webster.com/audio/prons/en/us/mp3/${subdir}/${a}.mp3`;
   }
 
   function extractMerriamAudio(apiData) {
     if (!Array.isArray(apiData) || apiData.length === 0) return null;
-    if (typeof apiData[0] === "string") return null; // suggestions
+    if (typeof apiData[0] === "string") return null; // suggestions list
 
     const entry = apiData.find((x) => x && typeof x === "object");
-    const audio =
-      entry?.hwi?.prs?.find((p) => p?.sound?.audio)?.sound?.audio || null;
-
-    return audio;
+    return entry?.hwi?.prs?.find((p) => p?.sound?.audio)?.sound?.audio || null;
   }
 
-  let audioPlayer = null;
+  function speakFallback(word) {
+    try {
+      if (!("speechSynthesis" in window)) {
+        if (feedbackText) feedbackText.textContent = `Word: ${word}`;
+        return;
+      }
+      speechSynthesis.cancel();
+      const utter = new SpeechSynthesisUtterance(word);
+      utter.rate = 0.9;
+      speechSynthesis.speak(utter);
+    } catch (e) {
+      console.warn("Speech fallback failed:", e);
+      if (feedbackText) feedbackText.textContent = `Word: ${word}`;
+    }
+  }
 
-  function render() {
-    if (gradeBadge) gradeBadge.textContent = `Grade: ${gradeLevel}`;
-    if (levelBadge) levelBadge.textContent = `Level: ${level}`;
-    if (progressPill) progressPill.textContent = `${correct} / ${total}`;
+  async function playWord() {
+    if (!currentWord) {
+      if (feedbackText) feedbackText.textContent = "Press next word first!";
+      return;
+    }
+
+    if (feedbackText) feedbackText.textContent = "Playing…";
+
+    try {
+      const data = await fetchDictionary(currentWord);
+      const audioName = extractMerriamAudio(data);
+      const url = merriamAudioUrl(audioName);
+
+      if (url) {
+        audioPlayer.pause();
+        audioPlayer.currentTime = 0;
+        audioPlayer.src = url;
+
+        try {
+          await audioPlayer.play();
+          if (feedbackText) feedbackText.textContent = "Listening…";
+          return;
+        } catch (playErr) {
+          console.warn("Audio play blocked/failed, using speech:", playErr);
+        }
+      }
+
+      speakFallback(currentWord);
+      if (feedbackText) feedbackText.textContent = "Listening…";
+    } catch (err) {
+      console.warn("Dictionary fetch failed, using speech:", err);
+      speakFallback(currentWord);
+      if (feedbackText) feedbackText.textContent = "Listening…";
+    }
+  }
+
+  function hint() {
+    if (!feedbackText || !currentWord) return;
+    feedbackText.textContent = `Hint: starts with "${currentWord[0].toUpperCase()}"`;
   }
 
   function openModal() {
@@ -152,7 +227,7 @@ document.addEventListener("DOMContentLoaded", () => {
     modal.classList.remove("is-open");
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
-    input?.focus();
+    // IMPORTANT: don't auto-focus (prevents scroll jump)
   }
 
   function showCorrectPopup() {
@@ -166,7 +241,7 @@ document.addEventListener("DOMContentLoaded", () => {
     try {
       yay.currentTime = 0;
       yay.play();
-    } catch (e) {}
+    } catch {}
 
     openModal();
   }
@@ -178,43 +253,6 @@ document.addEventListener("DOMContentLoaded", () => {
     resultTitle.textContent = "Almost!";
     resultMsg.textContent = "That spelling isn’t correct. Try again!";
     openModal();
-  }
-
-  async function playWord() {
-    if (!currentWord) return;
-
-    try {
-      const data = await fetchDictionary(currentWord);
-
-      const audioName = extractMerriamAudio(data);
-      const url = merriamAudioUrl(audioName);
-
-      if (url) {
-        if (!audioPlayer) audioPlayer = new Audio();
-        audioPlayer.pause();
-        audioPlayer.currentTime = 0;
-        audioPlayer.src = url;
-        await audioPlayer.play();
-        return;
-      }
-
-      speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(currentWord);
-      utter.rate = 0.9;
-      speechSynthesis.speak(utter);
-    } catch (err) {
-      console.error(err);
-
-      speechSynthesis.cancel();
-      const utter = new SpeechSynthesisUtterance(currentWord);
-      utter.rate = 0.9;
-      speechSynthesis.speak(utter);
-    }
-  }
-
-  function hint() {
-    if (!feedbackText || !currentWord) return;
-    feedbackText.textContent = `Hint: starts with "${currentWord[0].toUpperCase()}"`;
   }
 
   function check() {
@@ -247,7 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const ok = await ensureBankLoaded();
     if (!ok) return;
 
-    // Take the next word from the bank
     currentWord = bank.shift();
 
     if (!currentWord) {
@@ -260,7 +297,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
     if (feedbackText) feedbackText.textContent = "New word ready. Press play!";
     if (input) input.value = "";
-    input?.focus();
 
     try {
       await fetchDictionary(currentWord);
@@ -292,22 +328,8 @@ document.addEventListener("DOMContentLoaded", () => {
   nextBtn?.addEventListener("click", nextWord);
 
   render();
+
+  window.scrollTo(0, 0);
+
   nextWord();
-
-  window.__showSpellingModal = (type = "correct") => {
-    if (!modal) return;
-
-    if (type === "correct") {
-      resultImg.src = "/images/tiny6.PNG";
-      resultTitle.textContent = "That’s right!";
-      resultMsg.textContent = "Good job! You spelled it correctly!";
-    } else {
-      resultImg.src = "/images/tiny_confused.PNG";
-      resultTitle.textContent = "Almost!";
-      resultMsg.textContent = "That spelling isn’t correct. Try again!";
-    }
-
-    modal.classList.add("is-open");
-    modal.setAttribute("aria-hidden", "false");
-  };
 });

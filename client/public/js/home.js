@@ -146,9 +146,12 @@ if (toggle && nav) {
     "(prefers-reduced-motion: reduce)",
   )?.matches;
 <<<<<<< HEAD
+<<<<<<< HEAD
   
 =======
 
+>>>>>>> main
+=======
 >>>>>>> main
   let currentSlide = 0;
   const totalSlides = slides.length;
@@ -211,27 +214,36 @@ if (toggle && nav) {
     }
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   
 =======
 
+>>>>>>> main
+=======
 >>>>>>> main
   function nextSlide() {
     currentSlide = (currentSlide + 1) % totalSlides;
     updateSlidePosition();
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   
 =======
 
+>>>>>>> main
+=======
 >>>>>>> main
   function startAutoSlide() {
     if (prefersReducedMotion) return; // Don't auto-advance if reduced motion
     autoSlideTimer = setInterval(nextSlide, slideInterval);
   }
 <<<<<<< HEAD
+<<<<<<< HEAD
   
 =======
 
+>>>>>>> main
+=======
 >>>>>>> main
   function resetAutoSlide() {
     clearInterval(autoSlideTimer);
