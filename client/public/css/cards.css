@@ -91,6 +91,7 @@
 .cards-hero h1,
 .cards-hero p {
   text-align: center;
+  font-weight: 600;
 }
 
 /* --- wave at TOP of the gradient section --- */
