@@ -73,19 +73,38 @@ document.querySelector(".form-box.register form")
     };
 
     try {
-        const res = await fetch("/api/users/signup", {
+        // Step 1 — Create account
+        const signupRes = await fetch("/api/users/signup", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(data)
         });
 
-        const result = await res.json();
+        const signupResult = await signupRes.json();
 
-        if (res.ok) {
-            alert("Account created! Please login.");
-            document.querySelector('.container').classList.remove('active');
+        if (!signupRes.ok) {
+            alert(signupResult.message);
+            return;
+        }
+
+        // Step 2 — Auto login
+        const loginRes = await fetch("/api/users/login", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            credentials: "include",
+            body: JSON.stringify({
+                email: data.email,
+                password: data.password
+            })
+        });
+
+        const loginData = await loginRes.json();
+
+        if (loginRes.ok) {
+            window.location.href = "/dashboard";
         } else {
-            alert(result.message);
+            alert("Account created. Please login manually.");
+            document.querySelector('.container').classList.remove('active');
         }
 
     } catch (err) {
@@ -93,3 +112,4 @@ document.querySelector(".form-box.register form")
         alert("Signup failed");
     }
 });
+

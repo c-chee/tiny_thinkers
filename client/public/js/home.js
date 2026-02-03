@@ -135,7 +135,6 @@ if (toggle && nav) {
   const prefersReducedMotion = window.matchMedia?.(
     "(prefers-reduced-motion: reduce)",
   )?.matches;
-
   let currentSlide = 0;
   const totalSlides = slides.length;
   const slideInterval = 4000; // 4 seconds per slide
@@ -170,17 +169,14 @@ if (toggle && nav) {
       resetAutoSlide();
     }
   }
-
   function nextSlide() {
     currentSlide = (currentSlide + 1) % totalSlides;
     updateSlidePosition();
   }
-
   function startAutoSlide() {
     if (prefersReducedMotion) return; // Don't auto-advance if reduced motion
     autoSlideTimer = setInterval(nextSlide, slideInterval);
   }
-
   function resetAutoSlide() {
     clearInterval(autoSlideTimer);
     startAutoSlide();
