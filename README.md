@@ -96,3 +96,40 @@ The application offers:
 1. Open Chrome settings → System  
 2. Turn off **Use hardware acceleration when available**  
 3. Restart Chrome for changes to take effect  
+
+## Getting Started (Run Locally)
+
+Follow these steps to run Tiny Thinkers locally.
+
+### 1. Clone the Repository
+```bash
+git clone <repository-url>
+cd <repository-folder>
+```
+### 2. Install Dependencies
+Navigate to the server folder and install packages:
+```bash
+cd server
+npm install
+```
+### 3. Configure Environment Variables
+Create a .env file based on the example:
+-  .env.example
+### 4. Set Up the Database
+Create the database locally:
+```bash
+mysql -u root -p
+CREATE DATABASE tiny_thinkers;
+```
+### 5. Run Development Server
+From the server folder:
+```bash
+npm run dev
+```
+### 6. Open the Application
+Visit loccalhost at ths specified port:
+http://localhost:5000
+```bash
+Tiny Thinkers server running on port 5000
+
+```
