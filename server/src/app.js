@@ -43,13 +43,32 @@ hbs.registerHelper("contains", (csv, val) => {
     return csv.split(",").includes(val);
 });
 
+// app.engine(
+//   "hbs",
+//   engine({
+//     extname: "hbs",
+//     defaultLayout: "main",
+//     layoutsDir: path.join(__dirname, "../../client/views/layouts"),
+//     partialsDir: path.join(__dirname, "../../client/views/partials"),
+//     helpers: {
+//       isSelected: (current, value) => (current === value ? "selected" : ""),
+//       eq: (a, b) => a === b,
+//       contains: (csv, val) => csv && csv.split(",").includes(val),
+//     },
+//   })
+// );
+
+// Views
+app.set("views", path.resolve(__dirname, "../../client/views"));
+
+// Handlebars engine
 app.engine(
   "hbs",
   engine({
     extname: "hbs",
     defaultLayout: "main",
-    layoutsDir: path.join(__dirname, "../../client/views/layouts"),
-    partialsDir: path.join(__dirname, "../../client/views/partials"),
+    layoutsDir: path.resolve(__dirname, "../../client/views/layouts"),
+    partialsDir: path.resolve(__dirname, "../../client/views/partials"),
     helpers: {
       isSelected: (current, value) => (current === value ? "selected" : ""),
       eq: (a, b) => a === b,
@@ -57,6 +76,7 @@ app.engine(
     },
   })
 );
+
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
@@ -79,7 +99,7 @@ app.get("/login", (req, res) => {
       return res.redirect("/dashboard");
     } catch {}
   }
-  res.render("Login", {
+  res.render("login", {
     pageTitle: "Tiny Thinkers | Login",
     layout: "loginlayout",
   });
