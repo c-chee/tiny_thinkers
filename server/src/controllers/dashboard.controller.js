@@ -20,9 +20,9 @@ exports.getDashboard = async (req, res) => {
 
         // Always visible tiles
         tiles.push(
-            { label: "Resources", route: "/resources", class: "tile-resources", description: "Additional resources." },
-            { label: "Volunteer", route: "/volunteer", class: "tile-volunteer", description: "Get involved." },
-            { label: "Settings", route: "/settings", class: "tile-settings", description: "Update grade level and content." }
+            { label: "Resources", route: "/resources", class: "tile-resources", description: "Find local help for tutoring, learning at home, and basic needs." },
+            { label: "Contact Us", route: "/volunteer", class: "tile-volunteer", description: "Get in touch or find ways to support learning." },
+            { label: "Settings", route: "/settings", class: "tile-settings", description: "Customize what shows on your dashboard." }
         );
 
         res.render("dashboard", {

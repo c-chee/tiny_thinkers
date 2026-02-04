@@ -132,6 +132,16 @@ app.get("/volunteer", authMiddleware, (req, res) => {
   });
 });
 
+app.get("/dictionary", authMiddleware, (req, res) => {
+  res.render("dictionary", {
+    layout: "dashboard-layout",
+    pageTitle: "Tiny Thinkers | Dictionary",
+    pageCss: "/css/dictionary.css",
+    pageScript: "/js/dictionary.js",
+    homeLink: "/dashboard",
+  });
+});
+
 // ===================================================
 // API ROUTES
 // ===================================================
@@ -174,7 +184,6 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-// *** Should be near the end , but BEFORE the 404 handler ***
 // ===================================================
 // ERROR HANDLERS
 // ===================================================

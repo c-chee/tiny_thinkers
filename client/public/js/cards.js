@@ -181,8 +181,6 @@ document.addEventListener("DOMContentLoaded", () => {
     // ignore invalid input
     if (!letter || letter.length !== 1) return;
 
-  async function openCardFor(letter) {
-    if (!letter || letter.length !== 1) return;
     const normalized = letter.toLowerCase();
 
     const exists = grid.querySelector(`.key[data-letter="${normalized}"]`);
