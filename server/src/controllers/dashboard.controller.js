@@ -1,37 +1,36 @@
-// controllers/dashboard.controller.js
 const db = require("../db");
-
-// List of all possible content types
-const allContentTypes = ["reading", "alphabet", "vocab", "spelling", "dictionary"];
+const contentMap = require("../config/contentMap");
 
 exports.getDashboard = async (req, res) => {
     try {
-        // TEMP user until auth is ready
-        // const userId = 1;
-
-        // FOR actual user
         const userId = req.user.id;
 
-        // Fetch user preferences
-        const [prefs] = await db.query(
-            "SELECT * FROM user_preferences WHERE user_id = ?",
+        const [prefsRows] = await db.query(
+            "SELECT content_type FROM user_preferences WHERE user_id = ?",
             [userId]
         );
 
-        let contentTypes = ["reading", "dictionary", "spelling", "cards"];
+        let contentTypes = Object.keys(contentMap); // default all
 
-        if (prefs.length && prefs[0].content_type !== "all") {
-            contentTypes = prefs[0].content_type.split(",");
+        if (prefsRows.length && prefsRows[0].content_type) {
+            contentTypes = prefsRows[0].content_type.split(",");
         }
+
+        const tiles = contentTypes.map(type => contentMap[type]).filter(Boolean);
+
+        // Always visible tiles
+        tiles.push(
+            { label: "Resources", route: "/resources", class: "tile-resources", description: "Additional resources." },
+            { label: "Volunteer", route: "/volunteer", class: "tile-volunteer", description: "Get involved." },
+            { label: "Settings", route: "/settings", class: "tile-settings", description: "Update grade level and content." }
+        );
 
         res.render("dashboard", {
             layout: "dashboard-layout",
             pageTitle: "Tiny Thinkers | Dashboard",
-            contentTypes,
-            homeLink: "/dashboard"
+            tiles,
+            homeLink: "/dashboard",
         });
-
-
     } catch (err) {
         console.error(err);
         res.status(500).send("Dashboard error");
