@@ -142,6 +142,13 @@ app.get("/dictionary", authMiddleware, (req, res) => {
   });
 });
 
+app.get("/reading", (req, res) => {
+  res.render("comp", {
+    pageTitle: "Tiny Thinkers | Reading",
+    pageCss: "/css/comp.css" 
+  });
+});
+
 // ===================================================
 // API ROUTES
 // ===================================================
