@@ -39,8 +39,8 @@ const hbs = require("hbs");
 
 hbs.registerHelper("eq", (a, b) => a === b);
 hbs.registerHelper("contains", (csv, val) => {
-    if (!csv) return false;
-    return csv.split(",").includes(val);
+  if (!csv) return false;
+  return csv.split(",").includes(val);
 });
 
 // app.engine(
@@ -74,7 +74,7 @@ app.engine(
       eq: (a, b) => a === b,
       contains: (csv, val) => csv && csv.split(",").includes(val),
     },
-  })
+  }),
 );
 
 
@@ -129,7 +129,6 @@ app.get("/spelling", authMiddleware, (req, res) => {
     homeLink: "/dashboard",
   });
 });
-
 
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
@@ -201,7 +200,6 @@ app.get("/settings", authMiddleware, settingsController.getSettings);
 // Save is handled via API
 app.use("/api/settings", settingsRoutes);
 
-
 // ===================================================
 // DB TEST
 // ===================================================
@@ -224,7 +222,7 @@ app.use("/dashboard", dashboardRoutes);
 // === CONTENT ===
 app.use("/content", contentRoutes);
 
-// === 404 HANDLER === 
+// === 404 HANDLER ===
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("error", {
