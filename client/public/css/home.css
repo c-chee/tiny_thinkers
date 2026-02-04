@@ -1697,6 +1697,10 @@ footer {
     grid-template-columns: 1fr 1fr;
   }
 
+  .band-mint .section-grid {
+    column-gap: 80px;
+  }
+
   .how-grid {
     grid-template-columns: 1.1fr 0.9fr;
   }
@@ -1819,6 +1823,10 @@ footer {
 
   .meet-grid {
     grid-template-columns: 0.9fr 1.1fr;
+  }
+
+  .band-mint .section-grid {
+    column-gap: 100px;
   }
 
   .stats-track {

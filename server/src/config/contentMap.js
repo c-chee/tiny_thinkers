@@ -3,30 +3,52 @@
  * Later replace with API response
  */
 module.exports = {
-    reading: 
-    { 
-        label: "Reading Practice", 
-        route: "/reading" 
+    reading: {
+        label: "Reading",
+        route: "/reading",
+        class: "tile-reading",
+        description: "Read stories and answer questions to build understanding and confidence."
     },
 
-    alphabet: 
-    { 
-        label: "Alphabet Cards", 
-        route: "/cards" 
+    spelling: {
+        label: "Spelling",
+        route: "/spelling",
+        class: "tile-spelling",
+        description: "Listen and type words to improve spelling skills."
     },
-    vocab: 
-    { 
-        label: "Vocabulary Cards", 
-        route: "/vocab" 
+
+    dictionary: {
+        label: "Dictionary",
+        route: "/dictionary",
+        class: "tile-dictionary",
+        description: "Look up words to see meanings, examples, and how to say them."
     },
-    spelling: 
-    { 
-        label: "Spelling Practice", 
-        route: "/spelling" 
+
+    cards: {
+        label: "Cards",
+        route: "/cards",
+        class: "tile-cards",
+        description: "Click letters to hear sounds and example words."
     },
-    dictionary: 
-    { 
-        label: "Dictionary", 
-        route: "/dictionary" 
+
+    settings: {
+        label: "Settings",
+        route: "/settings",
+        class: "tile-settings",
+        description: "Customize what shows on your dashboard."
+    },
+
+    resources: {
+        label: "Resources",
+        route: "/resources",
+        class: "tile-resources",
+        description: "Find local help for tutoring, learning at home, and basic needs."
+    },
+    
+    volunteer: {
+        label: "Contact Us",
+        route: "/volunteer",
+        class: "tile-volunteer",
+        description: "Get in touch or find ways to support learning."
     }
 };
