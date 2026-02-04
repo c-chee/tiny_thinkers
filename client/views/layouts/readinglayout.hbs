@@ -36,5 +36,8 @@
 
     {{!-- {{> footer}}     --}}
     <script src="/js/comp.js"></script>
+    {{#if pageScript}}
+        <script src="{{pageScript}}"></script>
+    {{/if}}
 </body>
 </html>

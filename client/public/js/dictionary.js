@@ -34,8 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 <div class="dict-card">
                     <h2>${word}</h2>
                     <p><strong>Part of Speech:</strong> ${partOfSpeech}</p>
-                    <p><strong>Definition:</strong> ${definition}</p>
-                    ${example ? `<p><strong>Example:</strong> ${example}</p>` : ""}
+                    <p><strong>Definition:</strong> ${definition}</p> 
                     ${
                         audioUrl
                             ? `<button id="playAudio">Play</button>`
