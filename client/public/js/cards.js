@@ -42,7 +42,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!Array.isArray(apiData) || apiData.length === 0) return fallback;
 
     // If suggestions (strings)
-    if (typeof apiData[0] === "string") return apiData.slice(0, 5);
+    if (typeof apiData[0] === "string") return apiData.slice(0, 1);
 
     // If entries (objects) — try to pull out meta.id words or related forms
     const words = apiData
@@ -51,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .map((id) => id.split(":")[0]); // "apple:1" -> "apple"
 
     // de-dupe + take first 5
-    return [...new Set(words)].slice(0, 5);
+    return [...new Set(words)].slice(0, 1);
   }
 
   function getMerriamAudioUrl(apiData) {
