@@ -39,8 +39,8 @@ const hbs = require("hbs");
 
 hbs.registerHelper("eq", (a, b) => a === b);
 hbs.registerHelper("contains", (csv, val) => {
-    if (!csv) return false;
-    return csv.split(",").includes(val);
+  if (!csv) return false;
+  return csv.split(",").includes(val);
 });
 
 // app.engine(
@@ -74,9 +74,8 @@ app.engine(
       eq: (a, b) => a === b,
       contains: (csv, val) => csv && csv.split(",").includes(val),
     },
-  })
+  }),
 );
-
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
@@ -130,7 +129,6 @@ app.get("/spelling", authMiddleware, (req, res) => {
   });
 });
 
-
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
     layout: "resourceslayout",
@@ -171,15 +169,13 @@ app.get("/reading", authMiddleware, (req, res) => {
   });
 });
 
-
-
 // ===================================================
 // API ROUTES
 // ===================================================
 app.use("/api/users", userRoutes);
 app.use("/api/reading", readingRoutes);
 app.use("/dashboard", dashboardRoutes);
-app.use("/content", contentRoutes); 
+app.use("/content", contentRoutes);
 app.use("/api", dictionaryRoutes);
 
 // Settings
@@ -200,7 +196,6 @@ app.get("/settings", authMiddleware, settingsController.getSettings);
 
 // Save is handled via API
 app.use("/api/settings", settingsRoutes);
-
 
 // ===================================================
 // DB TEST
@@ -224,7 +219,7 @@ app.use("/dashboard", dashboardRoutes);
 // === CONTENT ===
 app.use("/content", contentRoutes);
 
-// === 404 HANDLER === 
+// === 404 HANDLER ===
 // *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("error", {
