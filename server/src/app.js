@@ -152,6 +152,10 @@ app.use("/", readingRoutes);
 
 // Users
 app.use("/api/users", userRoutes);
+app.use("/", readingRoutes); // reading comprehension routes
+app.use("/dashboard", dashboardRoutes);
+app.use("/content", contentRoutes);
+app.use("/api", dictionaryRoutes);
 
 // Settings
 app.use("/api/settings", settingsRoutes);
@@ -178,32 +182,7 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-// === USERS ===
-app.use("/api/users", userRoutes);
-
-
-// === DASHBOARD ===
-app.use("/dashboard", dashboardRoutes);
-
-// === CONTENT ===
-app.use("/content", contentRoutes);
-
-// === RESOURCES ===
-app.get('/resources', (req, res) => {
-  res.render('resources', {
-    layout: 'resourceslayout',
-    title: 'Resources'
-  });
-});
-
-// === VOLUNTEER ===
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
-      layout: 'volunteerlayout',
-      title: 'Volunteer'
-    });
-});
-
+// *** Should be near the end , but BEFORE the 404 handler ***
 // ===================================================
 // ERROR HANDLER (500)
 // ===================================================

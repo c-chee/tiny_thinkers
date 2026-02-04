@@ -91,6 +91,15 @@ router.get('/reading', authMiddleware, (req, res) => {
             ]
         }
     };
+router.get('/reading', (req, res) => {
+    const grade = req.query.grade || 'kindergarten';
+    res.render('comp', {
+        layout: 'readinglayout',
+        pageTitle: 'Reading Comprehension', 
+        grade, 
+        data: readingData[grade]
+    });
+});
 
     
 
