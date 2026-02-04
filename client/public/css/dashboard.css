@@ -369,7 +369,7 @@ footer {
 @media (min-width: 900px) {
   .bento {
     grid-template-columns: 1.25fr 1fr 1fr;
-    grid-template-rows: 220px 200px auto 180px;
+    grid-template-rows: auto;
     grid-template-areas:
       "reading spelling spelling"
       "reading dictionary cards"
@@ -467,13 +467,14 @@ footer {
   max-width: 30ch;
   color: rgba(0, 0, 0, 0.7);
   line-height: 1.35;
+  font-size: 1.2rem;
 }
 
 .tile-cta {
   display: inline-flex;
   width: fit-content;
   margin-top: 16px;
-  padding: 10px 16px;
+  padding: 5px 16px;
   border-radius: 999px;
   font-weight: 500;
   border: 2px solid var(--ink);
