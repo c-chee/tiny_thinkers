@@ -111,10 +111,10 @@ app.get("/spelling", authMiddleware, (req, res) => {
   });
 });
 
-
+// Resources & Volunteer
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
-    layout: "resourceslayout",
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Resources",
     pageCss: "/css/resources.css",
     homeLink: "/dashboard",
@@ -148,6 +148,7 @@ app.get("/reading", authMiddleware, (req, res) => {
     pageTitle: "Tiny Thinkers | Reading",
     pageCss: "/css/comp.css",
     homeLink: "/dashboard",
+    pageScript: "/js/comp.js",
   });
 });
 
@@ -193,20 +194,21 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-// === USERS ===
-app.use("/api/users", userRoutes);
+// ===================================================
+// ERROR HANDLERS
+// ===================================================
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(err.status || 500).render("error", {
+    pageTitle: "Tiny Thinkers | Something Went Wrong",
+    code: err.status || 500,
+    message: "Oops… tiny tripped up. Try again later.",
+    imageSrc: "/images/tiny_confused.PNG",
+    imageAlt: "tiny confused",
+    pageCss: "/css/error.css",
+  });
+});
 
-// === READING COMPREHENSION ===
-app.use("/", readingRoutes);
-
-// === DASHBOARD ===
-app.use("/dashboard", dashboardRoutes);
-
-// === CONTENT ===
-app.use("/content", contentRoutes);
-
-// === 404 HANDLER === 
-// *** Must be last ***
 app.use((req, res) => {
   res.status(404).render("error", {
     pageTitle: "Tiny Thinkers | Not Found",
