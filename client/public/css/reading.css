@@ -1,32 +1,21 @@
 /* ==========================
-   READING COMPREHENSION
-   (added in newer version)
+   READING COMPREHENSION STYLES
+   Styled to match spelling.css
 ============================= */
-:root {
-  --pink: #f7d6e0;
-  --yellow: #fee440;
-  --sky: #9ad0ec;
-  --mint: #c9feee;
-  --aqua: #b2f7ef;
-  --lav: #dfebff;
-  --purple: #9b5de5;
-  --dark-purple: #482475;
-  --hotpink: #f15bb5;
-  --red: #ff3864;
-  --orange: #ff9f1c;
-  --peach: #fff1dc;
-  --white: #ffffff;
-  --ink: #1c1c1c;
 
-  --nav-bg: linear-gradient(to right, #f2dbeb 12%, #cefbf4);
-  --footer-bg: #ebe3f6;
+/* --------------------------
+   GLOBALS
+-------------------------- */
+:root {
+  --read-yellow: #fff3b0;
+  --read-cream: #fff7e6;
+  --read-bg: #fff3b0;
+  --read-card-bg: #fff7e6;
 }
 
-
-
-body {
-  margin: 0;
-  padding: 0;
+.reading-page {
+  min-height: 100vh;
+  background: var(--read-bg);
   font-family:
     "Urbanist",
     system-ui,
@@ -35,157 +24,327 @@ body {
     Roboto,
     Arial,
     sans-serif;
-  color: var(--ink);
-  background: var(--peach);
+  color: #1c1c1c;
 }
 
-.comp-container {
-  padding: 2rem 1rem;
-  max-width: 1000px;
-  margin: 0 auto;
-}
-
-
-
-/* main */
-#typingTitle {
-  text-align: center;
-  margin-bottom: 20px;
-  font-family: "Finger Paint", cursive;
-  color: var(--orange);
-  font-size: 56px;
-}
-
-.grade-selector label {
-  font-weight: bold;
-}
-
-
-
-/* tips section */
-.tips-section {
-  position: relative;
-  background-color: var(--aqua);
-  padding: 18px 40px 32px;
-  border: 7px solid var(--purple);
-  border-radius: 20px;
-  overflow: visible;
-}
-
-
-.tips-dino {
-  width: 300px;
-  height: auto;
-  position: absolute;
-  right: 20px;
-  top: -20px;
-  z-index: 2;
-}
-.tips-section .comp-subheader {
-  font-size: 29px;
-  font-family: "Finger Paint", cursive;
-  color: var(--ink);
-}
-
-
-
-/* books section  */
-.books-section,
-.questions-section,
-.reading-tracker {
-  margin-top: 70px;
-  background-color: #f5f6f4;
-  border-radius: 10px;
-  padding: 10px 10px;
-}
-
-.books {
-  list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 14px;
-  padding: 0;
-  margin: 0;
-}
-
-.book-item img {
-  width: 250px;
-  height: 250px;
-  object-fit: cover;
-  border-radius: 6px;
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease; /* fixed typo */
-}
-
-.book-item a {
-  text-decoration: none;
+/* --------------------------
+   WAVES
+-------------------------- */
+.wave {
+  height: 110px;
+  width: 100%;
   display: block;
-  color: #3a4f7a;
+  background-repeat: no-repeat;
+  background-position: bottom center;
+  background-size: 100% 100%;
 }
 
-.book-item:hover img {
-  cursor: pointer;
-  transform: translateY(-4px);
-  box-shadow: 0 10px 25px rgba(58, 79, 122, 0.35);
+.wave-orange-to-blue {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='transparent'/%3E%3C/svg%3E");
 }
 
-.books h3,
-.books p {
+.wave-blue-to-orange {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23fff3b0'/%3E%3C/svg%3E");
+}
+
+/* --------------------------
+   HERO
+-------------------------- */
+.reading-hero {
+  position: relative;
+  padding: 22px 0 110px;
+  background: var(--read-bg);
+  overflow: hidden;
+}
+
+.reading-hero .subtitle {
+  max-width: 52ch;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.reading-hero .container.center-stack {
+  position: relative;
+  z-index: 2;
+  padding-top: 110px;
+}
+
+.reading-hero .wave-orange-to-blue {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 1;
+}
+
+/* --------------------------
+   TITLE + SUBTITLE ANIMATION
+-------------------------- */
+.reading-hero h1.title {
+  font-size: clamp(3.2rem, 5.5vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: 0.8px;
+  opacity: 0;
+  transform: scale(0.92) translateY(8px);
+  animation: popIn 0.6s ease-out forwards;
+}
+
+.reading-hero p.subtitle {
+  margin-top: 14px;
+  font-size: clamp(1.25rem, 2vw, 1.5rem);
+  opacity: 0;
+  transform: translateY(6px);
+  animation: popInSub 0.6s ease-out forwards;
+  animation-delay: 0.15s;
+}
+
+.reading-hero .title,
+.reading-hero .subtitle {
   text-align: center;
 }
 
-.parent-note {
-  text-align: center;
-  font-size: 17px;
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
 }
 
-.tips-list,
-.question-list {
-  list-style: none;
-  padding-left: 0;
-  margin: 0;
+@keyframes popInSub {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.tips-list li::before,
-.question-list li::before {
-  content: "⭐️";
-  margin-right: 6px;
-}
-
-.day {
+/* --------------------------
+   BADGES
+-------------------------- */
+.reading-badges {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0.75rem;
+  justify-content: center;
+  margin: 12px auto 0;
   gap: 12px;
+  flex-wrap: wrap;
 }
 
-.day input {
-  border: 2px solid #3a4f7a;
-  height: 35px;
-  width: 200px;
-  border-radius: 8px;
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  color: #fff;
+  background: #ffb84d;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+}
+
+/* --------------------------
+   MAIN AREA
+-------------------------- */
+.reading-area {
+  background:
+    radial-gradient(circle at 20% 25%, rgba(247, 214, 224, 0.95), transparent 45%),
+    radial-gradient(circle at 80% 30%, rgba(178, 247, 239, 0.95), transparent 45%),
+    radial-gradient(circle at 55% 85%, rgba(254, 228, 64, 0.55), transparent 55%),
+    linear-gradient(90deg, rgba(155, 93, 229, 0.2), rgba(0, 245, 212, 0.14));
+  position: relative;
+  overflow: hidden;
+  padding: 12px 0 110px;
+  padding-top: 60px;
+}
+
+.reading-area::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 110px;
+  z-index: 1;
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 0 L0 0 Z' fill='%23fff3b0'/%3E%3C/svg%3E");
+}
+
+.reading-area .wave-blue-to-orange {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  z-index: 1;
+}
+
+.reading-area .container.center-stack {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   text-align: center;
 }
 
-.selector {
-  text-align: center;
+.tiny-helper {
+  display: block;
+  margin: 1rem auto 0.5rem;
+  max-width: 260px;
+  width: 100%;
+  height: auto;
 }
 
-.selector label {
-  color: #3a4f7a;
+/* --------------------------
+   GAME CARD
+-------------------------- */
+.game-card {
+  width: min(720px, 92vw);
+  margin: 1.5rem auto 0;
+  background: var(--read-card-bg);
+  border-radius: 22px;
+  padding: 2rem 1.75rem 1.75rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
-.grade-selector select {
-  border: 2px solid #3a4f7a;
-  height: 35px;
-  width: 200px;
-  border-radius: 8px;
-  text-align: center;
+.game-title {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
 }
 
-.total-minutes {
-  font-size: 17px;
+#passageText {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.questions-container {
+  margin-top: 1rem;
+}
+
+.question-block {
+  margin-bottom: 1rem;
+  text-align: left;
+}
+
+.question-block p {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+}
+
+.question-block label {
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.reading-controls {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 1rem;
+}
+
+/* --------------------------
+   FEEDBACK
+-------------------------- */
+.feedback {
+  margin-top: 0.75rem;
   text-align: center;
+  font-weight: 600;
+}
+
+/* --------------------------
+   BACK BUTTON
+-------------------------- */
+.cards-back {
+  background: var(--read-bg);
+}
+
+.back-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 28px;
+  margin-bottom: 20px;
+}
+
+.back-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-weight: 1000;
+  text-decoration: none;
+  overflow: hidden;
+  background: transparent;
+  border: 2px solid black;
+  color: black;
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+  transition: transform 0.15s ease;
+}
+
+.back-btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(-12deg, #7b61ff 0px, #7b61ff 6px, #9a86ff 6px, #9a86ff 12px);
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  transition: clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
+  z-index: -1;
+}
+
+.back-btn:hover::before {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.back-btn:hover {
+  transform: translateY(-2px);
+  color: white;
+  border-color: white;
+}
+
+/* --------------------------
+   BUTTONS
+-------------------------- */
+.btn-pill {
+  border-radius: 999px;
+  padding: 0.5rem 1.25rem;
+  font-weight: 700;
+  border: 2px solid black;
+  background: transparent;
+  color: black;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-pill:hover {
+  color: white;
+  border-color: white;
+}
+
+/* --------------------------
+   MEDIA QUERIES
+-------------------------- */
+@media (min-width: 700px) {
+  .reading-hero {
+    padding-top: 80px;
+  }
+
+  .tiny-helper {
+    max-width: 230px;
+  }
+
+  .game-card {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 900px) {
+  .tiny-helper {
+    max-width: 260px;
+  }
+
+  .game-card {
+    max-width: 720px;
+  }
 }

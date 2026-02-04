@@ -1,0 +1,70 @@
+<main class="reading-page">
+
+    <!-- hero -->
+    <section class="hero-band reading-hero">
+
+        <div class="container center-stack">
+        <h1 class="title">Reading Comprehension</h1>
+        <p class="subtitle">Read passages and answer questions to build understanding and confidence.</p>
+
+        <div class="reading-badges">
+            <span class="badge" id="gradeBadge">Grade: —</span>
+        </div>
+        </div>
+
+        <!-- hero wave --> 
+        <div class="wave wave-orange-to-blue"></div>
+    </section>
+
+    <!-- reading / gradient section -->
+    <section class="reading-area">
+        <div class="container center-stack">
+
+        <img
+            src="/images/tiny7.png"
+            alt="Tiny cheering you on"
+            class="tiny-helper"
+        />
+
+        <p class="helper-text">
+            Read the passage carefully and answer the questions below!
+        </p>
+
+        <!-- passage card -->
+        <section class="game-card" aria-label="reading passage card">
+            <h2 class="game-title" id="passageTitle">Loading...</h2>
+            <p class="body small" id="passageText">Fetching passage, please wait.</p>
+
+            <div id="questions" class="questions-container"></div>
+
+            <div class="reading-controls">
+            <button class="btn-pill btn-solid" type="button" id="submitAnswers">
+                Submit Answers
+            </button>
+            <button class="btn-pill btn-ghost" type="button" id="nextPassage">
+                Next Passage
+            </button>
+            </div>
+
+            <div id="feedback" class="feedback"></div>
+        </section>
+
+        </div>
+
+        <div class="wave wave-blue-to-orange"></div>
+    </section>
+
+    <!-- bottom yellow section -->
+    <section class="cards-back">
+        <div class="container">
+        <div class="back-row">
+            <a href="/dashboard" class="btn-pill btn-solid back-btn">
+            Back to Dashboard
+            </a>
+        </div>
+        </div>
+    </section>
+
+</main>
+
+<script src="/js/reading.js"></script>

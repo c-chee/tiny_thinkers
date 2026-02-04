@@ -1,0 +1,254 @@
+:root {
+    --pink: #f7d6e0;
+    --yellow: #fee440;
+    --sky: #9ad0ec;
+    --mint: #c9feee;
+    --aqua: #b2f7ef;
+    --lav: #dfebff;
+    --purple: #9b5de5;
+    --dark-purple: #482475;
+    --hotpink: #f15bb5;
+    --red: #ff3864;
+    --orange: #ff9f1c;
+    --peach: #fff1dc;
+    --white: #ffffff;
+    --ink: #1c1c1c;
+
+    --nav-bg: linear-gradient(to right, #f2dbeb 12%, #cefbf4);
+    --footer-bg: #ebe3f6;
+}
+main {
+    margin: 0;
+    font-family:
+        "Urbanist",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Arial,
+        sans-serif;
+}
+
+/* - - - - - Dictionary Page - - - - - */
+.dictionary-page {
+    min-height: 100vh;
+    background: #d1e7ff;
+    padding: 60px 16px 80px;
+}
+
+.dictionary-container {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.dictionary-container h1 {
+    font-size: clamp(2.4rem, 5vw, 3.4rem);
+    margin-bottom: 1em;
+    font-weight: 800;
+    color: var(--orange);
+    font-family: "Finger Paint", cursive;
+}
+
+/* search box */
+.lookup-box {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.lookup-box input {
+    flex: 1;
+    max-width: 420px;
+    padding: 14px 16px;
+    border-radius: 16px;
+    border: none;
+    font-size: 1.1rem;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.12);
+}
+
+.lookup-box button {
+    border: none;
+    padding: 14px 20px;
+    border-radius: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    background: var(--yellow);
+    box-shadow:
+        0 8px 0 rgba(0,0,0,0.15),
+        0 14px 22px rgba(0,0,0,0.16);
+    transition: transform 0.08s ease;
+    text-transform: uppercase;
+}
+
+.lookup-box button:active {
+    transform: translateY(4px);
+    box-shadow:
+        0 4px 0 rgba(0,0,0,0.15),
+        0 8px 14px rgba(0,0,0,0.14);
+}
+
+/* result card */
+.dict-card {
+    background: rgba(255,255,255,0.92);
+    border-radius: 22px;
+    padding: 22px 24px;
+    text-align: left;
+    box-shadow: 0 14px 26px rgba(0,0,0,0.14);
+    margin-top: 10px;
+
+    animation: dictPop 0.35s ease-out;
+    border: 2px solid var(--orange);
+}
+
+.dict-card h2 {
+    color: var(--red);
+    text-transform: capitalize;
+}
+
+@keyframes dictPop {
+    from {
+        opacity: 0;
+        transform: scale(0.95) translateY(8px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+.dict-card h2 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+.dict-card p {
+    margin: 8px 0;
+    line-height: 1.4;
+}
+
+.dict-card strong {
+    font-weight: 800;
+}
+
+/* audio button */
+#playAudio {
+    margin-top: 12px;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 999px;
+    font-weight: 700;
+    cursor: pointer;
+    background: #ffb347;
+    box-shadow:
+        0 6px 0 rgba(0,0,0,0.15),
+        0 10px 16px rgba(0,0,0,0.15);
+}
+
+#playAudio:active {
+    transform: translateY(3px);
+    box-shadow:
+        0 3px 0 rgba(0,0,0,0.15),
+        0 6px 12px rgba(0,0,0,0.12);
+}
+
+.no-audio {
+    margin-top: 12px;
+    font-weight: 600;
+    opacity: 0.7;
+}
+
+/* - - - - - back to dash - - - - - */
+.back-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-family:
+        "Urbanist",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Arial,
+        sans-serif;
+    font-weight: 1000;
+    text-decoration: none;
+    overflow: hidden;
+    background: transparent;
+    border: 2px solid black;
+    color: black;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+    transition: transform 0.15s ease;
+}
+
+.back-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        -12deg,
+        #ff9f1c 0px,
+        #ff9f1c 6px,
+        #ffb347 6px,
+        #ffb347 12px
+    );
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    transition: clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
+    z-index: -1;
+}
+
+.back-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 6px,
+        rgba(255, 255, 255, 0.25) 6px,
+        rgba(255, 255, 255, 0.25) 9px
+    );
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.back-btn:hover::before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.back-btn:hover {
+    transform: translateY(-2px);
+    color: white;
+    border-color: white;
+}
+
+
+/* mobile */
+@media (max-width: 600px) {
+    .lookup-box {
+        flex-direction: column;
+    }
+
+    .lookup-box input,
+    .lookup-box button {
+        max-width: none;
+        width: 100%;
+    }
+
+    .dict-card {
+        padding: 18px;
+    }
+}

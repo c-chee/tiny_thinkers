@@ -200,7 +200,9 @@ body {
   width: 100%;
   height: 100%;
 }
-
+.login-page .toggle-box h1 {
+  margin-bottom: 20px;
+}
 .login-page .toggle-box::before {
   content: '';
   position: absolute;
@@ -261,15 +263,24 @@ body {
   background-color: var(--dark-orange);
 }
 
-@media (max-width: 650px) {
+@media (max-width: 920px) {
+  .login-page {
+    overflow-x: hidden;
+    padding: 30px 0;
+  }
   .login-page .container {
-    height: calc(100vh - 40px);
+    height: 100vh;
     width: min(850px, 100%);
+    position: relative;
   }
   .login-page .form-box {
     bottom: 0;
     width: 100%;
     height: 70%
+  }
+  .login-page .form-box h1,
+  .toggle-box h1 {
+    font-size: 30px;
   }
   .login-page .container.active .form-box {
     right: 0;
@@ -277,7 +288,7 @@ body {
   }
   .login-page .toggle-box::before {
     left:0;
-    top: -270%;
+    top: -263%;
     width: 100%;
     height: 300%;
   }
@@ -288,6 +299,9 @@ body {
   .login-page .toggle-panel {
     width: 100%;
     height: 30%;
+  }
+   .login-page .toggle-panel p {
+    font-size: 18px;
   }
   .login-page .toggle-panel.toggle-left {
     top: 0;
@@ -302,6 +316,9 @@ body {
   }
   .login-page .container.active .toggle-panel.toggle-right {
     bottom: 0;
+  }
+  .img-top {
+    visibility: hidden;
   }
 }
 
@@ -436,7 +453,6 @@ header p {
 .login-btn:hover {
   cursor: pointer;
   transform: translateY(-1px);
-  background-color: var(--orange);
   filter: drop-shadow(0 5px 7px rgba(255, 255, 255, 0.6));
 }
 

@@ -9,7 +9,9 @@
         <p>Customize your child's educational experience</p>
       </div>
 
-      <form action="/save-settings" method="POST" class="settings-form">
+      {{!-- <form action="/save-settings" method="POST" class="settings-form"> --}}
+      <form action="/api/settings" method="POST" class="settings-form">
+
         
         <!-- grade level section -->
         <div class="form-section">
@@ -17,42 +19,48 @@
           
           <div class="grade-grid">
             <label class="grade-option">
-              <input type="radio" name="grade_level" value="K" required>
+              <input type="radio" name="grade_level" value="K" required
+                {{#if (eq prefs.grade_level "K")}}checked{{/if}}>
               <div class="grade-card">
                 <span class="grade-label">Kindergarten</span>
               </div>
             </label>
             
             <label class="grade-option">
-              <input type="radio" name="grade_level" value="1">
+              <input type="radio" name="grade_level" value="1" 
+              {{#if (eq prefs.grade_level "1")}}checked{{/if}}>
               <div class="grade-card">
                 <span class="grade-label">1st Grade</span>
               </div>
             </label>
             
             <label class="grade-option">
-              <input type="radio" name="grade_level" value="2">
+              <input type="radio" name="grade_level" value="2"
+              {{#if (eq prefs.grade_level "2")}}checked{{/if}}>
               <div class="grade-card">
                 <span class="grade-label">2nd Grade</span>
               </div>
             </label>
             
             <label class="grade-option">
-              <input type="radio" name="grade_level" value="3">
+              <input type="radio" name="grade_level" value="3"
+              {{#if (eq prefs.grade_level "3")}}checked{{/if}}>
               <div class="grade-card">
                 <span class="grade-label">3rd Grade</span>
               </div>
             </label>
             
             <label class="grade-option">
-              <input type="radio" name="grade_level" value="4">
+              <input type="radio" name="grade_level" value="4"
+              {{#if (eq prefs.grade_level "4")}}checked{{/if}}>
               <div class="grade-card">
                 <span class="grade-label">4th Grade</span>
               </div>
             </label>
             
             <label class="grade-option">
-              <input type="radio" name="grade_level" value="5">
+              <input type="radio" name="grade_level" value="5"
+              {{#if (eq prefs.grade_level "5")}}checked{{/if}}>
               <div class="grade-card">
                 <span class="grade-label">5th Grade</span>
               </div>
@@ -67,7 +75,8 @@
           
           <div class="content-grid">
             <label class="content-option">
-              <input type="checkbox" name="content_type" value="spelling">
+              <input type="checkbox" name="content_type" value="spelling"
+              {{#if (contains prefs.content_type "spelling")}}checked{{/if}}>
               <div class="content-card">
                 <div class="content-info">
                   <span class="content-label">Spelling</span>
@@ -78,7 +87,8 @@
             </label>
             
             <label class="content-option">
-              <input type="checkbox" name="content_type" value="reading">
+              <input type="checkbox" name="content_type" value="reading"
+              {{#if (contains prefs.content_type "reading")}}checked{{/if}}>
               <div class="content-card">
                 <div class="content-info">
                   <span class="content-label">Reading</span>
@@ -87,24 +97,38 @@
                 <div class="checkbox-indicator"></div>
               </div>
             </label>
-            
+
             <label class="content-option">
-              <input type="checkbox" name="content_type" value="math">
+              <input type="checkbox" name="content_type" value="cards"
+              {{#if (contains prefs.content_type "cards")}}checked{{/if}}>
               <div class="content-card">
                 <div class="content-info">
-                  <span class="content-label">Math</span>
-                  <span class="content-description">Numbers, counting, and problem solving</span>
+                  <span class="content-label">Alphabet</span>
+                  <span class="content-description">---</span>
+                </div>
+                <div class="checkbox-indicator"></div>
+              </div>
+            </label>
+
+            <label class="content-option">
+              <input type="checkbox" name="content_type" value="dictionary"
+              {{#if (contains prefs.content_type "dictionary")}}checked{{/if}}>
+              <div class="content-card">
+                <div class="content-info">
+                  <span class="content-label">Dictionary</span>
+                  <span class="content-description">---</span>
                 </div>
                 <div class="checkbox-indicator"></div>
               </div>
             </label>
             
             <label class="content-option disabled">
-              <input type="checkbox" name="content_type" value="science" disabled>
+              <input type="checkbox" name="content_type" value="math" disabled
+              {{#if (contains prefs.content_type "math")}}checked{{/if}}>
               <div class="content-card">
                 <div class="content-info">
-                  <span class="content-label">Science</span>
-                  <span class="content-description">Exploration and discovery</span>
+                  <span class="content-label">Math</span>
+                  <span class="content-description">Numbers, counting, and problem solving</span>
                   <span class="coming-soon-badge">Coming Soon</span>
                 </div>
                 <div class="checkbox-indicator"></div>
@@ -112,7 +136,8 @@
             </label>
             
             <label class="content-option disabled">
-              <input type="checkbox" name="content_type" value="writing" disabled>
+              <input type="checkbox" name="content_type" value="writing" disabled
+              {{#if (contains prefs.content_type "writing")}}checked{{/if}}>
               <div class="content-card">
                 <div class="content-info">
                   <span class="content-label">Writing</span>

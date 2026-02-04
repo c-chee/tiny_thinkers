@@ -91,6 +91,30 @@
 .cards-hero h1,
 .cards-hero p {
   text-align: center;
+  font-weight: 600;
+}
+
+/* --- wave at TOP of the gradient section --- */
+.cards-area {
+  position: relative; /* make sure this stays */
+  padding-top: 60px; /* gives space so wave doesn't cover dino/keys */
+}
+
+.cards-area::before {
+  content: "";
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  height: 110px;
+  z-index: 1;
+
+  background-repeat: no-repeat;
+  background-position: top center;
+  background-size: 100% 100%;
+
+  /* same wave shape, filled with your hero/page color (#d1e7ff) */
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 0 L0 0 Z' fill='%23d1e7ff'/%3E%3C/svg%3E");
 }
 
 /* --- wave at TOP of the gradient section --- */
