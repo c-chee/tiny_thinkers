@@ -1,5 +1,7 @@
 const express = require("express");
 const router = express.Router();
+const authMiddleware = require("../middleware/auth.middleware");
+const settingsQueries = require("../db/queries/settings.queries");
 
 const WORDS_BY_GRADE = {
   k: ["cat", "sun", "hat", "pig", "map", "bug", "bed", "fish", "cup", "jam"],
@@ -37,16 +39,31 @@ function normalizeGrade(raw) {
   return 2;
 }
 
-router.get("/spelling/words", (req, res) => {
-  const grade = normalizeGrade(req.query.grade || 2);
-  const words = WORDS_BY_GRADE[grade] || WORDS_BY_GRADE[2];
+router.get("/spelling/words", authMiddleware, async (req, res) => {
+  try {
+    const userId = req.user.id;
 
-  res.json({
-    grade,
-    level: 1,
-    total: 10,
-    words: pick10(words),
-  });
+    // Get saved preferences
+    const prefs = await settingsQueries.get(userId);
+
+    // fallback if user has no settings yet
+    const gradeRaw = prefs?.grade_level || 2;
+
+    const grade = normalizeGrade(gradeRaw);
+    const words = WORDS_BY_GRADE[grade] || WORDS_BY_GRADE[2];
+
+    res.json({
+      grade,
+      level: 1,
+      total: 10,
+      words: pick10(words),
+    });
+
+  } catch (err) {
+    console.error("Spelling words error:", err);
+    res.status(500).json({ error: "Failed to load words" });
+  }
 });
+
 
 module.exports = router;
