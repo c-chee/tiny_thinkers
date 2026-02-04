@@ -208,7 +208,7 @@ body {
     transform: translateY(-35px);
 }
 .contactForm .inputBox input[type="submit"] {
-    width: 125px;
+    width: 150px;
     background-color: var(--hotpink);
     border: none;
     cursor: pointer;
