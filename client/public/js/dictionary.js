@@ -36,7 +36,12 @@ document.addEventListener("DOMContentLoaded", () => {
                     <p><strong>Part of Speech:</strong> ${partOfSpeech}</p>
                     <p><strong>Definition:</strong> ${definition}</p>
                     ${example ? `<p><strong>Example:</strong> ${example}</p>` : ""}
-                    ${audioUrl ? `<button id="playAudio">Play</button>` : ""}
+                    ${
+                        audioUrl
+                            ? `<button id="playAudio">Play</button>`
+                            : `<p class="no-audio">Audio not available</p>`
+                        }
+
                 </div>
             `;
 
