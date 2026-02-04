@@ -144,8 +144,10 @@ app.get("/dictionary", authMiddleware, (req, res) => {
 
 app.get("/reading", authMiddleware, (req, res) => {
   res.render("comp", {
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Reading",
-    pageCss: "/css/comp.css" 
+    pageCss: "/css/comp.css",
+    homeLink: "/dashboard",
   });
 });
 
@@ -155,7 +157,7 @@ app.get("/reading", authMiddleware, (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/", readingRoutes); // reading comprehension routes
 app.use("/dashboard", dashboardRoutes);
-app.use("/content", contentRoutes);
+app.use("/content", contentRoutes); 
 app.use("/api", dictionaryRoutes);
 
 // Settings
