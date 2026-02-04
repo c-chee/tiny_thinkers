@@ -19,6 +19,7 @@ Our project specifically focuses on **Education**, aiming to reduce educational 
 - [APIs](#apis)  
 - [Usage](#usage)  
 - [Deployment](#deployment)  
+- [Getting Started](#getting-started-run-locally)
 
 ---
 
@@ -96,6 +97,8 @@ The application offers:
 1. Open Chrome settings → System  
 2. Turn off **Use hardware acceleration when available**  
 3. Restart Chrome for changes to take effect  
+
+---
 
 ## Getting Started (Run Locally)
 
