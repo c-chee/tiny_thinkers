@@ -114,7 +114,9 @@ npm install
 ```
 ### 3. Configure Environment Variables
 Create a .env file based on the example:
--  .env.example
+```bash
+.env.example
+```
 ### 4. Set Up the Database
 Create the database locally:
 ```bash
@@ -127,7 +129,7 @@ From the server folder:
 npm run dev
 ```
 ### 6. Open the Application
-Visit loccalhost at ths specified port:
+Visit localhost at ths specified port:
 http://localhost:5000
 ```bash
 Tiny Thinkers server running on port 5000
