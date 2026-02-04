@@ -145,6 +145,16 @@ app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
 
+// Settings
+const settingsController = require("./controllers/settings.controller");
+
+// Settings page
+app.get("/settings", authMiddleware, settingsController.getSettings);
+
+// Save is handled via API
+app.use("/api/settings", settingsRoutes);
+
+
 // ===================================================
 // DB TEST
 // ===================================================

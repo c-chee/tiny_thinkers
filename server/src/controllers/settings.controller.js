@@ -1,4 +1,5 @@
-const settingsService = require("../services/settings.service"); // Imports the service that talks to the DB
+// controllers/settings.controller.js
+const settingsService = require("../services/settings.service");
 const contentMap = require("../config/contentMap");
 
 // GET /settings
@@ -8,26 +9,19 @@ exports.getSettings = async (req, res) => {
 
         const prefs = await settingsService.getPreferences(userId);
 
-        const contentOptions = Object.keys(contentMap).map(key => ({
-            key,
-            ...contentMap[key],
-        }));
-
         res.render("settings", {
-            layout: "dashboard-layout",
-            pageTitle: "Learning Settings",
-            pageCss: "/css/settings.css",
-            pageScript: "/js/settings.js",
-            homeLink: "/dashboard",
-            contentOptions,
-            prefs: prefs || {
-                grade_level: "K",
-                content_type: Object.keys(contentMap).join(","), // all checked
-            },
+        pageTitle: "Learning Settings",
+        layout: "dashboard-layout",
+        pageCss: "/css/settings.css",
+        pageScript: "/js/settings.js",
+        prefs: prefs || {
+            grade_level: "K",
+            content_type: Object.keys(contentMap).join(","), // all enabled by default
+        },
         });
     } catch (err) {
         console.error(err);
-        res.status(500).send("Failed to load settings");
+        res.status(500).send("Failed to load settings page");
     }
 };
 
@@ -37,12 +31,8 @@ exports.saveSettings = async (req, res) => {
         const userId = req.user.id;
         let { grade_level, content_type } = req.body;
 
-        // Handle multiple or single checkboxes
-        if (Array.isArray(content_type)) {
-            content_type = content_type.join(",");
-        } else if (!content_type) {
-            content_type = "";
-        }
+        if (Array.isArray(content_type)) content_type = content_type.join(",");
+        else if (!content_type) content_type = "";
 
         await settingsService.saveSettings(userId, grade_level, content_type);
 

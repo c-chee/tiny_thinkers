@@ -1,36 +1,29 @@
-// controllers/dashboard.controller.js
 const db = require("../db");
 const contentMap = require("../config/contentMap");
-
-// Tiles that should always show on the dashboard
-const alwaysVisibleTiles = ["settings", "resources", "volunteer"];
 
 exports.getDashboard = async (req, res) => {
     try {
         const userId = req.user.id;
 
-        // Fetch user preferences from DB
         const [prefsRows] = await db.query(
-            "SELECT grade_level, content_type FROM user_preferences WHERE user_id = ?",
+            "SELECT content_type FROM user_preferences WHERE user_id = ?",
             [userId]
         );
 
-        // Default content types
-        let userContentTypes = Object.keys(contentMap);
+        let contentTypes = Object.keys(contentMap); // default all
 
         if (prefsRows.length && prefsRows[0].content_type) {
-            userContentTypes = prefsRows[0].content_type.split(",");
+            contentTypes = prefsRows[0].content_type.split(",");
         }
 
-        // Merge user content + always visible tiles
-        const tilesToRender = Array.from(
-            new Set([...userContentTypes, ...alwaysVisibleTiles])
-        );
+        const tiles = contentTypes.map(type => contentMap[type]).filter(Boolean);
 
-        // Map tile keys to actual contentMap objects
-        const tiles = tilesToRender
-        .map((key) => contentMap[key])
-        .filter(Boolean); // filter out any missing keys
+        // Always visible tiles
+        tiles.push(
+            { label: "Resources", route: "/resources", class: "tile-resources", description: "Additional resources." },
+            { label: "Volunteer", route: "/volunteer", class: "tile-volunteer", description: "Get involved." },
+            { label: "Settings", route: "/settings", class: "tile-settings", description: "Update grade level and content." }
+        );
 
         res.render("dashboard", {
             layout: "dashboard-layout",
