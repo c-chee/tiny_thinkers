@@ -114,7 +114,7 @@ app.get("/spelling", authMiddleware, (req, res) => {
 // Resources & Volunteer
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
-    layout: "resourceslayout",
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Resources",
     pageCss: "/css/resources.css",
     homeLink: "/dashboard",
