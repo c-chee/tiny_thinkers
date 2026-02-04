@@ -175,7 +175,7 @@ app.get("/reading", authMiddleware, (req, res) => {
 app.use("/api/users", userRoutes);
 app.use("/api/reading", readingRoutes);
 app.use("/dashboard", dashboardRoutes);
-app.use("/content", contentRoutes);
+app.use("/content", contentRoutes); 
 app.use("/api", dictionaryRoutes);
 
 // Settings
