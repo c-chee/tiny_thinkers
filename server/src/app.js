@@ -111,10 +111,10 @@ app.get("/spelling", authMiddleware, (req, res) => {
   });
 });
 
-// Resources & Volunteer
+
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
-    layout: "dashboard-layout",
+    layout: "resourceslayout",
     pageTitle: "Tiny Thinkers | Resources",
     pageCss: "/css/resources.css",
     homeLink: "/dashboard",
@@ -139,6 +139,13 @@ app.get("/dictionary", authMiddleware, (req, res) => {
     pageCss: "/css/dictionary.css",
     pageScript: "/js/dictionary.js",
     homeLink: "/dashboard",
+  });
+});
+
+app.get("/reading", (req, res) => {
+  res.render("comp", {
+    pageTitle: "Tiny Thinkers | Reading",
+    pageCss: "/css/comp.css" 
   });
 });
 
@@ -190,37 +197,11 @@ app.use("/api/users", userRoutes);
 // === READING COMPREHENSION ===
 app.use("/", readingRoutes);
 
-
-// // reading comprehension 
-// const readingRoutes = require('./routes/reading.routes');
-// app.use('/', readingRoutes);
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
-
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
 
 // === CONTENT ===
 app.use("/content", contentRoutes);
-
-// === RESOURCES ===
-app.get('/resources', (req, res) => {
-  res.render('resources', {
-    layout: 'resourceslayout',
-    title: 'Resources'
-  });
-});
-
-
-// === VOLUNTEER ===
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
-      layout: 'volunteerlayout',
-      title: 'Volunteer'
-    });
-});
 
 // === 404 HANDLER === 
 // *** Must be last ***
