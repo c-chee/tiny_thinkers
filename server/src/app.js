@@ -4,7 +4,6 @@
  * - CORS
  * - Routes
  */
-
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
@@ -24,17 +23,26 @@ const dashboardRoutes = require("./routes/dashboard.routes");
 const contentRoutes = require("./routes/content.routes");
 const settingsRoutes = require("./routes/settings.routes");
 const authMiddleware = require("./middleware/auth.middleware");
+const contentMap = require("./config/contentMap");
 
 // === MIDDLEWARE ===
 app.use(cors());
-app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 app.use(cookieParser());
 
 // === STATIC FILES ===
 app.use(express.static(path.join(__dirname, "../../client/public")));
 
 // === HANDLEBARS ===
+const hbs = require("hbs");
+
+hbs.registerHelper("eq", (a, b) => a === b);
+hbs.registerHelper("contains", (csv, val) => {
+    if (!csv) return false;
+    return csv.split(",").includes(val);
+});
+
 app.engine(
   "hbs",
   engine({
@@ -44,18 +52,18 @@ app.engine(
     partialsDir: path.join(__dirname, "../../client/views/partials"),
     helpers: {
       isSelected: (current, value) => (current === value ? "selected" : ""),
+      eq: (a, b) => a === b,
+      contains: (csv, val) => csv && csv.split(",").includes(val),
     },
-  }),
+  })
 );
 
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "../../client/views"));
 
 // ===================================================
-// PAGE ROUTES
+// PUBLIC PAGES
 // ===================================================
-
-// Public Route
 app.get("/", (req, res) => {
   res.render("home", {
     pageTitle: "Tiny Thinkers | Home",
@@ -63,6 +71,28 @@ app.get("/", (req, res) => {
   });
 });
 
+app.get("/login", (req, res) => {
+  const token = req.cookies?.token;
+  if (token) {
+    try {
+      jwt.verify(token, process.env.JWT_SECRET);
+      return res.redirect("/dashboard");
+    } catch {}
+  }
+  res.render("Login", {
+    pageTitle: "Tiny Thinkers | Login",
+    layout: "loginlayout",
+  });
+});
+
+// ===================================================
+// DASHBOARD & CONTENT PAGES
+// ===================================================
+app.use("/dashboard", dashboardRoutes);
+app.use("/content", contentRoutes);
+app.use("/", readingRoutes);
+
+// Cards & Spelling (example)
 app.get("/cards", authMiddleware, (req, res) => {
   res.render("cards", {
     layout: "dashboard-layout",
@@ -81,48 +111,17 @@ app.get("/spelling", authMiddleware, (req, res) => {
   });
 });
 
-// === LOGIN ===
-app.get("/login", (req, res) => {
-  const token = req.cookies?.token;
-
-  if (token) {
-    try {
-      jwt.verify(token, process.env.JWT_SECRET);
-      return res.redirect("/dashboard");
-    } catch {
-      // invalid token -> show login
-    }
-  }
-
-  res.render("Login", {
-    pageTitle: "Tiny Thinkers | Login",
-    layout: "loginlayout",
-  });
-});
-
-// === SETTINGS PAGE ===
-app.get("/settings", authMiddleware, (req, res) => {
-  res.render("settings", {
-    layout: "dashboard-layout",
-    pageTitle: "Tiny Thinkers | Settings",
-    pageCss: "/css/settings.css",
-    homeLink: "/dashboard",
-    pageScript: "/js/settings.js"
-  });
-});
-
-// === RESOURCES ===
+// Resources & Volunteer
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
     layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Resources",
     pageCss: "/css/resources.css",
     homeLink: "/dashboard",
-    pageScript: "/js/resources.js"
+    pageScript: "/js/resources.js",
   });
 });
 
-// === VOLUNTEER ===
 app.get("/volunteer", authMiddleware, (req, res) => {
   res.render("volunteer", {
     layout: "dashboard-layout",
@@ -134,23 +133,8 @@ app.get("/volunteer", authMiddleware, (req, res) => {
 });
 
 // ===================================================
-// FEATURE ROUTES
-// ===================================================
-
-// Dashboard pages
-app.use("/dashboard", dashboardRoutes);
-
-// Content pages
-app.use("/content", contentRoutes);
-
-// Reading routes
-app.use("/", readingRoutes);
-
-// ===================================================
 // API ROUTES
 // ===================================================
-
-// Users
 app.use("/api/users", userRoutes);
 app.use("/", readingRoutes); // reading comprehension routes
 app.use("/dashboard", dashboardRoutes);
@@ -159,8 +143,6 @@ app.use("/api", dictionaryRoutes);
 
 // Settings
 app.use("/api/settings", settingsRoutes);
-
-// Dictionary + spelling APIs
 app.use("/api", dictionaryRoutes);
 app.use("/api", spellingRoutes);
 
@@ -168,6 +150,16 @@ app.use("/api", spellingRoutes);
 app.get("/api/status", (req, res) => {
   res.json({ status: "Tiny Thinkers API running" });
 });
+
+// Settings
+const settingsController = require("./controllers/settings.controller");
+
+// Settings page
+app.get("/settings", authMiddleware, settingsController.getSettings);
+
+// Save is handled via API
+app.use("/api/settings", settingsRoutes);
+
 
 // ===================================================
 // DB TEST
@@ -182,31 +174,26 @@ app.get("/db-test", async (req, res) => {
   }
 });
 
-// *** Should be near the end , but BEFORE the 404 handler ***
 // ===================================================
-// ERROR HANDLER (500)
+// ERROR HANDLERS
 // ===================================================
 app.use((err, req, res, next) => {
   console.error(err);
-
   res.status(err.status || 500).render("error", {
     pageTitle: "Tiny Thinkers | Something Went Wrong",
     code: err.status || 500,
-    message: "oops… tiny tripped up. try again in a moment!",
+    message: "Oops… tiny tripped up. Try again later.",
     imageSrc: "/images/tiny_confused.PNG",
-    imageAlt: "tiny looking confused",
+    imageAlt: "tiny confused",
     pageCss: "/css/error.css",
   });
 });
 
-// ===================================================
-// 404 HANDLER (must be last)
-// ===================================================
 app.use((req, res) => {
   res.status(404).render("error", {
     pageTitle: "Tiny Thinkers | Not Found",
     code: 404,
-    message: "tiny can’t find this page... but that’s okay!",
+    message: "Tiny can’t find this page, but that’s okay!",
     imageSrc: "/images/tiny8.PNG",
     imageAlt: "tiny searching",
     pageCss: "/css/error.css",
