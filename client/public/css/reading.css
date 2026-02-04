@@ -7,15 +7,9 @@
    GLOBALS
 -------------------------- */
 :root {
-<<<<<<< HEAD
-  --read-yellow: #fff3b0;
-  --read-cream: #fff7e6;
-  --read-bg: #fff3b0;
-=======
   --read-yellow: #ffe8f1; /* now pastel pink */
   --read-cream: #fff7e6;
   --read-bg: #ffe8f1; /* pastel pink everywhere */
->>>>>>> main
   --read-card-bg: #fff7e6;
 }
 
@@ -45,23 +39,12 @@
   background-size: 100% 100%;
 }
 
-<<<<<<< HEAD
-.wave-orange-to-blue {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='transparent'/%3E%3C/svg%3E");
-}
-
-.wave-blue-to-orange {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23fff3b0'/%3E%3C/svg%3E");
-}
-
-=======
 /* pastel pink waves (same as background for blending) */
 .wave-orange-to-blue,
 .wave-blue-to-orange {
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 100 L0 100 Z' fill='%23ffe8f1'/%3E%3C/svg%3E");
 }
 
->>>>>>> main
 /* --------------------------
    HERO
 -------------------------- */
@@ -160,11 +143,6 @@
 -------------------------- */
 .reading-area {
   background:
-<<<<<<< HEAD
-    radial-gradient(circle at 20% 25%, rgba(247, 214, 224, 0.95), transparent 45%),
-    radial-gradient(circle at 80% 30%, rgba(178, 247, 239, 0.95), transparent 45%),
-    radial-gradient(circle at 55% 85%, rgba(254, 228, 64, 0.55), transparent 55%),
-=======
     radial-gradient(
       circle at 20% 25%,
       rgba(247, 214, 224, 0.95),
@@ -180,7 +158,6 @@
       rgba(254, 228, 64, 0.55),
       transparent 55%
     ),
->>>>>>> main
     linear-gradient(90deg, rgba(155, 93, 229, 0.2), rgba(0, 245, 212, 0.14));
   position: relative;
   overflow: hidden;
@@ -199,11 +176,7 @@
   background-repeat: no-repeat;
   background-position: top center;
   background-size: 100% 100%;
-<<<<<<< HEAD
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 0 L0 0 Z' fill='%23fff3b0'/%3E%3C/svg%3E");
-=======
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 100' preserveAspectRatio='none'%3E%3Cpath d='M0 50 C 120 18, 240 82, 360 50 C 480 18, 600 82, 720 50 C 840 18, 960 82, 1080 50 C 1200 18, 1320 82, 1440 50 L1440 0 L0 0 Z' fill='%23ffe8f1'/%3E%3C/svg%3E");
->>>>>>> main
 }
 
 .reading-area .wave-blue-to-orange {
@@ -240,57 +213,6 @@
   background: var(--read-card-bg);
   border-radius: 22px;
   padding: 2rem 1.75rem 1.75rem;
-<<<<<<< HEAD
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.18), 0 6px 16px rgba(0, 0, 0, 0.12);
-}
-
-.game-title {
-  font-size: 1.75rem;
-  margin-bottom: 1rem;
-}
-
-#passageText {
-  font-size: 1rem;
-  line-height: 1.5;
-  margin-bottom: 1rem;
-}
-
-.questions-container {
-  margin-top: 1rem;
-}
-
-.question-block {
-  margin-bottom: 1rem;
-  text-align: left;
-}
-
-.question-block p {
-  margin-bottom: 0.5rem;
-  font-weight: 500;
-}
-
-.question-block label {
-  display: block;
-  margin-bottom: 0.25rem;
-}
-
-.reading-controls {
-  display: flex;
-  justify-content: center;
-  gap: 12px;
-  margin-top: 1rem;
-}
-
-/* --------------------------
-   FEEDBACK
--------------------------- */
-.feedback {
-  margin-top: 0.75rem;
-  text-align: center;
-  font-weight: 600;
-}
-
-=======
   box-shadow:
     0 20px 50px rgba(0, 0, 0, 0.18),
     0 6px 16px rgba(0, 0, 0, 0.12);
@@ -305,7 +227,6 @@
   font-weight: 600;
 }
 
->>>>>>> main
 /* --------------------------
    BACK BUTTON
 -------------------------- */
@@ -320,56 +241,10 @@
   margin-bottom: 20px;
 }
 
-<<<<<<< HEAD
-.back-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 20px;
-  border-radius: 999px;
-  font-weight: 1000;
-  text-decoration: none;
-  overflow: hidden;
-  background: transparent;
-  border: 2px solid black;
-  color: black;
-  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
-  transition: transform 0.15s ease;
-}
-
-.back-btn::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  background: repeating-linear-gradient(-12deg, #7b61ff 0px, #7b61ff 6px, #9a86ff 6px, #9a86ff 12px);
-  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
-  transition: clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
-  z-index: -1;
-}
-
-.back-btn:hover::before {
-  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
-}
-
-.back-btn:hover {
-  transform: translateY(-2px);
-  color: white;
-  border-color: white;
-}
-
-/* --------------------------
-   BUTTONS
--------------------------- */
-.btn-pill {
-  border-radius: 999px;
-  padding: 0.5rem 1.25rem;
-=======
 .btn-pill {
   border-radius: 999px;
   padding: 0.5rem 1.25rem;
   margin-top: 30px;
->>>>>>> main
   font-weight: 700;
   border: 2px solid black;
   background: transparent;
@@ -382,10 +257,6 @@
   color: white;
   border-color: white;
 }
-<<<<<<< HEAD
-
-=======
->>>>>>> main
 /* --------------------------
    MEDIA QUERIES
 -------------------------- */
@@ -393,27 +264,9 @@
   .reading-hero {
     padding-top: 80px;
   }
-<<<<<<< HEAD
-
-  .tiny-helper {
-    max-width: 230px;
-  }
-
-  .game-card {
-    max-width: 640px;
-  }
 }
 
 @media (min-width: 900px) {
-  .tiny-helper {
-    max-width: 260px;
-  }
-
-=======
-}
-
-@media (min-width: 900px) {
->>>>>>> main
   .game-card {
     max-width: 720px;
   }
