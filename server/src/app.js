@@ -111,7 +111,7 @@ app.get("/spelling", authMiddleware, (req, res) => {
   });
 });
 
-// Resources & Volunteer
+
 app.get("/resources", authMiddleware, (req, res) => {
   res.render("resources", {
     layout: "resourceslayout",
@@ -197,37 +197,11 @@ app.use("/api/users", userRoutes);
 // === READING COMPREHENSION ===
 app.use("/", readingRoutes);
 
-
-// // reading comprehension 
-// const readingRoutes = require('./routes/reading.routes');
-// app.use('/', readingRoutes);
-
-// const pageRoutes = require('./routes/pages.routes');
-// app.use('/', pageRoutes);
-
-
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
 
 // === CONTENT ===
 app.use("/content", contentRoutes);
-
-// === RESOURCES ===
-app.get('/resources', (req, res) => {
-  res.render('resources', {
-    layout: 'resourceslayout',
-    title: 'Resources'
-  });
-});
-
-
-// === VOLUNTEER ===
-app.get('/volunteer', (req, res) => {
-    res.render('volunteer', {
-      layout: 'volunteerlayout',
-      title: 'Volunteer'
-    });
-});
 
 // === 404 HANDLER === 
 // *** Must be last ***
