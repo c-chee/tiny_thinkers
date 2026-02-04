@@ -142,7 +142,7 @@ app.get("/dictionary", authMiddleware, (req, res) => {
   });
 });
 
-app.get("/reading", (req, res) => {
+app.get("/reading", authMiddleware, (req, res) => {
   res.render("comp", {
     pageTitle: "Tiny Thinkers | Reading",
     pageCss: "/css/comp.css" 
