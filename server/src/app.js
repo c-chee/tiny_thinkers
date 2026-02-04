@@ -144,8 +144,10 @@ app.get("/dictionary", authMiddleware, (req, res) => {
 
 app.get("/reading", authMiddleware, (req, res) => {
   res.render("comp", {
+    layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Reading",
-    pageCss: "/css/comp.css" 
+    pageCss: "/css/comp.css",
+    homeLink: "/dashboard",
   });
 });
 
