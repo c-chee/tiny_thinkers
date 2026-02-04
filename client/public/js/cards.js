@@ -1,27 +1,56 @@
+// wait until the html page is fully loaded before running any javascript
 document.addEventListener("DOMContentLoaded", () => {
+  // get the keyboard grid that holds all letter buttons
   const grid = document.getElementById("puzzleGrid");
+
+  // get the modal overlay element
   const modal = document.getElementById("letterModal");
+
+  // get the actual card inside the modal
   const modalCard = modal?.querySelector(".modal-card");
+
+  // get the close (x) button on the modal
   const closeBtn = document.getElementById("modalClose");
+
+  // get the modal title
   const title = document.getElementById("modalTitle");
+
+  // get the modal subtitle
   const subtitle = document.getElementById("modalSubtitle");
+
+  // get the main content area inside the modal
   const content = document.getElementById("modalContent");
+
+  // get the play sound button
   const playBtn = document.getElementById("playAudioBtn");
 
+  // if any required elements are missing , stop the script
   if (!grid || !modal || !modalCard || !title || !subtitle || !content) {
     console.warn("cards page: missing required dom elements.");
     return;
   }
 
+  // function to open the modal
   function openModal() {
+    // add the open class so the modal becomes visible
     modal.classList.add("is-open");
+
+    // update aria attribute for accessibility
     modal.setAttribute("aria-hidden", "false");
+
+    // prevent the page behind the modal from scrolling
     document.body.style.overflow = "hidden";
   }
 
+  // function to close the modal
   function closeModal() {
+    // remove the open class so the modal hides
     modal.classList.remove("is-open");
+
+    // update aria attribute for accessibility
     modal.setAttribute("aria-hidden", "true");
+
+    // restore page scrolling
     document.body.style.overflow = "";
   }
 
@@ -42,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (!Array.isArray(apiData) || apiData.length === 0) return fallback;
 
     // If suggestions (strings)
-    if (typeof apiData[0] === "string") return apiData.slice(0, 5);
+    if (typeof apiData[0] === "string") return apiData.slice(0, 1);
 
     // If entries (objects) — try to pull out meta.id words or related forms
     const words = apiData
@@ -51,7 +80,7 @@ document.addEventListener("DOMContentLoaded", () => {
       .map((id) => id.split(":")[0]); // "apple:1" -> "apple"
 
     // de-dupe + take first 5
-    return [...new Set(words)].slice(0, 5);
+    return [...new Set(words)].slice(0, 1);
   }
 
   function getMerriamAudioUrl(apiData) {
@@ -154,25 +183,20 @@ document.addEventListener("DOMContentLoaded", () => {
         </p>
       `;
     }
-
-    const startsWith = candidates.filter((w) => wantLetter(w));
-    const others = candidates.filter((w) => !wantLetter(w));
-
-    const unique = (arr) => [...new Set(arr)];
-
-    const result = unique([
-      ...startsWith,
-      ...others,
-      ...fallback.map(cleanOneWord).filter(Boolean),
-    ]).slice(0, 2);
-
-    return result.length ? result : fallback.slice(0, 2);
   }
 
+  // function to briefly animate a key press
   function pressKeyVisual(letter) {
+    // find the matching key button
     const btn = grid.querySelector(`.key[data-letter="${letter}"]`);
+
+    // if the button does not exist , stop
     if (!btn) return;
+
+    // add pressed class
     btn.classList.add("is-pressed");
+
+    // remove pressed class after a short delay
     setTimeout(() => btn.classList.remove("is-pressed"), 120);
   }
 
@@ -181,11 +205,16 @@ document.addEventListener("DOMContentLoaded", () => {
     // ignore invalid input
     if (!letter || letter.length !== 1) return;
 
+    // normalize letter to lowercase
     const normalized = letter.toLowerCase();
 
+    // check if the letter exists on the keyboard
     const exists = grid.querySelector(`.key[data-letter="${normalized}"]`);
+
+    // stop if the key does not exist
     if (!exists) return;
 
+    // show key press animation
     pressKeyVisual(normalized);
 
     // render the modal content (now async)
@@ -195,26 +224,46 @@ document.addEventListener("DOMContentLoaded", () => {
     openModal();
   }
 
+  // listen for clicks on the keyboard grid
   grid.addEventListener("click", (e) => {
+    // find the closest key button
     const btn = e.target.closest(".key");
+
+    // stop if click was not on a key
     if (!btn) return;
+
+    // get the letter from the button
     const letter = (btn.dataset.letter || "").toLowerCase();
+
+    // open the card for that letter
     openCardFor(letter);
   });
 
+  // listen for keyboard presses
   document.addEventListener("keydown", (e) => {
+    // if modal is open and escape is pressed, close it
     if (e.key === "Escape" && modal.classList.contains("is-open")) {
       closeModal();
       return;
     }
 
+    // get the active element type
     const tag = document.activeElement?.tagName?.toLowerCase();
+
+    // do not interfere with typing in inputs or textareas
     if (tag === "input" || tag === "textarea") return;
 
-    if (/^[a-zA-Z]$/.test(e.key)) openCardFor(e.key);
+    // if a letter key is pressed , open its card
+    if (/^[a-zA-Z]$/.test(e.key)) {
+      openCardFor(e.key);
+      return;
+    }
   });
 
+  // close modal when x button is clicked
   closeBtn?.addEventListener("click", closeModal);
+
+  // close modal when clicking the overlay background
   modal.addEventListener("click", (e) => {
     if (e.target === modal) closeModal();
   });
