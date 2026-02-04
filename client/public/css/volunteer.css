@@ -320,3 +320,97 @@ body {
     }
 }
 
+/* - - - - - back to dash - - - - - */
+.back-row {
+    display: flex;
+    justify-content: center;
+    margin-top: 28px;
+    margin-bottom: 20px;
+}
+
+.back-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 10px 20px;
+    border-radius: 999px;
+    font-family:
+        "Urbanist",
+        system-ui,
+        -apple-system,
+        Segoe UI,
+        Roboto,
+        Arial,
+        sans-serif;
+    font-weight: 1000;
+    text-decoration: none;
+    overflow: hidden;
+    background: transparent;
+    border: 2px solid black;
+    color: black;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.12);
+    transition: transform 0.15s ease;
+}
+
+.back-btn::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        -12deg,
+        #ff9f1c 0px,
+        #ff9f1c 6px,
+        #ffb347 6px,
+        #ffb347 12px
+    );
+    clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+    transition: clip-path 0.45s cubic-bezier(0.2, 0.9, 0.2, 1);
+    z-index: -1;
+}
+
+.back-btn::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: repeating-linear-gradient(
+        90deg,
+        transparent 0px,
+        transparent 6px,
+        rgba(255, 255, 255, 0.25) 6px,
+        rgba(255, 255, 255, 0.25) 9px
+    );
+    opacity: 0.35;
+    pointer-events: none;
+}
+
+.back-btn:hover::before {
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+
+.back-btn:hover {
+    transform: translateY(-2px);
+    color: white;
+    border-color: white;
+}
+
+
+/* mobile */
+@media (max-width: 600px) {
+    .lookup-box {
+        flex-direction: column;
+    }
+
+    .lookup-box input,
+    .lookup-box button {
+        max-width: none;
+        width: 100%;
+    }
+
+    .dict-card {
+        padding: 18px;
+    }
+}
+
+
