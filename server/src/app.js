@@ -90,7 +90,6 @@ app.get("/login", (req, res) => {
 // ===================================================
 app.use("/dashboard", dashboardRoutes);
 app.use("/content", contentRoutes);
-app.use("/", readingRoutes);
 
 // Cards & Spelling (example)
 app.get("/cards", authMiddleware, (req, res) => {
@@ -143,19 +142,22 @@ app.get("/dictionary", authMiddleware, (req, res) => {
 });
 
 app.get("/reading", authMiddleware, (req, res) => {
-  res.render("comp", {
+  res.render("reading", {
     layout: "dashboard-layout",
     pageTitle: "Tiny Thinkers | Reading",
-    pageCss: "/css/comp.css",
+    pageCss: "/css/reading.css",
+    pageScript: "/js/reading.js",
     homeLink: "/dashboard",
   });
 });
+
+
 
 // ===================================================
 // API ROUTES
 // ===================================================
 app.use("/api/users", userRoutes);
-app.use("/", readingRoutes); // reading comprehension routes
+app.use("/api/reading", readingRoutes);
 app.use("/dashboard", dashboardRoutes);
 app.use("/content", contentRoutes); 
 app.use("/api", dictionaryRoutes);
@@ -195,9 +197,6 @@ app.get("/db-test", async (req, res) => {
 
 // === USERS ===
 app.use("/api/users", userRoutes);
-
-// === READING COMPREHENSION ===
-app.use("/", readingRoutes);
 
 // === DASHBOARD ===
 app.use("/dashboard", dashboardRoutes);
