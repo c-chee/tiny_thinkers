@@ -136,6 +136,12 @@ app.get("/volunteer", authMiddleware, (req, res) => {
 // API ROUTES
 // ===================================================
 app.use("/api/users", userRoutes);
+app.use("/", readingRoutes); // reading comprehension routes
+app.use("/dashboard", dashboardRoutes);
+app.use("/content", contentRoutes);
+app.use("/api", dictionaryRoutes);
+
+// Settings
 app.use("/api/settings", settingsRoutes);
 app.use("/api", dictionaryRoutes);
 app.use("/api", spellingRoutes);
